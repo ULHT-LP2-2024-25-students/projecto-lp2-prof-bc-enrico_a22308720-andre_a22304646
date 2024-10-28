@@ -1,8 +1,10 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class GameManager {
@@ -82,5 +84,69 @@ public class GameManager {
         }
         return true;
     }
+
+    public int[] getWorldSize (){
+
+        return null;
     }
+
+    public int getInitialTeamID (){
+        return 0;
+    }
+
+    public int getCurrentlTeamID (){
+        return 0;
+    }
+     public boolean isDay (){
+        return false;
+     }
+
+     public String getSquareInfo ( int x, int y){
+        return "";
+     }
+
+     public String getCreatureInfo (int id){
+        return "";
+     }
+
+     public String getCreatureInfoAsString (int id){
+        return null;
+     }
+
+     public String [] getEquipment (){
+        return null;
+     }
+
+     public boolean hasEquipmnent (int creatureId, int equipmnentTypeId){
+        return false;
+     }
+
+     public boolean move(int x0, int y0, int xD, int yD){
+        return false;
+     }
+
+     public boolean gameIsOver (){
+        return false;
+     }
+
+     public ArrayList<String> getSurvivors(){
+        return null;
+     }
+
+     public JPanel getCreditsPanel(){
+        return null;
+     }
+
+
+
+
+
+    public HashMap<String,String> customizeBoard (){
+        HashMap<String,String> hash= new HashMap<>();
+
+        return hash;
+    }
+}
+
+
 

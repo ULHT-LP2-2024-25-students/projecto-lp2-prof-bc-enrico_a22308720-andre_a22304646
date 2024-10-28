@@ -10,7 +10,7 @@ public class Creature {
     int[] positionInBoard;
     ArrayList<Equipment> equipments;
 
-    public Creature(int id, int team, String name, int[] positionInBoard, ArrayList<Equipment> equipments) {
+    public Creature(int id, int team, String name) {
         this.id = id;
         this.team = team;
         this.name = name;
@@ -38,6 +38,10 @@ public class Creature {
         return creatureInfo;
     }
 
+    int getId (){
+        return this.id;
+    }
+
     boolean hasEquipment(int type){
         for (Equipment actualEquipmet: equipments){
             if (actualEquipmet.getTypeAsString().equals("" + type)){
@@ -51,5 +55,9 @@ public class Creature {
         return this.positionInBoard;
     }
 
+    boolean putOnBoard(int[] position){
+
+        return true;
+    }
 
 }

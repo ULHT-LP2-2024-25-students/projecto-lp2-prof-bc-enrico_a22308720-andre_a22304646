@@ -9,22 +9,17 @@ public class Equipment {
     int[] positionInBoard;
 
 
-
-    public Equipment(int id, int type, String name) {
+    public Equipment(int id, int type, int[] positionInBoard) {
         this.id = id;
         this.type = type;
-        this.name = name;
-        this.positionInBoard=new int[2];
-    }
-
-    public Equipment(int id, int type, String name, int[] positionInBoard) {
-        this.id = id;
-        this.type = type;
-        this.name = name;
         this.positionInBoard = positionInBoard;
     }
 
     int[] getPositionInBoard(){return this.positionInBoard;}
+
+    int getId() {
+        return id;
+    }
 
     String getTypeAsString(){return "" + type;}
 

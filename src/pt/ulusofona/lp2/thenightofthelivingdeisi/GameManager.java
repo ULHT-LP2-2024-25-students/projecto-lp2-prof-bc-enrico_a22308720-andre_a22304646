@@ -10,7 +10,7 @@ public class GameManager {
     int initialTeam;
     int currentTeam;
     boolean gameStatus;
-    Board board = new Board();
+    Board board;
 
     public GameManager() {
     }
@@ -19,18 +19,68 @@ public class GameManager {
         ArrayList<String> info = new ArrayList<String>();
         try {
             Scanner scanner = new Scanner(file);
-
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 info.add(line);
             }
             scanner.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException exception) {
+            exception.printStackTrace();
+            return false;
         }
+        int creatures = 0;
+        int equipments = 0;
 
-        return false;
+        for (int index = 0; index < info.size(); index++) {
+
+            if (index == 0) {
+                String[] size = info.get(index).split(" ");
+                this.board = new Board(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
+            }
+            if (index == 1) {
+                this.initialTeam = Integer.parseInt(info.get(index));
+            }
+            if (index == 2) {
+                creatures = Integer.parseInt(info.get(index));
+            }
+            if (index > 2 && index < 3 + creatures) {
+                String[] infoCreature = info.get(index).split(":");
+                String creatureId = infoCreature[0].substring(0, 1);
+                String teamId = infoCreature[1].substring(0, 1);
+                String creatureName = infoCreature[2].substring(1, infoCreature[2].length() - 2);
+                int[] positionInBoard = new int[2];
+                positionInBoard[0] = Integer.parseInt(infoCreature[3].substring(1, 2));
+                positionInBoard[1] = Integer.parseInt(infoCreature[4].substring(1, 2));
+                Creature creature = new Creature(
+                        Integer.parseInt(creatureId),
+                        Integer.parseInt(teamId),
+                        creatureName,
+                        positionInBoard
+                );
+                board.addCreature(creature);
+            }
+            if (index == 3 + creatures) {
+                {
+                    equipments = Integer.parseInt(info.get(index));
+                }
+                if (index > 3 + creatures && index < info.size()) {
+                    String[] infoEquipment = info.get(index).split(":");
+                    String equipmentId = infoEquipment[0].substring(0, 1);
+                    String equipmentType = infoEquipment[1].substring(0, 1);
+                    int[] positionInBoard = new int[2];
+                    positionInBoard[0] = Integer.parseInt(infoEquipment[2].substring(1, 2));
+                    positionInBoard[1] = Integer.parseInt(infoEquipment[3].substring(1, 2));
+                    Equipment equipment = new Equipment(
+                            Integer.parseInt(equipmentId),
+                            Integer.parseInt(equipmentType),
+                            positionInBoard
+                    );
+                    board.addEquipment(equipment);
+                }
+            }
+            return false;
+        }
+        return true;
     }
-
-}
+    }
 

@@ -25,4 +25,12 @@ public class Board {
         board[position[0]][position[1]] = equipment.getId();
     }
 
+    public int getSizeX() {
+        return board.length;
+    }
+
+    public int getSizeY() {
+        return board[0].length;
+    }
+
 }

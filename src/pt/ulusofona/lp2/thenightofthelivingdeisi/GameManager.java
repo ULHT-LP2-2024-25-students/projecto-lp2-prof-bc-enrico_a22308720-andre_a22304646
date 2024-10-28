@@ -13,6 +13,7 @@ public class GameManager {
     int currentTeam;
     boolean gameStatus;
     Board board;
+    int turns;
 
     public GameManager() {
     }
@@ -61,10 +62,10 @@ public class GameManager {
                 );
                 board.addCreature(creature);
             }
-            if (index == 3 + creatures) {
-                {
-                    equipments = Integer.parseInt(info.get(index));
-                }
+            if (index == 3 + creatures && index < info.size()) {
+
+                equipments = Integer.parseInt(info.get(index));
+
                 if (index > 3 + creatures && index < info.size()) {
                     String[] infoEquipment = info.get(index).split(":");
                     String equipmentId = infoEquipment[0].substring(0, 1);
@@ -80,69 +81,69 @@ public class GameManager {
                     board.addEquipment(equipment);
                 }
             }
-            return false;
         }
         return true;
     }
 
-    public int[] getWorldSize (){
-
-        return null;
+    public int[] getWorldSize() {
+        int[] size = new int[2];
+        size[0] = board.getSizeX();
+        size[1] = board.getSizeY();
+        return size;
     }
 
-    public int getInitialTeamID (){
-        return 0;
+    public int getInitialTeamID() {
+        return initialTeam;
     }
 
-    public int getCurrentlTeamID (){
-        return 0;
+    public int getCurrentlTeamID() {
+        return turns%2 != 0 ? initialTeam : (initialTeam == 0 ? 0 : 1);
+        //if turn is odd, return initial team, if not return the other team
     }
-     public boolean isDay (){
-        return false;
-     }
 
-     public String getSquareInfo ( int x, int y){
+    public boolean isDay() {
+        return gameStatus;
+    }
+
+    public String getSquareInfo(int x, int y) {
         return "";
-     }
+    }
 
-     public String getCreatureInfo (int id){
+    public String getCreatureInfo(int id) {
         return "";
-     }
+    }
 
-     public String getCreatureInfoAsString (int id){
+    public String getCreatureInfoAsString(int id) {
         return null;
-     }
+    }
 
-     public String [] getEquipment (){
+    public String[] getEquipment() {
         return null;
-     }
+    }
 
-     public boolean hasEquipmnent (int creatureId, int equipmnentTypeId){
+    public boolean hasEquipmnent(int creatureId, int equipmnentTypeId) {
         return false;
-     }
+    }
 
-     public boolean move(int x0, int y0, int xD, int yD){
+    public boolean move(int x0, int y0, int xD, int yD) {
         return false;
-     }
+    }
 
-     public boolean gameIsOver (){
+    public boolean gameIsOver() {
         return false;
-     }
+    }
 
-     public ArrayList<String> getSurvivors(){
+    public ArrayList<String> getSurvivors() {
         return null;
-     }
+    }
 
-     public JPanel getCreditsPanel(){
+    public JPanel getCreditsPanel() {
         return null;
-     }
+    }
 
 
-
-
-
-    public HashMap<String,String> customizeBoard (){
-        HashMap<String,String> hash= new HashMap<>();
+    public HashMap<String, String> customizeBoard() {
+        HashMap<String, String> hash = new HashMap<>();
 
         return hash;
     }

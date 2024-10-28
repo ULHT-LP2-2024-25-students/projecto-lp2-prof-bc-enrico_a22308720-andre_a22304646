@@ -4,32 +4,33 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Board {
-    int[][] board;
-    ArrayList<Creature> creaturesOnBoard;
-    ArrayList<Equipment> equipmentOnBoard;
+    int[][] board;                  // board contains creature or equipmnet id. If empty 0
 
-    public Board() {
-        this.creaturesOnBoard=new ArrayList<>();
-        this.equipmentOnBoard=new ArrayList<>();
-    }
 
-    boolean createBoard (int rows, int columns){
-        if (board==null){
-            board = new int[rows][columns];
-            return true;
-        }
-        return false;
+    public Board(int rows, int columns) {
+        this.board = new int [rows][columns];
     }
 
     boolean addCreature(Creature creature){
-        if (creaturesOnBoard.contains(creature)){
+        int [] position = creature.getPositionInBoard();
+        if (position[0] < board.length && position[1] < board[0].length && board[position[0]][position[1]] != 0 ){
             return false;
         }
-        creaturesOnBoard.add(creature);
+        board[position[0]][position[1]] = creature.getId();
         return true;
     }
 
-    void addEquipment(Equipment equipment){
-        equipmentOnBoard.add(equipment);
+    void addEquipment(Equipment equipment) {
+        int[] position = equipment.getPositionInBoard();
+        board[position[0]][position[1]] = equipment.getId();
     }
+
+    public int getSizeX() {
+        return board.length;
+    }
+
+    public int getSizeY() {
+        return board[0].length;
+    }
+
 }

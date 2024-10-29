@@ -1,13 +1,10 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
-import java.util.ArrayList;
-
 public class Equipment {
-    int id;
-    int type;
-    String name;
-    int[] positionInBoard;
-
+    private int id;
+    private int type;
+    private String name;
+    private int[] positionInBoard;
 
     public Equipment(int id, int type, int[] positionInBoard) {
         this.id = id;
@@ -15,21 +12,23 @@ public class Equipment {
         this.positionInBoard = positionInBoard;
     }
 
-    int[] getPositionInBoard(){return this.positionInBoard;}
+    public int[] getPositionInBoard() {
+        return this.positionInBoard;
+    }
 
-    int getId() {
+    public int getId() {
         return id;
     }
 
-    String getTypeAsString(){return "" + type;}
+    public String getTypeAsString() {
+        return String.valueOf(type);
+    }
 
-    String[] getEquipmentInfo(){
-        String[] equipmentInfo = new String[5];
-        equipmentInfo[0] = "" + id;
-        equipmentInfo[1] = "" + type;
-        equipmentInfo[2] = "" + positionInBoard[0];
-        equipmentInfo[3] = "" + positionInBoard[1];
-        equipmentInfo[4] = null;
-        return equipmentInfo;
+    public String[] getEquipmentInfo() {
+        return new String[]{String.valueOf(id), String.valueOf(type), String.valueOf(positionInBoard[0]), String.valueOf(positionInBoard[1]), null};
+    }
+
+    public String getNameOfEquipment() {
+        return this.type == 0 ? "Escudo de Madeira" : "Espada samurai";
     }
 }

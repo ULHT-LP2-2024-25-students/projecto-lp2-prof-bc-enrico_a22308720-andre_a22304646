@@ -1,21 +1,20 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Creature {
-    int id;
-    int team;
-    String name;
-    int[] positionInBoard;
-    ArrayList<Equipment> equipments;
+    private int id;
+    private int team;
+    private String name;
+    private int[] positionInBoard;
+    private ArrayList<Equipment> equipments;
 
     public Creature(int id, int team, String name) {
         this.id = id;
         this.team = team;
         this.name = name;
-        this.positionInBoard= new int[2];
-        this.equipments = new ArrayList<Equipment>();
+        this.positionInBoard = new int[2];
+        this.equipments = new ArrayList<>();
     }
 
     public Creature(int id, int team, String name, int[] positionInBoard) {
@@ -23,41 +22,36 @@ public class Creature {
         this.team = team;
         this.name = name;
         this.positionInBoard = positionInBoard;
-        this.equipments=new ArrayList<>();
+        this.equipments = new ArrayList<>();
     }
 
-    String[] getCreatureInfo(){
-        String[] creatureInfo = new String[6];
-        creatureInfo[0] = "" + id;
-        creatureInfo[1] = "" + team;
-        creatureInfo[2] = name;
-        creatureInfo[3] = "" + positionInBoard[0];
-        creatureInfo[4] = "" + positionInBoard[1];
-        creatureInfo[5] = null;
-
-        return creatureInfo;
+    public String[] getCreatureInfo() {
+        return new String[]{String.valueOf(this.id), String.valueOf(this.team), this.name, String.valueOf(this.positionInBoard[0]), String.valueOf(this.positionInBoard[1]), null};
     }
 
-    int getId (){
+    public int getId() {
         return this.id;
     }
 
-    boolean hasEquipment(int type){
-        for (Equipment actualEquipmet: equipments){
-            if (actualEquipmet.getTypeAsString().equals("" + type)){
+    public boolean hasEquipment(int type) {
+        for (Equipment equipment : equipments) {
+            if (equipment.getTypeAsString().equals(String.valueOf(type))) {
                 return true;
             }
         }
         return false;
     }
 
-    int[] getPositionInBoard(){
+    public int[] getPositionInBoard() {
         return this.positionInBoard;
     }
 
-    boolean putOnBoard(int[] position){
-
-        return true;
+    public int points() {
+        return equipments.size();
     }
 
+    public boolean move(int[] position) {
+        this.positionInBoard = position;
+        return true;
+    }
 }

@@ -123,7 +123,7 @@ public class GameManager {
                 result = info[0] + " | Zombie | " + info[2] + " | -" + creature.points() + " @(" + info[3] + "," + info[4] + ")";
                 break;
             case "1":
-                result = info[0] + " | Human | " + info[2] + " | +" + creature.points() + " @(" + info[3] + "," + info[4] + ")";
+                result = info[0] + " | Humano | " + info[2] + " | +" + creature.points() + " @(" + info[3] + "," + info[4] + ")";
                 break;
             default:
                 break;

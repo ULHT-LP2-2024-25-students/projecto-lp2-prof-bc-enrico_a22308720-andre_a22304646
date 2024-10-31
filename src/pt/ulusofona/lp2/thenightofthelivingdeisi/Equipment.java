@@ -34,4 +34,8 @@ public class Equipment {
         equipmentInfo[4] = null;
         return equipmentInfo;
     }
+
+    public String getNameOfEquipment() {
+        return this.type == 0 ? "Escudo de Madeira" : "Espada samurai";
+    }
 }

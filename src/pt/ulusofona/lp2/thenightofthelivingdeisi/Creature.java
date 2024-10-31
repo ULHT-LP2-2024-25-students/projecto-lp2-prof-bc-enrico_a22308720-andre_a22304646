@@ -9,6 +9,7 @@ public class Creature {
     int[] positionInBoard;
     ArrayList<Equipment> equipments;
 
+
     public Creature(int id, int team, String name, int[] positionInBoard) {
         this.id = id;
         this.team = team;
@@ -29,6 +30,8 @@ public class Creature {
         return creatureInfo;
     }
 
+    int points(){return equipments.size();}
+
     int getId (){
         return this.id;
     }
@@ -48,9 +51,20 @@ public class Creature {
         return this.positionInBoard;
     }
 
-    boolean putOnBoard(int[] position){
-
-        return true;
+    void move(int x, int y) {
+        this.positionInBoard = new int[]{x, y};
     }
 
+    void addEquipment(Equipment equipment) {
+        equipments.add(equipment);
+    }
+
+    String getIdAndName(Creature creature) {
+        if (team == 1) {
+            return id + " " + name;
+        }
+        return id + " (antigamente conhecido como" + name + ")";
+
+
+    }
 }

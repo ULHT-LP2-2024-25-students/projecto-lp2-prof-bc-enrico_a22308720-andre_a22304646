@@ -1,5 +1,4 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
-
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -98,20 +97,14 @@ public class GameManager {
 
 
     public String getSquareInfo(int x, int y) {
-        return "";
-    }
-
-    public String getCreatureInfo(int id) {
-        return "";
-    }
-
-    public String getCreatureInfoAsString(int id) {
-        String result= "";
-        String[] info = board.getCreatureById(id).getCreatureInfo();
-        for (String line : info){
-            result += line + " ";
+        if (board.positionIsValid(x, y)){
+            return board.getSquareInfo(x, y);
         }
-        return result;
+        return null;
+    }
+
+    public String[] getCreatureInfo(int id) {
+        return board.getCreatureById(id).getCreatureInfo();
     }
 
     public String getCreatureInfoAsString(int id) {
@@ -141,12 +134,16 @@ public class GameManager {
         return info[0] + " | " + equipment.getNameOfEquipment() + " @ (" + info[2] + "," + info[3] + ")";
     }
 
-    public boolean hasEquipmnent(int creatureId, int equipmnentTypeId) {
-        return false;
+    public boolean hasEquipment(int creatureId, int equipmnentTypeId) {
+        return board.getCreatureById(creatureId).hasEquipment(equipmnentTypeId);
     }
 
     public boolean move(int x0, int y0, int xD, int yD) {
-        return false;
+        boolean validation = board.move(x0, y0, xD, yD);
+        if(validation){
+            increaseTurn();
+        }
+        return validation;
     }
 
     public boolean gameIsOver() {
@@ -154,7 +151,24 @@ public class GameManager {
     }
 
     public ArrayList<String> getSurvivors() {
-        return null;
+        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<Creature> creatures = board.getCreatures();
+        result.add("Nr. de turnos terminados:");
+        result.add(this.turns + "");
+        result.add("OS VIVOS");
+        for (Creature actualCreature : creatures) {
+            if (actualCreature.getTeam() == 1) {
+                result.add(actualCreature.getIdAndName(actualCreature));
+            }
+        }
+        result.add("OS MORTOS");
+        for (Creature actualCreature : creatures) {
+            if (actualCreature.getTeam() == 0) {
+                result.add(actualCreature.getIdAndName(actualCreature));
+            }
+        }
+        result.add("-----");
+        return result;
     }
 
     public JPanel getCreditsPanel() {

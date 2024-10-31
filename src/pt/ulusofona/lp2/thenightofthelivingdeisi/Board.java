@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public class Board {
     int[][] board;                  // board contains creature or equipmnet id. If empty 0
+    ArrayList<Creature> creatures;
+    ArrayList<Equipment> equipments;
 
 
-    public Board(int rows, int columns) {
-        this.board = new int [rows][columns];
+    public Board(int rows, int columns){
+        this.board = new int[rows][columns];
         this.creatures=new ArrayList<>();
         this.equipments=new ArrayList<>();
     }
@@ -22,7 +24,7 @@ public class Board {
         return true;
     }
 
-    void addEquipment(Equipment equipment) {
+    void addEquipment(Equipment equipment){
         int[] position = equipment.getPositionInBoard();
         board[position[0]][position[1]] = equipment.getId();
         equipments.add(equipment);
@@ -88,6 +90,7 @@ public class Board {
                     }
                     board[xD][yD]=positionId(x0,y0);                                    // posicao destino recebe id da origem
                     board[x0][y0]=0;                                                    //posicao da origem recebe 0
+                    creature.move(xD, yD);
                     return true;
                 }
             }
@@ -114,5 +117,6 @@ public class Board {
     }
 
     public ArrayList<Creature> getCreatures (){return creatures;}
+
 
 }

@@ -74,7 +74,7 @@ public class GameManager {
         return size;
     }
 
-    public int getInitialTeamID() {
+    public int getInitialTeamId() {
         return initialTeam;
     }
 

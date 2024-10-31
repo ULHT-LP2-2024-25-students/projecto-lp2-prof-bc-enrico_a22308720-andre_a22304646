@@ -36,6 +36,6 @@ public class Equipment {
     }
 
     public String getNameOfEquipment() {
-        return this.type == 0 ? "Escudo de Madeira" : "Espada samurai";
+        return this.type == 0 ? "Escudo de madeira" : "Espada samurai";
     }
 }

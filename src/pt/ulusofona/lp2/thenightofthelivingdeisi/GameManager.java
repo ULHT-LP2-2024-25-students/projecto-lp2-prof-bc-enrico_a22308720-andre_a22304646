@@ -139,11 +139,12 @@ public class GameManager {
     }
 
     public boolean move(int x0, int y0, int xD, int yD) {
-        boolean validation = board.move(x0, y0, xD, yD);
-        if(validation){
-            increaseTurn();
-        }
-        return validation;
+        if (isDay() && board.getCreatureById(board.)){}
+            if(board.move(x0, y0, xD, yD)){
+                increaseTurn();
+                return true;
+            }
+            return false;
     }
 
     public boolean gameIsOver() {

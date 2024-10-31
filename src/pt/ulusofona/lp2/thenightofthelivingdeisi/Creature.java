@@ -21,7 +21,7 @@ public class Creature {
     String[] getCreatureInfo(){
         String[] creatureInfo = new String[6];
         creatureInfo[0] = "" + id;
-        creatureInfo[1] = "" + team;
+        creatureInfo[1] = team == 0? "Zombie" : "Humano";
         creatureInfo[2] = name;
         creatureInfo[3] = "" + positionInBoard[0];
         creatureInfo[4] = "" + positionInBoard[1];

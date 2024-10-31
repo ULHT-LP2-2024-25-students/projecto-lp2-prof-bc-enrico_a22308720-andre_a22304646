@@ -106,10 +106,14 @@ public class Board {
     }
 
     public boolean moveIsValid (int x0, int y0, int xD, int yD){
-        if ((Math.abs(xD-x0) != 1 && xD-x0 != 0) || (Math.abs(yD-y0) != 1 && yD-y0 != 0)){
-                return false;
+        if((Math.abs(xD-x0) == 1) && (yD-y0 == 0)){
+            return true;
         }
-        return true;
+        if((Math.abs(yD-y0) == 1) && (xD-x0 == 0)){
+            return true;
+        }
+
+       return false;
     }
 
     public int positionId(int x, int y){

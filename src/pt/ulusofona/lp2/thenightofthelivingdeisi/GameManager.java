@@ -16,7 +16,7 @@ public class GameManager {
 
     public GameManager() {
         this.turns=1;
-        this.gameStatus = true;
+        this.gameStatus = getCurrentTeamId() == 0 ? false : true;
     }
 
     public boolean loadGame(File file) {
@@ -113,10 +113,10 @@ public class GameManager {
         String result = "";
         switch (info[1]) {
             case "0":
-                result = info[0] + " | Zombie | " + info[2] + " | -" + creature.points() + " @(" + info[3] + "," + info[4] + ")";
+                result = info[0] + " | Zombie | " + info[2] + " | -" + creature.points() + " @ (" + info[3] + "," + info[4] + ")";
                 break;
             case "1":
-                result = info[0] + " | Humano | " + info[2] + " | +" + creature.points() + " @(" + info[3] + "," + info[4] + ")";
+                result = info[0] + " | Humano | " + info[2] + " | +" + creature.points() + " @  (" + info[3] + "," + info[4] + ")";
                 break;
             default:
                 break;
@@ -139,12 +139,19 @@ public class GameManager {
     }
 
     public boolean move(int x0, int y0, int xD, int yD) {
-        if (isDay() && board.getCreatureById(board.)){}
+        if (isDay() && (board.getCreatureById(board.positionId(x0,y0)).getTeam() == 1)){
             if(board.move(x0, y0, xD, yD)){
                 increaseTurn();
                 return true;
             }
-            return false;
+        }
+        if (!isDay() && (board.getCreatureById(board.positionId(x0,y0)).getTeam() == 0)){
+            if(board.move(x0, y0, xD, yD)){
+                increaseTurn();
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean gameIsOver() {

@@ -16,6 +16,8 @@ public class GameManager {
     int turns;
 
     public GameManager() {
+        this.turns=1;
+        this.gameStatus = true;
     }
 
     public boolean loadGame(File file) {
@@ -77,14 +79,23 @@ public class GameManager {
         return initialTeam;
     }
 
-    public int getCurrentlTeamID() {
+    public int getCurrentTeamId() {
         return turns%2 != 0 ? initialTeam : (initialTeam == 0 ? 0 : 1);
         //if turn is odd, return initial team, if not return the other team
     }
 
     public boolean isDay() {
+        if (turns %2 == 0){
+            gameStatus=false;
+        }else{
+            gameStatus=true;
+        }
         return gameStatus;
     }
+    public void increaseTurn(){
+        turns++;
+    }
+
 
     public String getSquareInfo(int x, int y) {
         return "";
@@ -103,8 +114,31 @@ public class GameManager {
         return result;
     }
 
-    public String[] getEquipment(int id) {
+    public String getCreatureInfoAsString(int id) {
+        Creature creature = board.getCreatureById(id);
+        String[] info = board.getCreatureById(id).getCreatureInfo();
+        String result = "";
+        switch (info[1]) {
+            case "0":
+                result = info[0] + " | Zombie | " + info[2] + " | -" + creature.points() + " @(" + info[3] + "," + info[4] + ")";
+                break;
+            case "1":
+                result = info[0] + " | Human | " + info[2] + " | +" + creature.points() + " @(" + info[3] + "," + info[4] + ")";
+                break;
+            default:
+                break;
+        }
+        return result;
+    }
+
+    public String[] getEquipmentInfo(int id) {
         return board.getEquipment(id).getEquipmentInfo();
+    }
+
+    public String getEquipmentInfoAsString(int id) {
+        Equipment equipment = board.getEquipment(id);
+        String[] info = equipment.getEquipmentInfo();
+        return info[0] + " | " + equipment.getNameOfEquipment() + " @ (" + info[2] + "," + info[3] + ")";
     }
 
     public boolean hasEquipmnent(int creatureId, int equipmnentTypeId) {

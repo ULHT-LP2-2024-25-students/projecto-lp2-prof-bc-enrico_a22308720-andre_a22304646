@@ -1,6 +1,5 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Board {
@@ -40,18 +39,18 @@ public class Board {
     public String getSquareInfo(int x, int y) {
         String result="";
         if (board[x][y] == 0){
-            result+="vazio";
+            result+="";
         }
         if (board[x][y] < 0 ){
-            result+="E";
+            result+="E:" + board[x][y];
         }
         if (board[x][y] > 0 ){
             Creature creature = getCreatureById(board[x][y]);
-            if(creature.getTeam() == 0){
-                result += "Z";
+            if(creature.getTeam() == 0) {
+                result += "Z:"+ board[x][y];
             }
             if(creature.getTeam() == 1){
-                result += "H";
+                result += "H:" + board[x][y];
             }
         }
         return result;
@@ -74,6 +73,7 @@ public class Board {
         }
         return null;
     }
+
 
     public boolean move(int x0, int y0, int xD, int yD){
         Creature creature;

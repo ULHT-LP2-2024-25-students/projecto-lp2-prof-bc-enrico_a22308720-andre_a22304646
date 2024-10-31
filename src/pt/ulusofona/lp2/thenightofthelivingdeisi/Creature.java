@@ -1,6 +1,5 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Creature {

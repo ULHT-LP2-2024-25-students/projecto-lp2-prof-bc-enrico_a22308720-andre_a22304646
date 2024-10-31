@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
-import java.util.ArrayList;
-
 public class Equipment {
     int id;
     int type;
@@ -15,15 +13,19 @@ public class Equipment {
         this.positionInBoard = positionInBoard;
     }
 
-    int[] getPositionInBoard(){return this.positionInBoard;}
+    int[] getPositionInBoard() {
+        return this.positionInBoard;
+    }
 
     int getId() {
         return id;
     }
 
-    String getTypeAsString(){return "" + type;}
+    String getTypeAsString() {
+        return "" + type;
+    }
 
-    String[] getEquipmentInfo(){
+    String[] getEquipmentInfo() {
         String[] equipmentInfo = new String[5];
         equipmentInfo[0] = "" + id;
         equipmentInfo[1] = "" + type;

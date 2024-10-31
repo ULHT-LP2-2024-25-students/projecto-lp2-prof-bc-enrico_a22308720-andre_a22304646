@@ -42,9 +42,11 @@ public class Creature {
         return this.id;
     }
 
+    int getTeam (){return this.team;}
+
     boolean hasEquipment(int type){
-        for (Equipment actualEquipmet: equipments){
-            if (actualEquipmet.getTypeAsString().equals("" + type)){
+        for (Equipment actualEquipment: equipments){
+            if (actualEquipment.getTypeAsString().equals("" + type)){
                 return true;
             }
         }

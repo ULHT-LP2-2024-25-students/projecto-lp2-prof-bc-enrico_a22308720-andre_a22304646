@@ -10,14 +10,6 @@ public class Creature {
     int[] positionInBoard;
     ArrayList<Equipment> equipments;
 
-    public Creature(int id, int team, String name) {
-        this.id = id;
-        this.team = team;
-        this.name = name;
-        this.positionInBoard= new int[2];
-        this.equipments = new ArrayList<Equipment>();
-    }
-
     public Creature(int id, int team, String name, int[] positionInBoard) {
         this.id = id;
         this.team = team;

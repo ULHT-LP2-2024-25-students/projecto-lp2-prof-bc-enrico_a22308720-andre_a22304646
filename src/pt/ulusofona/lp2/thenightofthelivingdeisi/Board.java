@@ -14,14 +14,14 @@ public class Board {
         this.equipments=new ArrayList<>();
     }
 
-    boolean addCreature(Creature creature){
+    void addCreature(Creature creature){
         int [] position = creature.getPositionInBoard();
-        if (position[0] < board.length && position[1] < board[0].length && board[position[0]][position[1]] != 0 ){
-            return false;
+        if (positionIsValid(position[0],position[1])&& board[position[0]][position[1]] > 0 ){
+            return;
         }
         board[position[0]][position[1]] = creature.getId();
         creatures.add(creature);
-        return true;
+        return;
     }
 
     void addEquipment(Equipment equipment){
@@ -99,7 +99,7 @@ public class Board {
     }
 
     public boolean positionIsValid(int x, int y){
-        if (x >= 0 && x < board.length && y >= 0 && y < board[0].length) {
+        if (x >= 0 && x < getSizeX() && y >= 0 && y < getSizeY()) {
             return true;
         }
         return false;

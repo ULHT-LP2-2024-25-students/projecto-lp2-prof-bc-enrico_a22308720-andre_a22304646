@@ -15,8 +15,7 @@ public class GameManager {
     int turns;
 
     public GameManager() {
-        this.turns=1;
-        this.gameStatus = getCurrentTeamId() == 0 ? false : true;
+        this.turns=0;
     }
 
     public boolean loadGame(File file) {
@@ -79,15 +78,27 @@ public class GameManager {
     }
 
     public int getCurrentTeamId() {
-        return turns%2 != 0 ? initialTeam : (initialTeam == 0 ? 0 : 1);
+        if (turns%2 ==0){
+            currentTeam = initialTeam;
+        }
+        else {
+            currentTeam = initialTeam == 1 ? 0 : 1;
+        }
+        return currentTeam;
         //if turn is odd, return initial team, if not return the other team
     }
 
     public boolean isDay() {
-        if (turns %2 == 0){
-            gameStatus=false;
-        }else{
-            gameStatus=true;
+        if(turns==0){
+            gameStatus = getInitialTeamId() == 0 ? false : true;
+        }
+
+        if (((turns % 2) == 0) && turns != 0){
+            if (gameStatus) {
+                gameStatus = false;
+            }else {
+                gameStatus = true;
+            }
         }
         return gameStatus;
     }
@@ -112,10 +123,10 @@ public class GameManager {
         String[] info = board.getCreatureById(id).getCreatureInfo();
         String result = "";
         switch (info[1]) {
-            case "0":
+            case "Zombie":
                 result = info[0] + " | Zombie | " + info[2] + " | -" + creature.points() + " @ (" + info[3] + "," + info[4] + ")";
                 break;
-            case "1":
+            case "Humano":
                 result = info[0] + " | Humano | " + info[2] + " | +" + creature.points() + " @  (" + info[3] + "," + info[4] + ")";
                 break;
             default:
@@ -139,13 +150,9 @@ public class GameManager {
     }
 
     public boolean move(int x0, int y0, int xD, int yD) {
-        if (isDay() && (board.getCreatureById(board.positionId(x0,y0)).getTeam() == 1)){
-            if(board.move(x0, y0, xD, yD)){
-                increaseTurn();
-                return true;
-            }
-        }
-        if (!isDay() && (board.getCreatureById(board.positionId(x0,y0)).getTeam() == 0)){
+        if (board.getCreatureById(board.positionId(x0,y0)).getTeam() != getCurrentTeamId()){
+            return false;
+        }else{
             if(board.move(x0, y0, xD, yD)){
                 increaseTurn();
                 return true;

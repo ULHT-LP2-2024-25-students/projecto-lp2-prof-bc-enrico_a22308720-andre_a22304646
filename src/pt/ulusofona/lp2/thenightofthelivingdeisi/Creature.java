@@ -64,7 +64,11 @@ public class Creature {
             return id + " " + name;
         }
         return id + " (antigamente conhecido como" + name + ")";
-
-
     }
+
+    boolean isHuman(){
+        return team == 0 ? false : true;
+    }
+
+
 }

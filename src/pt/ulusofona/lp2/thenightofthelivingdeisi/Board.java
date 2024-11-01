@@ -30,6 +30,12 @@ public class Board {
         equipments.add(equipment);
     }
 
+    void removeEquipment (Equipment equipment){
+        int[] position = equipment.getPositionInBoard();
+        board[position[0]][position[1]] = 0;
+        equipments.remove(equipment);
+    }
+
     public int getSizeX() {
         return board.length;
     }
@@ -58,7 +64,7 @@ public class Board {
         return result;
     }
 
-    public  Creature getCreatureById(int id){
+    public Creature getCreatureById(int id){
         for(Creature atualCreature : creatures){
             if(atualCreature.getId() == id) {
                 return atualCreature;
@@ -86,7 +92,12 @@ public class Board {
                 // verificar se posicao de destino e valida, se o movimento e valido e se a posicao de destino esta vazia
                 if ((positionIsValid(xD, yD) && moveIsValid(x0,y0,xD,yD)) && (positionId(xD, yD) <= 0)){
                     if (positionId(xD, yD) < 0){
-                        creature.addEquipment(getEquipment(positionId(xD, yD)));        //se for equipamento fica com a criatura
+                        if (creature.isHuman()){
+                            creature.addEquipment(getEquipment(positionId(xD, yD)));  //se for equipamento fica com a criatura
+                        }else{
+                            removeEquipment(getEquipment(positionId(xD, yD)));  //se for zombie elimina equipamento
+                        }
+
                     }
                     board[xD][yD]=positionId(x0,y0);                                    // posicao destino recebe id da origem
                     board[x0][y0]=0;                                                    //posicao da origem recebe 0

@@ -52,8 +52,7 @@ public class GameManager {
                 positionInBoard[1] = Integer.parseInt(infoCreature[4]);
 
                 Creature creature = new Creature(creatureId, teamId, creatureName, positionInBoard);
-                if (!board.addCreature(creature)){return false;}
-
+                board.addCreature(creature);
             } else if (index == 3 + creatures) {
                 equipments = Integer.parseInt(info.get(index));
             } else if (index > 3 + creatures && index < 4 + creatures + equipments) {

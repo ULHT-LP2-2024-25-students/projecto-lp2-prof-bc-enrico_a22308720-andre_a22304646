@@ -5,6 +5,8 @@ import pt.ulusofona.lp2.thenightofthelivingdeisi.Equipment;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 public class TestCreature {
 
     Creature creature;

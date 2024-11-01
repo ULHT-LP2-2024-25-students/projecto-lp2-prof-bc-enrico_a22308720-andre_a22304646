@@ -11,7 +11,7 @@ public class TestEquipment {
 
     @BeforeEach
     void setUp() {
-        equipment = new Equipment(-1, 0, position);
+        equipment = new Equipment(1, 0, position);
     }
 
     @Test
@@ -21,7 +21,7 @@ public class TestEquipment {
 
     @Test
     void testGetId() {
-        assertEquals(-1, equipment.getId());
+        assertEquals(1, equipment.getId());
     }
 
     @Test
@@ -31,15 +31,14 @@ public class TestEquipment {
 
     @Test
     void testGetEquipmentInfo() {
-        String[] expectedInfo = {"-1", "0", "0", "0", null};
+        String[] expectedInfo = {"1", "0", "0", "0", null};
         assertArrayEquals(expectedInfo, equipment.getEquipmentInfo());
     }
 
     @Test
     void testGetNameOfEquipment() {
         assertEquals("Escudo de madeira", equipment.getNameOfEquipment());
-        Equipment samuraiSword = new Equipment(-2, 1, position);
+        Equipment samuraiSword = new Equipment(2, 1, position);
         assertEquals("Espada samurai", samuraiSword.getNameOfEquipment());
     }
 }
-

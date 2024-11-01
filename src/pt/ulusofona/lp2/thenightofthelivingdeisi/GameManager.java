@@ -8,11 +8,11 @@ import java.util.Scanner;
 
 public class GameManager {
     int[] worldSize;
-    int initialTeam;
+    public int initialTeam;
     int currentTeam;
     boolean gameStatus;
-    Board board;
-    int turns;
+    public Board board;
+    public int turns;
 
     public GameManager() {
         this.turns=0;
@@ -67,12 +67,6 @@ public class GameManager {
                 Equipment equipment = new Equipment(equipmentId, equipmentType, positionInBoard);
                 board.addEquipment(equipment);
             }
-        }
-        if ((board.getCreatures().size() != creatures) || (board.getEquipments().size()  != equipments)){    //confirmar se o descritivo do nr de criaturas e equipamentos bate certo
-            return false;
-        }
-        if(info.size() != creatures + equipments + 4) {                                 //confirmar que o load game tem o tamanho necessario
-            return false;
         }
         return true;
     }
@@ -152,7 +146,7 @@ public class GameManager {
 
     public String getEquipmentInfoAsString(int id) {
         Equipment equipment = board.getEquipment(id);
-        if(equipment == null){return "";}
+        if(equipment == null){return null;}
         String[] info = equipment.getEquipmentInfo();
         return info[0] + " | " + equipment.getNameOfEquipment() + " @ (" + info[2] + "," + info[3] + ")";
     }

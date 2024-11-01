@@ -8,6 +8,7 @@ public class Creature {
     String name;
     int[] positionInBoard;
     ArrayList<Equipment> equipments;
+    int points;
 
 
     public Creature(int id, int team, String name, int[] positionInBoard) {
@@ -30,7 +31,12 @@ public class Creature {
         return creatureInfo;
     }
 
-    int points(){return equipments.size();}
+    void increasePoint(){
+        points++;
+    }
+    int getPoints(){
+        return points;
+    }
 
     int getId (){
         return this.id;

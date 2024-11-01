@@ -93,8 +93,10 @@ public class Board {
                 if ((positionIsValid(xD, yD) && moveIsValid(x0,y0,xD,yD)) && (positionId(xD, yD) <= 0)){
                     if (positionId(xD, yD) < 0){
                         if (creature.isHuman()){
+                            creature.increasePoint();
                             creature.addEquipment(getEquipment(positionId(xD, yD)));  //se for equipamento fica com a criatura
                         }else{
+                            creature.increasePoint();
                             removeEquipment(getEquipment(positionId(xD, yD)));  //se for zombie elimina equipamento
                         }
 

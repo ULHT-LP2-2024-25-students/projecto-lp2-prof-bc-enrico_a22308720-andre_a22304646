@@ -124,10 +124,10 @@ public class GameManager {
         String result = "";
         switch (info[1]) {
             case "Zombie":
-                result = info[0] + " | Zombie | " + info[2] + " | -" + creature.points() + " @ (" + info[3] + ", " + info[4] + ")";
+                result = info[0] + " | Zombie | " + info[2] + " | -" + creature.getPoints() + " @ (" + info[3] + ", " + info[4] + ")";
                 break;
             case "Humano":
-                result = info[0] + " | Humano | " + info[2] + " | +" + creature.points() + " @ (" + info[3] + ", " + info[4] + ")";
+                result = info[0] + " | Humano | " + info[2] + " | +" + creature.getPoints() + " @ (" + info[3] + ", " + info[4] + ")";
                 break;
             default:
                 break;
@@ -142,7 +142,7 @@ public class GameManager {
     public String getEquipmentInfoAsString(int id) {
         Equipment equipment = board.getEquipment(id);
         String[] info = equipment.getEquipmentInfo();
-        return info[0] + " | " + equipment.getNameOfEquipment() + " @ (" + info[2] + ", " + info[3] + ")";
+        return info[0] + " | " + equipment.getNameOfEquipment() + " @ (" + info[2] + "," + info[3] + ")";
     }
 
     public boolean hasEquipment(int creatureId, int equipmnentTypeId) {

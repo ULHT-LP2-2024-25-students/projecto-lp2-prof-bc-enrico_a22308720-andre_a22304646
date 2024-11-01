@@ -16,12 +16,12 @@ public class Board {
 
     public boolean addCreature(Creature creature){
         int [] position = creature.getPositionInBoard();
-        if (positionIsValid(position[0],position[1])&& board[position[0]][position[1]] > 0 ){
-            return;
+        if (!positionIsValid(position[0],position[1]) || board[position[0]][position[1]] > 0 ){
+            return false;
         }
         board[position[0]][position[1]] = creature.getId();
         creatures.add(creature);
-        return;
+        return true;
     }
 
     public void addEquipment(Equipment equipment){

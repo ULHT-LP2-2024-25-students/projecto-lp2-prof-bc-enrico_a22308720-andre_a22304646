@@ -46,11 +46,14 @@ public class GameManager {
                 int creatureId = Integer.parseInt(infoCreature[0]);
                 int teamId = Integer.parseInt(infoCreature[1]);
                 String creatureName = infoCreature[2];
+
                 int[] positionInBoard = new int[2];
                 positionInBoard[0] = Integer.parseInt(infoCreature[3]);
                 positionInBoard[1] = Integer.parseInt(infoCreature[4]);
+
                 Creature creature = new Creature(creatureId, teamId, creatureName, positionInBoard);
-                board.addCreature(creature);
+                if (!board.addCreature(creature)){return false;}
+
             } else if (index == 3 + creatures) {
                 equipments = Integer.parseInt(info.get(index));
             } else if (index > 3 + creatures && index < 4 + creatures + equipments) {
@@ -149,6 +152,7 @@ public class GameManager {
 
     public String getEquipmentInfoAsString(int id) {
         Equipment equipment = board.getEquipment(id);
+        if(equipment == null){return "";}
         String[] info = equipment.getEquipmentInfo();
         return info[0] + " | " + equipment.getNameOfEquipment() + " @ (" + info[2] + "," + info[3] + ")";
     }

@@ -42,9 +42,9 @@ public class Creature {
         return this.id;
     }
 
-    int getTeam (){return this.team;}
+    public int getTeam (){return this.team;}
 
-    boolean hasEquipment(int type){
+    public boolean hasEquipment(int type){
         for (Equipment actualEquipment: equipments){
             if (actualEquipment.getTypeAsString().equals("" + type)){
                 return true;
@@ -53,26 +53,26 @@ public class Creature {
         return false;
     }
 
-    int[] getPositionInBoard(){
+    public int[] getPositionInBoard(){
         return this.positionInBoard;
     }
 
-    void move(int x, int y) {
+    public void move(int x, int y) {
         this.positionInBoard = new int[]{x, y};
     }
 
-    void addEquipment(Equipment equipment) {
+    public void addEquipment(Equipment equipment) {
         equipments.add(equipment);
     }
 
-    String getIdAndName(Creature creature) {
+    public String getIdAndName(Creature creature) {
         if (team == 1) {
             return id + " " + name;
         }
         return id + " (antigamente conhecido como" + name + ")";
     }
 
-    boolean isHuman(){
+    public boolean isHuman(){
         return team == 0 ? false : true;
     }
 

@@ -14,7 +14,7 @@ public class Board {
         this.equipments=new ArrayList<>();
     }
 
-    void addCreature(Creature creature){
+    public boolean addCreature(Creature creature){
         int [] position = creature.getPositionInBoard();
         if (positionIsValid(position[0],position[1])&& board[position[0]][position[1]] > 0 ){
             return;
@@ -24,13 +24,13 @@ public class Board {
         return;
     }
 
-    void addEquipment(Equipment equipment){
+    public void addEquipment(Equipment equipment){
         int[] position = equipment.getPositionInBoard();
         board[position[0]][position[1]] = equipment.getId();
         equipments.add(equipment);
     }
 
-    void removeEquipment (Equipment equipment){
+    public void removeEquipment (Equipment equipment){
         equipments.remove(equipment);
     }
 

@@ -1,36 +1,45 @@
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.Equipment;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class TestEquipment {
-    int id;
-    int type;
-    String name;
-    int[] positionInBoard;
 
+    Equipment equipment;
+    int[] position = {0, 0};
 
-
-    public TestEquipment(int id, int type, String name) {
-        this.id = id;
-        this.type = type;
-        this.name = name;
-        this.positionInBoard=new int[2];
+    @BeforeEach
+    void setUp() {
+        equipment = new Equipment(-1, 0, position);
     }
 
-    public TestEquipment(int id, int type, String name, int[] positionInBoard) {
-        this.id = id;
-        this.type = type;
-        this.name = name;
-        this.positionInBoard = positionInBoard;
+    @Test
+    void testGetPositionInBoard() {
+        assertArrayEquals(position, equipment.getPositionInBoard());
     }
 
-    int[] getPositionInBoard(){return this.positionInBoard;}
+    @Test
+    void testGetId() {
+        assertEquals(-1, equipment.getId());
+    }
 
-    String getTypeAsString(){return "" + type;}
+    @Test
+    void testGetTypeAsString() {
+        assertEquals("0", equipment.getTypeAsString());
+    }
 
-    String[] getEquipmentInfo(){
-        String[] equipmentInfo = new String[5];
-        equipmentInfo[0] = "" + id;
-        equipmentInfo[1] = "" + type;
-        equipmentInfo[2] = "" + positionInBoard[0];
-        equipmentInfo[3] = "" + positionInBoard[1];
-        equipmentInfo[4] = null;
-        return equipmentInfo;
+    @Test
+    void testGetEquipmentInfo() {
+        String[] expectedInfo = {"-1", "0", "0", "0", null};
+        assertArrayEquals(expectedInfo, equipment.getEquipmentInfo());
+    }
+
+    @Test
+    void testGetNameOfEquipment() {
+        assertEquals("Escudo de madeira", equipment.getNameOfEquipment());
+        Equipment samuraiSword = new Equipment(-2, 1, position);
+        assertEquals("Espada samurai", samuraiSword.getNameOfEquipment());
     }
 }
+

@@ -19,7 +19,7 @@ public class Creature {
         this.equipments=new ArrayList<>();
     }
 
-    String[] getCreatureInfo(){
+    public String[] getCreatureInfo(){
         String[] creatureInfo = new String[6];
         creatureInfo[0] = "" + id;
         creatureInfo[1] = team == 0? "Zombie" : "Humano";
@@ -31,14 +31,14 @@ public class Creature {
         return creatureInfo;
     }
 
-    void increasePoint(){
+    public void increasePoint(){
         points++;
     }
-    int getPoints(){
+    public int getPoints(){
         return points;
     }
 
-    int getId (){
+    public int getId (){
         return this.id;
     }
 

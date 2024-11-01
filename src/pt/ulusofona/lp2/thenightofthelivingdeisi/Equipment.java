@@ -13,19 +13,19 @@ public class Equipment {
         this.positionInBoard = positionInBoard;
     }
 
-    int[] getPositionInBoard() {
+    public int[] getPositionInBoard() {
         return this.positionInBoard;
     }
 
-    int getId() {
+    public int getId() {
         return id;
     }
 
-    String getTypeAsString() {
+    public String getTypeAsString() {
         return "" + type;
     }
 
-    String[] getEquipmentInfo() {
+    public String[] getEquipmentInfo() {
         String[] equipmentInfo = new String[5];
         equipmentInfo[0] = "" + id;
         equipmentInfo[1] = "" + type;

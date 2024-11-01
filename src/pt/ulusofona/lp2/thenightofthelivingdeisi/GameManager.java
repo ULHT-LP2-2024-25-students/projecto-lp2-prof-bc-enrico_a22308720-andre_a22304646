@@ -54,6 +54,7 @@ public class GameManager {
                 equipments = Integer.parseInt(info.get(index));
             } else if (index > 3 + creatures && index < 4 + creatures + equipments) {
                 String[] infoEquipment = info.get(index).split(" : ");
+                if(infoEquipment.length != 4){return false;}                        // se nao passarem todas as informacaoes de algum equipamento
                 int equipmentId = Integer.parseInt(infoEquipment[0]);
                 int equipmentType = Integer.parseInt(infoEquipment[1]);
                 int[] positionInBoard = new int[2];

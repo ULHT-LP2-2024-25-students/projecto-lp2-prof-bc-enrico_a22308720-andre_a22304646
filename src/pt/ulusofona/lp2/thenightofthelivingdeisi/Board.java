@@ -134,5 +134,7 @@ public class Board {
 
     public ArrayList<Creature> getCreatures (){return creatures;}
 
+    public ArrayList<Equipment> getEquipments (){return equipments;}
+
 
 }

@@ -97,10 +97,10 @@ public class Board {
                             creature.addEquipment(getEquipment(positionId(xD, yD)));  //se for equipamento fica com a criatura
                         }else{
                             creature.increasePoint();
-                            removeEquipment(getEquipment(positionId(xD, yD)));  //se for zombie elimina equipamento
                         }
 
                     }
+                    removeEquipment(getEquipment(positionId(xD, yD)));                  //elimina equipamento da lista
                     board[xD][yD]=positionId(x0,y0);                                    // posicao destino recebe id da origem
                     board[x0][y0]=0;                                                    //posicao da origem recebe 0
                     creature.move(xD, yD);

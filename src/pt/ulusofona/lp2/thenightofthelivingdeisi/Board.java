@@ -97,12 +97,12 @@ public class Board {
                             creature.increasePoint();
 
                         }
-
+                        removeEquipment(getEquipment(positionId(xD, yD)));                  //elimina equipamento da lisat
                     }
                     board[xD][yD]=positionId(x0,y0);                                    // posicao destino recebe id da origem
                     board[x0][y0]=0;                                                    //posicao da origem recebe 0
                     creature.move(xD, yD);
-                    removeEquipment(getEquipment(positionId(xD, yD)));                  //elimina equipamento da lisat
+
                     return true;
                 }
             }

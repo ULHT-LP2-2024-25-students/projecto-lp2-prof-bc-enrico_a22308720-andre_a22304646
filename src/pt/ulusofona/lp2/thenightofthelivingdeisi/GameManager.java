@@ -169,12 +169,14 @@ public class GameManager {
         ArrayList<Creature> creatures = board.getCreatures();
         result.add("Nr. de turnos terminados:");
         result.add(this.turns + "");
+        result.add("");
         result.add("OS VIVOS");
         for (Creature actualCreature : creatures) {
             if (actualCreature.getTeam() == 1) {
                 result.add(actualCreature.getIdAndName(actualCreature));
             }
         }
+        result.add("");
         result.add("OS MORTOS");
         for (Creature actualCreature : creatures) {
             if (actualCreature.getTeam() == 0) {

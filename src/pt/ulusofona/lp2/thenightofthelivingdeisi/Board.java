@@ -35,11 +35,11 @@ public class Board {
     }
 
     public int getSizeX() {
-        return board[0].length;
+        return board.length;
     }
 
     public int getSizeY() {
-        return board.length;
+        return board[0].length;
     }
 
     public String getSquareInfo(int x, int y) {

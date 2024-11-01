@@ -42,6 +42,7 @@ public class GameManager {
                 creatures = Integer.parseInt(info.get(index));
             } else if (index > 2 && index < 3 + creatures) {
                 String[] infoCreature = info.get(index).split(" : ");
+                if(infoCreature.length != 5){return false;}                         //se nao passarem todas as informacoes de alguma criatura
                 int creatureId = Integer.parseInt(infoCreature[0]);
                 int teamId = Integer.parseInt(infoCreature[1]);
                 String creatureName = infoCreature[2];
@@ -63,6 +64,12 @@ public class GameManager {
                 Equipment equipment = new Equipment(equipmentId, equipmentType, positionInBoard);
                 board.addEquipment(equipment);
             }
+        }
+        if ((board.getCreatures().size() != creatures) || (board.getEquipments().size()  != equipments)){    //confirmar se o descritivo do nr de criaturas e equipamentos bate certo
+            return false;
+        }
+        if(info.size() != creatures + equipments + 4) {                                 //confirmar que o load game tem o tamanho necessario
+            return false;
         }
         return true;
     }

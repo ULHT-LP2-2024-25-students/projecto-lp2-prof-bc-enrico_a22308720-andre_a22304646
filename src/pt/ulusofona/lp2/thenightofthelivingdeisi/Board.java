@@ -59,6 +59,7 @@ public class Board {
                 result += "H:" + board[x][y];
             }
         }
+
         return result;
     }
 

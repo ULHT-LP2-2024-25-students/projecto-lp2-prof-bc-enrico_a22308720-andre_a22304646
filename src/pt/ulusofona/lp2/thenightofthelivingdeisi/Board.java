@@ -137,5 +137,4 @@ public class Board {
 
     public ArrayList<Equipment> getEquipments (){return equipments;}
 
-
 }

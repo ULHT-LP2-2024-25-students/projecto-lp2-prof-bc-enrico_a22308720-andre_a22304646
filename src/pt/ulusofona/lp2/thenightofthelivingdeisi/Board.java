@@ -9,7 +9,7 @@ public class Board {
 
 
     public Board(int rows, int columns){
-        this.board = new int[rows][columns];
+        this.board = new int[columns][rows];
         this.creatures=new ArrayList<>();
         this.equipments=new ArrayList<>();
     }
@@ -126,7 +126,7 @@ public class Board {
             return true;
         }
 
-       return false;
+        return false;
     }
 
     public int positionId(int x, int y){

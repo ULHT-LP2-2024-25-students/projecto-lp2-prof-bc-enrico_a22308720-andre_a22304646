@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestGameManager {
 
     @Test
-    void testLoadGame() {
+    public void testLoadGame() {
         GameManager gameManager = new GameManager();
         File loadFile = new File("test-files/test.txt");
         gameManager.loadGame(loadFile);
@@ -34,7 +34,7 @@ public class TestGameManager {
     }
 
     @Test
-    void testMove(){
+    public void testMove(){
         GameManager gameManager = new GameManager();
         File loadFile = new File("test-files/test.txt");
         gameManager.loadGame(loadFile);
@@ -44,7 +44,7 @@ public class TestGameManager {
         assertEquals("H:1",gameManager.getSquareInfo(1,0));
     }
     @Test
-    void testHasEquipment (){
+    public void testHasEquipment (){
         GameManager gameManager = new GameManager();
         File loadFile = new File("test-files/test.txt");
         gameManager.loadGame(loadFile);
@@ -55,7 +55,7 @@ public class TestGameManager {
     }
 
     @Test
-    void testGameIsOver(){
+    public void testGameIsOver(){
         GameManager gameManager = new GameManager();
         File loadFile = new File("test-files/test.txt");
         gameManager.loadGame(loadFile);

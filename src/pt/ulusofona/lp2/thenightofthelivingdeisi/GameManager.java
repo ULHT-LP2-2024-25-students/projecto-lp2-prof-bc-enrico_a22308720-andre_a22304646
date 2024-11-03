@@ -8,11 +8,11 @@ import java.util.Scanner;
 
 public class GameManager {
     int[] worldSize;
-    public int initialTeam;
+    int initialTeam;
     int currentTeam;
     boolean gameStatus;
-    public Board board;
-    public int turns;
+    Board board;
+    int turns;
 
     public GameManager() {
         this.turns=0;

@@ -43,6 +43,16 @@ public class TestGameManager {
         assertEquals("",gameManager.getSquareInfo(0,0));
         assertEquals("H:1",gameManager.getSquareInfo(1,0));
     }
+    @Test
+    void testHasEquipment (){
+        GameManager gameManager = new GameManager();
+        File loadFile = new File("test-files/test.txt");
+        gameManager.loadGame(loadFile);
+        gameManager.move(0,0,1,0);
+        Creature creature=gameManager.board.getCreatureById(1);
+        assertTrue(creature.hasEquipment(0));
+
+    }
 
 
 

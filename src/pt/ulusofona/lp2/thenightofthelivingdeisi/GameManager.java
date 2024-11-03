@@ -139,11 +139,11 @@ public class GameManager {
     }
 
     public String[] getEquipmentInfo(int id) {
-        return board.getEquipment(id).getEquipmentInfo();
+        return board.getEquipmentById(id).getEquipmentInfo();
     }
 
     public String getEquipmentInfoAsString(int id) {
-        Equipment equipment = board.getEquipment(id);
+        Equipment equipment = board.getEquipmentById(id);
         if(equipment == null){return null;}
         String[] info = equipment.getEquipmentInfo();
         return info[0] + " | " + equipment.getNameOfEquipment() + " @ (" + info[2] + "," + info[3] + ")";
@@ -178,14 +178,14 @@ public class GameManager {
         result.add("OS VIVOS");
         for (Creature actualCreature : creatures) {
             if (actualCreature.getTeam() == 1) {
-                result.add(actualCreature.getIdAndName(actualCreature));
+                result.add(actualCreature.getIdAndName());
             }
         }
         result.add("");
         result.add("OS MORTOS");
         for (Creature actualCreature : creatures) {
             if (actualCreature.getTeam() == 0) {
-                result.add(actualCreature.getIdAndName(actualCreature));
+                result.add(actualCreature.getIdAndName());
             }
         }
         result.add("-----");

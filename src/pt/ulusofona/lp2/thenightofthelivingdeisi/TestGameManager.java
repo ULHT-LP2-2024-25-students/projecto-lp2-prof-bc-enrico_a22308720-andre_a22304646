@@ -54,6 +54,28 @@ public class TestGameManager {
 
     }
 
+    @Test
+    void testGameIsOver(){
+        GameManager gameManager = new GameManager();
+        File loadFile = new File("test-files/test.txt");
+        gameManager.loadGame(loadFile);
+        gameManager.move(0,0,1,0);
+        gameManager.move(1,2,1,3);
+        gameManager.move(1,0,0,0);
+        gameManager.move(1,3,1,2);
+        gameManager.move(0,0,1,0);
+        gameManager.move(1,2,1,3);
+        gameManager.move(1,0,0,0);
+        gameManager.move(1,3,1,2);
+        gameManager.move(0,0,1,0);
+        gameManager.move(1,2,1,3);
+        gameManager.move(1,0,0,0);
+        gameManager.move(1,3,1,2);
+        assertTrue(gameManager.gameIsOver());
+
+
+    }
+
 
 
 

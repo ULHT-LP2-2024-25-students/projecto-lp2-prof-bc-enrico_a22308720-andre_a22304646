@@ -110,7 +110,6 @@ public class GameManager {
         turns++;
     }
 
-
     public String getSquareInfo(int x, int y) {
         if (board.positionIsValid(x, y)){
             return board.getSquareInfo(x, y);

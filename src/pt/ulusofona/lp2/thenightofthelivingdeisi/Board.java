@@ -75,7 +75,7 @@ public class Board {
         return  null;
     }
 
-    public Equipment getEquipment(int id){
+    public Equipment getEquipmentById(int id){
         for(Equipment equipment : equipments){
             if(equipment.getId() == id){
                 return equipment;
@@ -83,7 +83,6 @@ public class Board {
         }
         return null;
     }
-
 
     public boolean move(int x0, int y0, int xD, int yD){
         Creature creature;
@@ -96,12 +95,12 @@ public class Board {
                     if (positionId(xD, yD) < 0){
                         if (creature.isHuman()){
                             creature.increasePoint();
-                            creature.addEquipment(getEquipment(positionId(xD, yD)));  //se for equipamento fica com a criatura
+                            creature.addEquipment(getEquipmentById(positionId(xD, yD)));  //se for equipamento fica com a criatura
                         }else{
                             creature.increasePoint();
 
                         }
-                        removeEquipment(getEquipment(positionId(xD, yD)));                  //elimina equipamento da lisat
+                        removeEquipment(getEquipmentById(positionId(xD, yD)));                  //elimina equipamento da lisat
                     }
                     board[xD][yD]=positionId(x0,y0);                                    // posicao destino recebe id da origem
                     board[x0][y0]=0;                                                    //posicao da origem recebe 0
@@ -135,6 +134,6 @@ public class Board {
 
     public ArrayList<Creature> getCreatures (){return creatures;}
 
-    public ArrayList<Equipment> getEquipments (){return equipments;}
+
 
 }

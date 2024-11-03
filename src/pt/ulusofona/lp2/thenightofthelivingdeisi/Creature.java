@@ -65,7 +65,7 @@ public class Creature {
         equipments.add(equipment);
     }
 
-    public String getIdAndName(Creature creature) {
+    public String getIdAndName() {
         if (team == 1) {
             return id + " " + name;
         }

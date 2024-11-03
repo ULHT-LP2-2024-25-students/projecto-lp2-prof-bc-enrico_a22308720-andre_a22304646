@@ -16,7 +16,10 @@ public class Board {
 
     public boolean addCreature(Creature creature){
         int [] position = creature.getPositionInBoard();
-        if (!positionIsValid(position[0],position[1]) || board[position[0]][position[1]] > 0 ){
+        if (!positionIsValid(position[0],position[1]) ){
+            return false;
+        }
+        if (board[position[0]][position[1]] > 0){
             return false;
         }
         board[position[0]][position[1]] = creature.getId();
@@ -111,11 +114,8 @@ public class Board {
         return false;
     }
 
-    public boolean positionIsValid(int x, int y){
-        if (x >= 0 && x < getSizeX() && y >= 0 && y < getSizeY()) {
-            return true;
-        }
-        return false;
+    public boolean positionIsValid(int x, int y) {
+        return x >= 0 && x < getSizeX() && y >= 0 && y < getSizeY();
     }
 
     public boolean moveIsValid (int x0, int y0, int xD, int yD){

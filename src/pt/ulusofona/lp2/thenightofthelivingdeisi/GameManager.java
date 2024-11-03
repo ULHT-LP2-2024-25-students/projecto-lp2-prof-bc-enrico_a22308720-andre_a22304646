@@ -163,6 +163,7 @@ public class GameManager {
             }
         }
         return false;
+
     }
 
     public boolean gameIsOver() {

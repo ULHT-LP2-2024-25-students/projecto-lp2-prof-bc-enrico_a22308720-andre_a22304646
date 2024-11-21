@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.equipments;
 
 public class Leach extends Equipment {
-    int liters;
+    private int liters;
 
 
     public Leach(int[] positionInBoard, int id, int type, String name) {

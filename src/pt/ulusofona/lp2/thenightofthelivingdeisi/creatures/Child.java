@@ -4,10 +4,10 @@ import pt.ulusofona.lp2.thenightofthelivingdeisi.Creature;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.Equipment;
 
 public class Child extends Creatures {
-    Equipment equipment;
+    private Equipment equipment = null;
 
-    public Child(int[] positionInBoard, int id, int team, String name, int points, State state, Equipment equipment) {
-        super(positionInBoard, id, team, name, points, state);
-        this.equipment = equipment;
+    public Child(int[] positionInBoard, int id, int team, String name, State state) {
+        super(positionInBoard, id, team, name, state);
+        this.equipment = null;
     }
 }

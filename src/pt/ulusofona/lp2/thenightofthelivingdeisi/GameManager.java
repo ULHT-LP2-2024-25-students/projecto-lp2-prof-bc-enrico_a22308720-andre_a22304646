@@ -1,4 +1,6 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.creatures.*;
+
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,15 +20,12 @@ public class GameManager {
         this.turns=0;
     }
 
-    public boolean loadGame(File file) {
+    public void loadGame(File file) throws FileNotFoundException  {
         ArrayList<String> info = new ArrayList<>();
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                info.add(scanner.nextLine());
-            }
-        } catch (FileNotFoundException exception) {
-            exception.printStackTrace();
-            return false;
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNextLine()) {
+            info.add(scanner.nextLine());
         }
 
         int creatures = 0;
@@ -42,22 +41,70 @@ public class GameManager {
                 creatures = Integer.parseInt(info.get(index));
             } else if (index > 2 && index < 3 + creatures) {
                 String[] infoCreature = info.get(index).split(" : ");
-                if(infoCreature.length != 5){return false;}                         //se nao passarem todas as informacoes de alguma criatura
+                if(infoCreature.length != 6){return;}                         //se nao passarem todas as informacoes de alguma criatura
                 int creatureId = Integer.parseInt(infoCreature[0]);
                 int teamId = Integer.parseInt(infoCreature[1]);
-                String creatureName = infoCreature[2];
+                int creatureType = Integer.parseInt(infoCreature[2]);
+                String creatureName = infoCreature[3];
 
                 int[] positionInBoard = new int[2];
                 positionInBoard[0] = Integer.parseInt(infoCreature[3]);
                 positionInBoard[1] = Integer.parseInt(infoCreature[4]);
 
-                Creature creature = new Creature(creatureId, teamId, creatureName, positionInBoard);
-                board.addCreature(creature);
+                switch (creatureType) {
+                    case 0:{
+                         Child creature = new Child(
+                                 positionInBoard,
+                                 creatureId,
+                                 teamId,
+                                 creatureName,
+                                 teamId == 10 ? State.DEAD : State.LIVE
+                             );
+                    }
+                    case 1:{
+                        Adult creature = new Adult(
+                                positionInBoard,
+                                creatureId,
+                                teamId,
+                                creatureName,
+                                teamId == 10 ? State.DEAD : State.LIVE
+                        );
+                    }
+                    case 2:{
+                        Old  creature = new Old(
+                                positionInBoard,
+                                creatureId,
+                                teamId,
+                                creatureName,
+                                teamId == 10 ? State.DEAD : State.LIVE
+                        );
+                    }
+                    case 3:{
+                        Dog creature = new Dog(
+                                positionInBoard,
+                                creatureId,
+                                teamId,
+                                creatureName,
+                                State.LIVE
+                        );
+                    }
+                    case 4:{
+                        Vampire creature = new Vampire(
+                                positionInBoard,
+                                creatureId,
+                                teamId,
+                                creatureName,
+                                State.LIVE
+                        );
+                    }
+                    board.addCreature(creature);
+                }
+
             } else if (index == 3 + creatures) {
                 equipments = Integer.parseInt(info.get(index));
             } else if (index > 3 + creatures && index < 4 + creatures + equipments) {
                 String[] infoEquipment = info.get(index).split(" : ");
-                if(infoEquipment.length != 4){return false;}                        // se nao passarem todas as informacaoes de algum equipamento
+                if(infoEquipment.length != 4){return;}                        // se nao passarem todas as informacaoes de algum equipamento
                 int equipmentId = Integer.parseInt(infoEquipment[0]);
                 int equipmentType = Integer.parseInt(infoEquipment[1]);
                 int[] positionInBoard = new int[2];
@@ -67,7 +114,6 @@ public class GameManager {
                 board.addEquipment(equipment);
             }
         }
-        return true;
     }
 
     public int[] getWorldSize() {
@@ -86,7 +132,7 @@ public class GameManager {
             currentTeam = initialTeam;
         }
         else {
-            currentTeam = initialTeam == 1 ? 0 : 1;
+            currentTeam = initialTeam == 20 ? 10 : 20;
         }
         return currentTeam;
         //if turn is odd, return initial team, if not return the other team
@@ -94,7 +140,7 @@ public class GameManager {
 
     public boolean isDay() {
         if(turns==0){
-            gameStatus = getInitialTeamId() == 0 ? false : true;
+            gameStatus = getInitialTeamId() == 10 ? false : true;
         }
 
         if (((turns % 2) == 0) && turns != 0){
@@ -184,7 +230,7 @@ public class GameManager {
         result.add("");
         result.add("OS MORTOS");
         for (Creature actualCreature : creatures) {
-            if (actualCreature.getTeam() == 0) {
+            if (actualCreature.getTeam() == 10) {
                 result.add(actualCreature.getIdAndName());
             }
         }

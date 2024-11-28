@@ -7,4 +7,8 @@ abstract public class Piece {
     public Piece(int[] positionInBoard) {
         this.positionInBoard = positionInBoard;
     }
+
+    public int[] getPositionInBoard(){
+        return this.positionInBoard;
+    }
 }

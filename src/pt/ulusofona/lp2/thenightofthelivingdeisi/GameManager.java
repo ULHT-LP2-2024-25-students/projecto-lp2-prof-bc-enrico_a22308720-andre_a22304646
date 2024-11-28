@@ -51,9 +51,10 @@ public class GameManager {
                 positionInBoard[0] = Integer.parseInt(infoCreature[3]);
                 positionInBoard[1] = Integer.parseInt(infoCreature[4]);
 
+                Creature creature;
                 switch (creatureType) {
                     case 0:{
-                         Child creature = new Child(
+                          creature = new Child(
                                  positionInBoard,
                                  creatureId,
                                  teamId,
@@ -62,7 +63,7 @@ public class GameManager {
                              );
                     }
                     case 1:{
-                        Adult creature = new Adult(
+                         creature = new Adult(
                                 positionInBoard,
                                 creatureId,
                                 teamId,
@@ -71,7 +72,7 @@ public class GameManager {
                         );
                     }
                     case 2:{
-                        Old  creature = new Old(
+                          creature = new Old(
                                 positionInBoard,
                                 creatureId,
                                 teamId,
@@ -80,7 +81,7 @@ public class GameManager {
                         );
                     }
                     case 3:{
-                        Dog creature = new Dog(
+                         creature = new Dog(
                                 positionInBoard,
                                 creatureId,
                                 teamId,
@@ -89,7 +90,7 @@ public class GameManager {
                         );
                     }
                     case 4:{
-                        Vampire creature = new Vampire(
+                         creature = new Vampire(
                                 positionInBoard,
                                 creatureId,
                                 teamId,
@@ -112,7 +113,15 @@ public class GameManager {
                 positionInBoard[1] = Integer.parseInt(infoEquipment[3]);
                 Equipment equipment = new Equipment(equipmentId, equipmentType, positionInBoard);
                 board.addEquipment(equipment);
+            } else if (index > 3 + creatures + equipments && index < 4 + creatures + equipments) {
+                String[] infoDoor = info.get(index).split(" : ");
+                if(infoDoor.length != 2){return;}                        // se nao passarem todas as informacaoes de algum equipamento
+                int[] positionInBoard = new int[2];
+                positionInBoard[0] = Integer.parseInt(infoDoor[0]);
+                positionInBoard[1] = Integer.parseInt(infoDoor[1]);
+                Door door = new Door(positionInBoard);
             }
+
         }
     }
 
@@ -168,7 +177,7 @@ public class GameManager {
     }
 
     public String getCreatureInfoAsString(int id) {
-        Creature creature = board.getCreatureById(id);
+        LegacyCreature creature = board.getCreatureById(id);
         String[] info = board.getCreatureById(id).getCreatureInfo();
         String result = "";
         switch (info[1]) {

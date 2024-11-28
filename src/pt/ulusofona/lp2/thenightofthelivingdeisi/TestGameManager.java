@@ -2,15 +2,8 @@ package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.Board;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.Creature;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.Equipment;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.GameManager;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,7 +42,7 @@ public class TestGameManager {
         File loadFile = new File("test-files/test.txt");
         gameManager.loadGame(loadFile);
         gameManager.move(0,0,1,0);
-        Creature creature=gameManager.board.getCreatureById(1);
+        LegacyCreature creature=gameManager.board.getCreatureById(1);
         assertTrue(creature.hasEquipment(0));
 
     }

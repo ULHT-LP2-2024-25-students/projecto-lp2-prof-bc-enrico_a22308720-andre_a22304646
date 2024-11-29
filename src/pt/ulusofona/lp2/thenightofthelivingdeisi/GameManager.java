@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.creatures.*;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Door;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Equipment;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.*;
 
 import javax.swing.*;
 import java.io.File;
@@ -111,7 +113,7 @@ public class GameManager {
                 int[] positionInBoard = new int[2];
                 positionInBoard[0] = Integer.parseInt(infoEquipment[2]);
                 positionInBoard[1] = Integer.parseInt(infoEquipment[3]);
-                Equipment equipment = new Equipment(equipmentId, equipmentType, positionInBoard);
+                Equipment equipment = new Equipment(positionInBoard, equipmentId, equipmentType);
                 board.addEquipment(equipment);
             } else if (index > 3 + creatures + equipments && index < 4 + creatures + equipments) {
                 String[] infoDoor = info.get(index).split(" : ");
@@ -177,7 +179,7 @@ public class GameManager {
     }
 
     public String getCreatureInfoAsString(int id) {
-        LegacyCreature creature = board.getCreatureById(id);
+        Creature creature = board.getCreatureById(id);
         String[] info = board.getCreatureById(id).getCreatureInfo();
         String result = "";
         switch (info[1]) {

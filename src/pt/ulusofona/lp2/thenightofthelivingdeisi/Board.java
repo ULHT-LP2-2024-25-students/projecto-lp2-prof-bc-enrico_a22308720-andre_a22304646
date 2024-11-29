@@ -1,6 +1,8 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
-import pt.ulusofona.lp2.thenightofthelivingdeisi.creatures.Creature;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Equipment;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.Creature;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
 
 import java.util.ArrayList;
 
@@ -22,17 +24,17 @@ public class Board {
         if (!positionIsValid(position[0],position[1]) ){
             return false;
         }
-        if (board[position[0]][position[1]] > 0){
+        if (board[position[0]][position[1]] != null){
             return false;
         }
-        board[position[0]][position[1]] = creature.getId();
+        board[position[0]][position[1]] = creature;
         creatures.add(creature);
         return true;
     }
 
     public void addEquipment(Equipment equipment){
         int[] position = equipment.getPositionInBoard();
-        board[position[0]][position[1]] = equipment.getId();
+        board[position[0]][position[1]] = equipment;
         equipments.add(equipment);
     }
 

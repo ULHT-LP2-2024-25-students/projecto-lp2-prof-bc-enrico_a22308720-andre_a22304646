@@ -1,4 +1,6 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.*;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

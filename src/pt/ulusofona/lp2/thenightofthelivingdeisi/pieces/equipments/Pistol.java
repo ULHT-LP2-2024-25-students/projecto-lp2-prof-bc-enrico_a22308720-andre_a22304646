@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.equipments;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments;
 
 public class Pistol extends Equipment {
     int bullets;

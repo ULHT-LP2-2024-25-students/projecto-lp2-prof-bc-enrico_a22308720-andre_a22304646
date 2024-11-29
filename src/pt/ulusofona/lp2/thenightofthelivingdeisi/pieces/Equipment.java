@@ -1,15 +1,15 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces;
 
-public class Equipment {
+public class Equipment extends Piece {
     int id;
     int type;
     String name;
-    int[] positionInBoard;
 
-
-    public Equipment(int id, int type, int[] positionInBoard) {
+    public Equipment(int[] positionInBoard, int id, int type, String name) {
+        super(positionInBoard);
         this.id = id;
         this.type = type;
+        this.name = name;
         this.positionInBoard = positionInBoard;
     }
 

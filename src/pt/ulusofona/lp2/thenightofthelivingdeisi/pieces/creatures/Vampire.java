@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.creatures;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
 
 
 public class Vampire extends Creature {

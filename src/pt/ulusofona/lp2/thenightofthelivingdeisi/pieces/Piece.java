@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces;
 
 abstract public class Piece {
     protected int[] positionInBoard;
@@ -6,5 +6,9 @@ abstract public class Piece {
 
     public Piece(int[] positionInBoard) {
         this.positionInBoard = positionInBoard;
+    }
+
+    public int[] getPositionInBoard(){
+        return this.positionInBoard;
     }
 }

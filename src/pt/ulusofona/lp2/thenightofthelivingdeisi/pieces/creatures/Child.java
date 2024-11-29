@@ -1,9 +1,8 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.creatures;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
 
-import pt.ulusofona.lp2.thenightofthelivingdeisi.Creature;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.Equipment;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Equipment;
 
-public class Child extends Creatures {
+public class Child extends Creature {
     private Equipment equipment = null;
 
     public Child(int[] positionInBoard, int id, int team, String name, State state) {

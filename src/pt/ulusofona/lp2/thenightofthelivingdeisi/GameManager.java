@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.creatures.*;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Door;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Equipment;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.*;
 
 import javax.swing.*;
 import java.io.File;
@@ -51,9 +53,10 @@ public class GameManager {
                 positionInBoard[0] = Integer.parseInt(infoCreature[3]);
                 positionInBoard[1] = Integer.parseInt(infoCreature[4]);
 
+                Creature creature;
                 switch (creatureType) {
                     case 0:{
-                         Child creature = new Child(
+                          creature = new Child(
                                  positionInBoard,
                                  creatureId,
                                  teamId,
@@ -62,7 +65,7 @@ public class GameManager {
                              );
                     }
                     case 1:{
-                        Adult creature = new Adult(
+                         creature = new Adult(
                                 positionInBoard,
                                 creatureId,
                                 teamId,
@@ -71,7 +74,7 @@ public class GameManager {
                         );
                     }
                     case 2:{
-                        Old  creature = new Old(
+                          creature = new Old(
                                 positionInBoard,
                                 creatureId,
                                 teamId,
@@ -80,7 +83,7 @@ public class GameManager {
                         );
                     }
                     case 3:{
-                        Dog creature = new Dog(
+                         creature = new Dog(
                                 positionInBoard,
                                 creatureId,
                                 teamId,
@@ -89,7 +92,7 @@ public class GameManager {
                         );
                     }
                     case 4:{
-                        Vampire creature = new Vampire(
+                         creature = new Vampire(
                                 positionInBoard,
                                 creatureId,
                                 teamId,
@@ -110,9 +113,17 @@ public class GameManager {
                 int[] positionInBoard = new int[2];
                 positionInBoard[0] = Integer.parseInt(infoEquipment[2]);
                 positionInBoard[1] = Integer.parseInt(infoEquipment[3]);
-                Equipment equipment = new Equipment(equipmentId, equipmentType, positionInBoard);
+                Equipment equipment = new Equipment(positionInBoard, equipmentId, equipmentType);
                 board.addEquipment(equipment);
+            } else if (index > 3 + creatures + equipments && index < 4 + creatures + equipments) {
+                String[] infoDoor = info.get(index).split(" : ");
+                if(infoDoor.length != 2){return;}                        // se nao passarem todas as informacaoes de algum equipamento
+                int[] positionInBoard = new int[2];
+                positionInBoard[0] = Integer.parseInt(infoDoor[0]);
+                positionInBoard[1] = Integer.parseInt(infoDoor[1]);
+                Door door = new Door(positionInBoard);
             }
+
         }
     }
 

@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
 import java.util.ArrayList;
 
-public class Creature {
+public class LegacyCreature {
     int id;
     int team;
     String name;
@@ -11,7 +11,7 @@ public class Creature {
     int points;
 
 
-    public Creature(int id, int team, String name, int[] positionInBoard) {
+    public LegacyCreature(int id, int team, String name, int[] positionInBoard) {
         this.id = id;
         this.team = team;
         this.name = name;

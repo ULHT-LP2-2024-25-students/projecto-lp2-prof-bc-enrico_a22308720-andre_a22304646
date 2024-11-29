@@ -1,5 +1,5 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.equipments;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.Piece;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
 
 public class Equipment extends Piece {
     protected int id;

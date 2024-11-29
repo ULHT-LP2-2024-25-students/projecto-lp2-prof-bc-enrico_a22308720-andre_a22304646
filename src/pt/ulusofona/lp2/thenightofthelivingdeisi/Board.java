@@ -1,15 +1,20 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Equipment;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.Creature;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
+
 import java.util.ArrayList;
 
 public class Board {
-    int[][] board;                  // board contains creature or equipmnet id. If empty 0
+    Piece[][] board;                  // board contains creature or equipmnet id. If empty 0
     ArrayList<Creature> creatures;
     ArrayList<Equipment> equipments;
+    ArrayList<Creature> safeHeaven;
 
 
     public Board(int rows, int columns){
-        this.board = new int[columns][rows];
+        this.board = new Piece[rows][columns];
         this.creatures=new ArrayList<>();
         this.equipments=new ArrayList<>();
     }
@@ -19,17 +24,17 @@ public class Board {
         if (!positionIsValid(position[0],position[1]) ){
             return false;
         }
-        if (board[position[0]][position[1]] > 0){
+        if (board[position[0]][position[1]] != null){
             return false;
         }
-        board[position[0]][position[1]] = creature.getId();
+        board[position[0]][position[1]] = creature;
         creatures.add(creature);
         return true;
     }
 
     public void addEquipment(Equipment equipment){
         int[] position = equipment.getPositionInBoard();
-        board[position[0]][position[1]] = equipment.getId();
+        board[position[0]][position[1]] = equipment;
         equipments.add(equipment);
     }
 
@@ -54,7 +59,7 @@ public class Board {
             result+="E:" + board[x][y];
         }
         if (board[x][y] > 0 ){
-            Creature creature = getCreatureById(board[x][y]);
+            LegacyCreature creature = getCreatureById(board[x][y]);
             if(creature.getTeam() == 0) {
                 result += "Z:"+ board[x][y];
             }
@@ -85,7 +90,7 @@ public class Board {
     }
 
     public boolean move(int x0, int y0, int xD, int yD){
-        Creature creature;
+        LegacyCreature creature;
         if (positionIsValid(x0, y0)){               // verificar se a posicao de origem e valida
             if(positionId(x0, y0) > 0){             // verificar se na posicao de origem esta uma criatura
                 creature = getCreatureById(positionId(x0, y0));         //obter a criatura a mover

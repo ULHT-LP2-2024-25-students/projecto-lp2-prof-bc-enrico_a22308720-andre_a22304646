@@ -1,7 +1,8 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Door;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Equipment;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.LegacyEquipment;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.*;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
 
 import javax.swing.*;
 import java.io.File;
@@ -63,6 +64,8 @@ public class GameManager {
                                  creatureName,
                                  teamId == 10 ? State.DEAD : State.LIVE
                              );
+                          board.addCreature(creature);
+                          break;
                     }
                     case 1:{
                          creature = new Adult(
@@ -72,6 +75,8 @@ public class GameManager {
                                 creatureName,
                                 teamId == 10 ? State.DEAD : State.LIVE
                         );
+                         board.addCreature(creature);
+                         break;
                     }
                     case 2:{
                           creature = new Old(
@@ -81,6 +86,8 @@ public class GameManager {
                                 creatureName,
                                 teamId == 10 ? State.DEAD : State.LIVE
                         );
+                          board.addCreature(creature);
+                          break;
                     }
                     case 3:{
                          creature = new Dog(
@@ -90,6 +97,8 @@ public class GameManager {
                                 creatureName,
                                 State.LIVE
                         );
+                         board.addCreature(creature);
+                         break;
                     }
                     case 4:{
                          creature = new Vampire(
@@ -99,8 +108,9 @@ public class GameManager {
                                 creatureName,
                                 State.LIVE
                         );
+                         board.addCreature(creature);
+                         break;
                     }
-                    board.addCreature(creature);
                 }
 
             } else if (index == 3 + creatures) {
@@ -122,6 +132,7 @@ public class GameManager {
                 positionInBoard[0] = Integer.parseInt(infoDoor[0]);
                 positionInBoard[1] = Integer.parseInt(infoDoor[1]);
                 Door door = new Door(positionInBoard);
+                board.addDoor(door);
             }
 
         }
@@ -129,8 +140,8 @@ public class GameManager {
 
     public int[] getWorldSize() {
         int[] size = new int[2];
-        size[1] = board.getSizeX();
-        size[0] = board.getSizeY();
+        size[0] = board.getSizeX();
+        size[1] = board.getSizeY();
         return size;
     }
 
@@ -179,20 +190,7 @@ public class GameManager {
     }
 
     public String getCreatureInfoAsString(int id) {
-        Creature creature = board.getCreatureById(id);
-        String[] info = board.getCreatureById(id).getCreatureInfo();
-        String result = "";
-        switch (info[1]) {
-            case "Zombie":
-                result = info[0] + " | Zombie | " + info[2] + " | -" + creature.getPoints() + " @ (" + info[3] + ", " + info[4] + ")";
-                break;
-            case "Humano":
-                result = info[0] + " | Humano | " + info[2] + " | +" + creature.getPoints() + " @ (" + info[3] + ", " + info[4] + ")";
-                break;
-            default:
-                break;
-        }
-        return result;
+        return board.getCreatureById(id).getCreatureInfoAsString();
     }
 
     public String[] getEquipmentInfo(int id) {
@@ -200,10 +198,7 @@ public class GameManager {
     }
 
     public String getEquipmentInfoAsString(int id) {
-        Equipment equipment = board.getEquipmentById(id);
-        if(equipment == null){return null;}
-        String[] info = equipment.getEquipmentInfo();
-        return info[0] + " | " + equipment.getNameOfEquipment() + " @ (" + info[2] + "," + info[3] + ")";
+        return board.getEquipmentById(id).getEquipmentInfoAsString();
     }
 
     public boolean hasEquipment(int creatureId, int equipmnentTypeId) {

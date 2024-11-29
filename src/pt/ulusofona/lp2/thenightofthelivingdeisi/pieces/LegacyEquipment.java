@@ -1,11 +1,11 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces;
 
-public class Equipment extends Piece {
+public class LegacyEquipment extends Piece {
     int id;
     int type;
     String name;
 
-    public Equipment(int[] positionInBoard, int id, int type, String name) {
+    public LegacyEquipment(int[] positionInBoard, int id, int type, String name) {
         super(positionInBoard);
         this.id = id;
         this.type = type;

@@ -11,4 +11,6 @@ abstract public class Piece {
     public int[] getPositionInBoard(){
         return this.positionInBoard;
     }
+
+
 }

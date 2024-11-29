@@ -1,8 +1,10 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Equipment;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Door;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.LegacyEquipment;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.Creature;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
 
 import java.util.ArrayList;
 
@@ -38,27 +40,31 @@ public class Board {
         equipments.add(equipment);
     }
 
+    public void addDoor(Door door){
+        board[door.getPositionInBoard()[1]][door.getPositionInBoard()[0]]=door;
+    }
+
     public void removeEquipment (Equipment equipment){
         equipments.remove(equipment);
     }
 
     public int getSizeX() {
-        return board.length;
+        return board[0].length;
     }
 
     public int getSizeY() {
-        return board[0].length;
+        return board.length;
     }
 
     public String getSquareInfo(int x, int y) {
         String result="";
-        if (board[x][y] == 0){
+        if (board[y][x] == null){
             result+="";
         }
-        if (board[x][y] < 0 ){
+        if (board[y][x] < 0 ){
             result+="E:" + board[x][y];
         }
-        if (board[x][y] > 0 ){
+        if (board[y][x] > 0 ){
             LegacyCreature creature = getCreatureById(board[x][y]);
             if(creature.getTeam() == 0) {
                 result += "Z:"+ board[x][y];

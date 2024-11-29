@@ -5,7 +5,22 @@ public class Leach extends Equipment {
 
 
     public Leach(int[] positionInBoard, int id, int type, String name) {
-        super(positionInBoard, id, type, name);
-        this.liters = 10;
+        super(positionInBoard, id, type);
+        this.name = "Lixívia";
+        this.liters = 1;
+
     }
+
+    @Override
+    public boolean canAttack(){return false;}
+
+    @Override
+    public boolean canDefend(){return true;}
+
+    @Override
+    public String getEquipmentInfoAsString() {
+        return id + " | " + name + " @ (" + positionInBoard[0] + "," + positionInBoard[1] + ") | " + liters + "litros";
+    }
+
+
 }

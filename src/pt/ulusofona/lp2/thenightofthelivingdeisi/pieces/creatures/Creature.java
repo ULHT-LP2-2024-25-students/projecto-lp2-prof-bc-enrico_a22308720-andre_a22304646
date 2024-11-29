@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
 
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
 
-public class Creature extends Piece {
+abstract public class Creature extends Piece {
     protected int id;
     protected int team;
     protected String name;
@@ -18,6 +18,7 @@ public class Creature extends Piece {
         this.state = state;
     }
 
+
     public int getId() {
         return id;
     }
@@ -26,20 +27,9 @@ public class Creature extends Piece {
         return points;
     }
 
-    public String[] getCreatureInfo(){
-        String[] creatureInfo = new String[6];
-        creatureInfo[0] = "" + id;
-        creatureInfo[1] = team == 0? "Zombie" : "Humano";
-        creatureInfo[2] = name;
-        creatureInfo[3] = "" + positionInBoard[0];
-        creatureInfo[4] = "" + positionInBoard[1];
-        creatureInfo[5] = null;
+    abstract public String[] getCreatureInfo();
+    abstract public String getCreatureInfoAsString();
 
-        return creatureInfo;
-    }
 
-    public Creature(int[] positionInBoard, int team) {
-        super(positionInBoard);
-        this.team = team;
-    }
+
 }

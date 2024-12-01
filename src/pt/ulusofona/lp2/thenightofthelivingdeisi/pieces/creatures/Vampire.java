@@ -25,4 +25,14 @@ public class Vampire extends Creature {
     public String getCreatureInfoAsString() {
         return id + " | Vampiro | Zombie | " +  name + " | -" + points + " @(" + positionInBoard[0] + "," + positionInBoard[1]+")";
     }
+
+    @Override
+    public boolean hasEquipment(int equipmentTypeId) {
+        return false;
+    }
+
+    @Override
+    public String getIdAndName() {
+            return id + " (antigamente conhecido como " + name +")";
+    }
 }

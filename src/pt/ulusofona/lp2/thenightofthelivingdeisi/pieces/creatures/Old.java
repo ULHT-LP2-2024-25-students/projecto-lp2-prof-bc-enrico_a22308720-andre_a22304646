@@ -35,5 +35,20 @@ public class Old extends Creature {
         }
     }
 
+    @Override
+    public boolean hasEquipment(int equipmentTypeId) {
+        return equipment.getType() == equipmentTypeId;
+    }
+
+    @Override
+    public String getIdAndName() {
+        if(state ==State.LIVE){
+            return id + " " + name;
+        }else{
+            return id + " (antigamente conhecido como " + name +")";
+        }
+    }
+
+
 
 }

@@ -1,3 +1,4 @@
+/*
 package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces;
 
 public class LegacyEquipment extends Piece {

@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments;
 
 public class Sword extends Equipment {
-    public Sword(int[] positionInBoard, int id, int type, String name) {
+    public Sword(int[] positionInBoard, int id, int type) {
         super(positionInBoard, id, type);
         this.name = "Espada samurai";
 

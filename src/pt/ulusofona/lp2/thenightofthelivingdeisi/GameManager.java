@@ -1,8 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Door;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.LegacyEquipment;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.*;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.*;
 
 import javax.swing.*;
 import java.io.File;
@@ -123,8 +122,29 @@ public class GameManager {
                 int[] positionInBoard = new int[2];
                 positionInBoard[0] = Integer.parseInt(infoEquipment[2]);
                 positionInBoard[1] = Integer.parseInt(infoEquipment[3]);
-                Equipment equipment = new Equipment(positionInBoard, equipmentId, equipmentType);
-                board.addEquipment(equipment);
+                Equipment equipment;
+                switch (equipmentType){
+                    case 0:{
+                        equipment = new Shield(positionInBoard,equipmentId,equipmentType);
+                        board.addEquipment(equipment);
+                        break;
+                    }
+                    case 1:{
+                        equipment = new Sword(positionInBoard,equipmentId,equipmentType);
+                        board.addEquipment(equipment);
+                        break;
+                    }
+                    case 2:{
+                        equipment = new Pistol(positionInBoard,equipmentId,equipmentType);
+                        board.addEquipment(equipment);
+                        break;
+                    }
+                    case 3:{
+                        equipment = new Leach(positionInBoard,equipmentId,equipmentType);
+                        board.addEquipment(equipment);
+                        break;
+                    }
+                }
             } else if (index > 3 + creatures + equipments && index < 4 + creatures + equipments) {
                 String[] infoDoor = info.get(index).split(" : ");
                 if(infoDoor.length != 2){return;}                        // se nao passarem todas as informacaoes de algum equipamento
@@ -201,18 +221,19 @@ public class GameManager {
         return board.getEquipmentById(id).getEquipmentInfoAsString();
     }
 
-    public boolean hasEquipment(int creatureId, int equipmnentTypeId) {
-        return board.getCreatureById(creatureId).hasEquipment(equipmnentTypeId);
+    public boolean hasEquipment(int creatureId, int equipmentTypeId) {
+        return board.getCreatureById(creatureId).hasEquipment(equipmentTypeId);
     }
 
     public boolean move(int x0, int y0, int xD, int yD) {
+        /*
         int originId = board.positionId(x0, y0);
         if (originId > 0 && board.getCreatureById(originId).getTeam() == getCurrentTeamId()) {
             if (board.move(x0, y0, xD, yD)) {
                 increaseTurn();
                 return true;
             }
-        }
+        }*/
         return false;
 
     }
@@ -229,14 +250,14 @@ public class GameManager {
         result.add("");
         result.add("OS VIVOS");
         for (Creature actualCreature : creatures) {
-            if (actualCreature.getTeam() == 1) {
+            if (actualCreature.getState() == State.LIVE) {
                 result.add(actualCreature.getIdAndName());
             }
         }
         result.add("");
         result.add("OS MORTOS");
         for (Creature actualCreature : creatures) {
-            if (actualCreature.getTeam() == 10) {
+            if (actualCreature.getState() != State.LIVE) {
                 result.add(actualCreature.getIdAndName());
             }
         }
@@ -247,7 +268,6 @@ public class GameManager {
     public JPanel getCreditsPanel() {
         return null;
     }
-
 
     public HashMap<String, String> customizeBoard() {
         HashMap<String, String> hash = new HashMap<>();

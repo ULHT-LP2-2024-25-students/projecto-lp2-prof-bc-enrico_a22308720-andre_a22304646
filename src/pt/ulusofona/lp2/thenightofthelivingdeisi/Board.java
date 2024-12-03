@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
 
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Door;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.LegacyEquipment;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.Creature;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
@@ -58,6 +57,7 @@ public class Board {
 
     public String getSquareInfo(int x, int y) {
         String result="";
+        /*
         if (board[y][x] == null){
             result+="";
         }
@@ -73,7 +73,7 @@ public class Board {
                 result += "H:" + board[x][y];
             }
         }
-
+        */
         return result;
     }
 
@@ -96,7 +96,7 @@ public class Board {
     }
 
     public boolean move(int x0, int y0, int xD, int yD){
-        LegacyCreature creature;
+       /* LegacyCreature creature;
         if (positionIsValid(x0, y0)){               // verificar se a posicao de origem e valida
             if(positionId(x0, y0) > 0){             // verificar se na posicao de origem esta uma criatura
                 creature = getCreatureById(positionId(x0, y0));         //obter a criatura a mover
@@ -120,7 +120,7 @@ public class Board {
                     return true;
                 }
             }
-        }
+        }*/
         return false;
     }
 
@@ -140,7 +140,7 @@ public class Board {
     }
 
     public int positionId(int x, int y){
-        return board[x][y];
+        return board[x][y].getId();
     }
 
     public ArrayList<Creature> getCreatures (){return creatures;}

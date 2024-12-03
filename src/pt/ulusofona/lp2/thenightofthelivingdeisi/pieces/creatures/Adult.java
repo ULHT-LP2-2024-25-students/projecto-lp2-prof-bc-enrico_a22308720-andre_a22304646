@@ -1,6 +1,4 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
-
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.LegacyEquipment;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
 
 public class Adult extends Creature {
@@ -33,6 +31,20 @@ public class Adult extends Creature {
             return result;
         }else{   // se tiver equipamento concatenar strings
             return result + equipment.getEquipmentInfoAsString();
+        }
+    }
+
+    @Override
+    public boolean hasEquipment(int equipmentTypeId) {
+        return equipment.getType() == equipmentTypeId;
+    }
+
+    @Override
+    public String getIdAndName() {
+        if(state ==State.LIVE){
+            return id + " " + name;
+        }else{
+            return id + " (antigamente conhecido como " + name +")";
         }
     }
 

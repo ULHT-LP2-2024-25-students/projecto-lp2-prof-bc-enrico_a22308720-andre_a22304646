@@ -3,14 +3,13 @@ package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
 
 abstract public class Creature extends Piece {
-    protected int id;
     protected int team;
     protected String name;
     protected int points;
     protected State state;
 
     public Creature(int[] positionInBoard, int id, int team, String name, State state) {
-        super(positionInBoard);
+        super(positionInBoard,id);
         this.id = id;
         this.team = team;
         this.name = name;
@@ -18,17 +17,17 @@ abstract public class Creature extends Piece {
         this.state = state;
     }
 
-
-    public int getId() {
-        return id;
-    }
-
     public int getPoints() {
         return points;
+    }
+    public State getState() {
+        return state;
     }
 
     abstract public String[] getCreatureInfo();
     abstract public String getCreatureInfoAsString();
+    abstract public boolean hasEquipment(int equipmentTypeId);
+    abstract public String getIdAndName();
 
 
 

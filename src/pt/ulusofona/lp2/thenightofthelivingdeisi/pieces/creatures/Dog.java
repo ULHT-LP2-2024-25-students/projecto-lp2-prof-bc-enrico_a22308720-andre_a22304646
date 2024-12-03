@@ -26,4 +26,15 @@ public class Dog extends Creature {
         return id + " | Cão | " + name + " @(" + positionInBoard[0] + "," + positionInBoard[1]+")";
     }
 
+    @Override
+    public boolean hasEquipment(int equipmentTypeId) {
+        return false;
+    }
+
+    @Override
+    public String getIdAndName() {
+            return id + " " + name;
+    }
+
+
 }

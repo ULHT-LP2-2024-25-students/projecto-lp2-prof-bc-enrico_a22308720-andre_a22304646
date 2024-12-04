@@ -36,6 +36,9 @@ public class Adult extends Creature {
 
     @Override
     public boolean hasEquipment(int equipmentTypeId) {
+        if (equipment==null){
+            return false;
+        }
         return equipment.getType() == equipmentTypeId;
     }
 
@@ -48,5 +51,13 @@ public class Adult extends Creature {
         }
     }
 
-
+    @Override
+    public boolean moveIsValid(int x0, int y0, int xD, int yD) {
+        if(x0 != xD || y0!=yD) {                                        // evitar que nao se possoa mover para a casa onde está
+            if ((Math.abs(xD - x0) <= 2) && (Math.abs(yD - y0) <= 2)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

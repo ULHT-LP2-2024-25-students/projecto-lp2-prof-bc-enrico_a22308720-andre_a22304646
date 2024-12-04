@@ -1,77 +1,30 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
 public class TestGameManager {
 
-    @Test
-    public void testLoadGame() {
-        GameManager gameManager = new GameManager();
-        File loadFile = new File("test-files/test.txt");
-        gameManager.loadGame(loadFile);
-        assertEquals(1,gameManager.getInitialTeamId());
-        assertEquals("1 | Humano | Human1 | +0 @ (0, 0)",gameManager.getCreatureInfoAsString(1));
-        assertEquals("2 | Humano | Human2 | +0 @ (0, 4)",gameManager.getCreatureInfoAsString(2));
-        assertEquals("3 | Zombie | Zombie1 | -0 @ (1, 2)",gameManager.getCreatureInfoAsString(3));
-        assertEquals("4 | Zombie | Zombie2 | -0 @ (5, 1)",gameManager.getCreatureInfoAsString(4));
-        assertEquals(6,gameManager.getWorldSize()[0]);
-        assertEquals(7,gameManager.getWorldSize()[1]);
-        assertEquals("-1 | Escudo de madeira @ (1,0)",gameManager.getEquipmentInfoAsString(-1));
-        assertEquals("-2 | Espada samurai @ (4,3)",gameManager.getEquipmentInfoAsString(-2));
-
-    }
 
     @Test
-    public void testMove(){
+    public void testLoadGame(){
         GameManager gameManager = new GameManager();
-        File loadFile = new File("test-files/test.txt");
-        gameManager.loadGame(loadFile);
-        assertFalse(gameManager.move(0,0,2,0));
-        assertTrue(gameManager.move(0,0,1,0));
-        assertEquals("",gameManager.getSquareInfo(0,0));
-        assertEquals("H:1",gameManager.getSquareInfo(1,0));
+        try{
+            gameManager.loadGame(new File("test-files/test.txt"));
+        }catch (FileNotFoundException e){
+            System.out.println("Ficheiro não existe");
+        } catch (InvalidFileException e) {
+            System.out.println("Ficheiro inválido");
+        }
+
+        assertEquals("1 | Criança | Zombie | Melanie | -0 @(3,3)",gameManager.getCreatureInfoAsString(1));
+        assertEquals("-4 | Lixívia @(4,4) | 1.0 litros",gameManager.getEquipmentInfoAsString(-4));
+        assertEquals("-3 | Pistola Walter PPK @(2,1) | 3 balas",gameManager.getEquipmentInfoAsString(-3));
+        assertEquals("SH",gameManager.getSquareInfo(6,0));
     }
-    @Test
-    public void testHasEquipment (){
-        GameManager gameManager = new GameManager();
-        File loadFile = new File("test-files/test.txt");
-        gameManager.loadGame(loadFile);
-        gameManager.move(0,0,1,0);
-        LegacyCreature creature=gameManager.board.getCreatureById(1);
-        assertTrue(creature.hasEquipment(0));
-
-    }
-
-    @Test
-    public void testGameIsOver(){
-        GameManager gameManager = new GameManager();
-        File loadFile = new File("test-files/test.txt");
-        gameManager.loadGame(loadFile);
-        gameManager.move(0,0,1,0);
-        gameManager.move(1,2,1,3);
-        gameManager.move(1,0,0,0);
-        gameManager.move(1,3,1,2);
-        gameManager.move(0,0,1,0);
-        gameManager.move(1,2,1,3);
-        gameManager.move(1,0,0,0);
-        gameManager.move(1,3,1,2);
-        gameManager.move(0,0,1,0);
-        gameManager.move(1,2,1,3);
-        gameManager.move(1,0,0,0);
-        gameManager.move(1,3,1,2);
-        assertTrue(gameManager.gameIsOver());
-
-
-    }
-
-
-
-
-
-
 }

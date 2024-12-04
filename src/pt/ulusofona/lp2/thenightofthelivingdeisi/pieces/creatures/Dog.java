@@ -36,5 +36,18 @@ public class Dog extends Creature {
             return id + " " + name;
     }
 
+    @Override
+    public boolean moveIsValid(int x0, int y0, int xD, int yD) {
+        if(x0 != xD || y0!=yD) {
+            if ((Math.abs(xD - x0) <= 2) && (Math.abs(yD - y0) == 0)) {
+                return true;
+            }
+            if ((Math.abs(xD - x0) == 0 ) && (Math.abs(yD - y0) <= 2)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }

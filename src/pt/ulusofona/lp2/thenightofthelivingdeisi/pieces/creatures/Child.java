@@ -36,6 +36,9 @@ public class Child extends Creature {
     }
     @Override
     public boolean hasEquipment(int equipmentTypeId) {
+        if (equipment==null){
+            return false;
+        }
         return equipment.getType() == equipmentTypeId;
     }
 
@@ -46,6 +49,17 @@ public class Child extends Creature {
         }else{
             return id + " (antigamente conhecido como " + name +")";
         }
+    }
+
+    @Override
+    public boolean moveIsValid(int x0, int y0, int xD, int yD) {
+        if ((Math.abs(xD - x0) == 1) && (Math.abs(yD - y0) == 0)) {
+            return true;
+        }
+        if ((Math.abs(xD - x0) == 0) && (Math.abs(yD - y0) == 1)) {
+            return true;
+        }
+        return false;
     }
 
 

@@ -22,20 +22,20 @@ public class Board {
 
     public boolean addCreature(Creature creature){
         int [] position = creature.getPositionInBoard();
-        if (!positionIsValid(position[0],position[1]) ){
+        if (!positionIsValid(position[1],position[0]) ){
             return false;
         }
-        if (board[position[0]][position[1]] != null){
+        if (board[position[1]][position[0]] != null){
             return false;
         }
-        board[position[0]][position[1]] = creature;
+        board[position[1]][position[0]] = creature;
         creatures.add(creature);
         return true;
     }
 
     public void addEquipment(Equipment equipment){
         int[] position = equipment.getPositionInBoard();
-        board[position[0]][position[1]] = equipment;
+        board[position[1]][position[0]] = equipment;
         equipments.add(equipment);
     }
 
@@ -56,25 +56,11 @@ public class Board {
     }
 
     public String getSquareInfo(int x, int y) {
-        String result="";
-        /*
         if (board[y][x] == null){
-            result+="";
+            return "";
+        }else{
+            return board[y][x].getSquareInfo();
         }
-        if (board[y][x] < 0 ){
-            result+="E:" + board[x][y];
-        }
-        if (board[y][x] > 0 ){
-            LegacyCreature creature = getCreatureById(board[x][y]);
-            if(creature.getTeam() == 0) {
-                result += "Z:"+ board[x][y];
-            }
-            if(creature.getTeam() == 1){
-                result += "H:" + board[x][y];
-            }
-        }
-        */
-        return result;
     }
 
     public Creature getCreatureById(int id){
@@ -128,19 +114,8 @@ public class Board {
         return x >= 0 && x < getSizeX() && y >= 0 && y < getSizeY();
     }
 
-    public boolean moveIsValid (int x0, int y0, int xD, int yD){
-        if((Math.abs(xD-x0) == 1) && (yD-y0 == 0)){
-            return true;
-        }
-        if((Math.abs(yD-y0) == 1) && (xD-x0 == 0)){
-            return true;
-        }
-
-        return false;
-    }
-
     public int positionId(int x, int y){
-        return board[x][y].getId();
+        return board[y][x].getId();
     }
 
     public ArrayList<Creature> getCreatures (){return creatures;}

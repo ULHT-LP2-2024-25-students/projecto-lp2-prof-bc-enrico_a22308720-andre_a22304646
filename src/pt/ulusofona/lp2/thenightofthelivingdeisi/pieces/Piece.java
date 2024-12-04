@@ -18,4 +18,9 @@ abstract public class Piece {
     public int getId() {
         return id;
     }
+
+
+
+    abstract public String getSquareInfo();
+
 }

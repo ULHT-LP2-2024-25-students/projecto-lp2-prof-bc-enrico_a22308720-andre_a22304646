@@ -6,8 +6,10 @@ import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.*;
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class GameManager {
@@ -22,7 +24,7 @@ public class GameManager {
         this.turns=0;
     }
 
-    public void loadGame(File file) throws FileNotFoundException  {
+    public void loadGame(File file) throws InvalidFileException, FileNotFoundException{
         ArrayList<String> info = new ArrayList<>();
         Scanner scanner = new Scanner(file);
 
@@ -32,6 +34,7 @@ public class GameManager {
 
         int creatures = 0;
         int equipments = 0;
+        int doors =0;
 
         for (int index = 0; index < info.size(); index++) {
             if (index == 0) {
@@ -50,8 +53,8 @@ public class GameManager {
                 String creatureName = infoCreature[3];
 
                 int[] positionInBoard = new int[2];
-                positionInBoard[0] = Integer.parseInt(infoCreature[3]);
-                positionInBoard[1] = Integer.parseInt(infoCreature[4]);
+                positionInBoard[0] = Integer.parseInt(infoCreature[4]);
+                positionInBoard[1] = Integer.parseInt(infoCreature[5]);
 
                 Creature creature;
                 switch (creatureType) {
@@ -145,7 +148,9 @@ public class GameManager {
                         break;
                     }
                 }
-            } else if (index > 3 + creatures + equipments && index < 4 + creatures + equipments) {
+            }else if(index == 4 + creatures + equipments){
+                doors = Integer.parseInt(info.get(index));
+            } else if (index > 4 + creatures + equipments && index < 5 + creatures + equipments + doors) {
                 String[] infoDoor = info.get(index).split(" : ");
                 if(infoDoor.length != 2){return;}                        // se nao passarem todas as informacaoes de algum equipamento
                 int[] positionInBoard = new int[2];
@@ -273,5 +278,13 @@ public class GameManager {
         HashMap<String, String> hash = new HashMap<>();
 
         return hash;
+    }
+
+    public List<Integer> getIdsInSafeHeaven(){
+        return null;
+    }
+
+    public void saveGame(File file) throws IOException {
+
     }
 }

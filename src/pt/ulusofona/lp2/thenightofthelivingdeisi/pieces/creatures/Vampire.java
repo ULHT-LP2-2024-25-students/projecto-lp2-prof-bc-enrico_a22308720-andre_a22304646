@@ -6,7 +6,6 @@ public class Vampire extends Creature {
         super(positionInBoard, id, team, name, state);
     }
 
-
     @Override
     public String[] getCreatureInfo(){
         String[] creatureInfo = new String[7];
@@ -34,5 +33,15 @@ public class Vampire extends Creature {
     @Override
     public String getIdAndName() {
             return id + " (antigamente conhecido como " + name +")";
+    }
+
+    @Override
+    public boolean moveIsValid(int x0, int y0, int xD, int yD) {
+        if(x0 != xD || y0 != yD) {                                        // evitar que nao se possoa mover para a casa onde está
+            if ((Math.abs(xD - x0) <= 1) && (Math.abs(yD - y0) <= 1)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

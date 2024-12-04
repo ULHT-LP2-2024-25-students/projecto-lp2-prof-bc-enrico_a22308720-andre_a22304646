@@ -8,6 +8,8 @@ public class Door extends Piece {
     }
 
 
-
-
+    @Override
+    public String getSquareInfo() {
+        return "SH";
+    }
 }

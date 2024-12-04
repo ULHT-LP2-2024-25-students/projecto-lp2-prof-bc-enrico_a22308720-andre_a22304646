@@ -28,6 +28,14 @@ abstract public class Creature extends Piece {
     abstract public String getCreatureInfoAsString();
     abstract public boolean hasEquipment(int equipmentTypeId);
     abstract public String getIdAndName();
+    abstract public boolean moveIsValid (int x0, int y0, int xD, int yD);
+    public String getSquareInfo(){
+        if(state == State.LIVE){
+            return "H:" + id;
+        }else{
+            return "Z:" + id;
+        }
+    }
 
 
 

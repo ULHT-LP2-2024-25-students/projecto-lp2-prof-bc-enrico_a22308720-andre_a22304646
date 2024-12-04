@@ -1,13 +1,13 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments;
 
 public class Leach extends Equipment {
-    private int liters;
+    private double liters;
 
 
     public Leach(int[] positionInBoard, int id, int type) {
         super(positionInBoard, id, type);
         this.name = "Lixívia";
-        this.liters = 1;
+        this.liters = 1.0;
 
     }
 
@@ -19,7 +19,7 @@ public class Leach extends Equipment {
 
     @Override
     public String getEquipmentInfoAsString() {
-        return id + " | " + name + " @ (" + positionInBoard[0] + "," + positionInBoard[1] + ") | " + liters + "litros";
+        return id + " | " + name + " @(" + positionInBoard[0] + "," + positionInBoard[1] + ") | " + liters + " litros";
     }
 
 

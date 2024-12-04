@@ -30,10 +30,17 @@ abstract public class Equipment extends Piece {
     }
 
     public String getEquipmentInfoAsString() {
-        return id + " | " + name + " @ (" + positionInBoard[0] + "," + positionInBoard[1] + ")";
+        return id + " | " + name + " @(" + positionInBoard[0] + "," + positionInBoard[1] + ")";
     }
 
     abstract public boolean canAttack();
     abstract public boolean canDefend();
+
+
+
+    public String getSquareInfo(){
+        return "E:" + id;
+
+    }
 
 }

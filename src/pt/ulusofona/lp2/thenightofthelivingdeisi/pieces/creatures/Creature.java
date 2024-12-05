@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
 
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
 
 abstract public class Creature extends Piece {
     protected int team;
@@ -29,6 +30,11 @@ abstract public class Creature extends Piece {
     abstract public boolean hasEquipment(int equipmentTypeId);
     abstract public String getIdAndName();
     abstract public boolean moveIsValid (int x0, int y0, int xD, int yD);
+    abstract public Creature interactCreature(Creature piece);
+    abstract public boolean destroyEquipment(Piece piece);
+    abstract public boolean canBeTransformed();
+    abstract public boolean canTransform();
+
     public String getSquareInfo(){
         if(state == State.LIVE){
             return "H:" + id;
@@ -37,6 +43,12 @@ abstract public class Creature extends Piece {
         }
     }
 
+    public boolean canMove(){
+        return true;
+    }
 
-
+    @Override
+    public boolean canBeHolded(){
+        return false;
+    }
 }

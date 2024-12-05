@@ -43,4 +43,23 @@ abstract public class Equipment extends Piece {
 
     }
 
+
+    public boolean canMove(){
+        return false;
+    }
+
+    public boolean moveIsValid (int x0, int y0, int xD, int yD){
+        return false;
+    }
+
+    @Override
+    public boolean canBeHolded(){
+        return true;
+    }
+
+    public boolean canTransform(){return false;}
+
+    public boolean canBeTransformed(){return false;}
+
+    abstract public void atack();
 }

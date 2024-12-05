@@ -1,4 +1,5 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
 
 public class Adult extends Creature {
@@ -60,4 +61,37 @@ public class Adult extends Creature {
         }
         return false;
     }
+
+    @Override
+    public Creature interactCreature(Creature piece) {
+        if (this.state == State.LIVE) {
+
+            if (piece.canBeTransformed()){
+                return piece;
+            }
+            if (piece.canTransform() && this.equipment.canAttack()){
+                equipment.atack();
+            }
+
+
+
+        }else{
+
+        }
+    }
+
+    @Override
+    public boolean destroyEquipment(Piece piece) {
+        if(this.state == State.LIVE){
+            this.equipment = (Equipment) piece;
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+
+    public boolean canTransform(){return this.state != State.LIVE;}
+
+    public boolean canBeTransformed(){return this.state == State.LIVE;}
 }

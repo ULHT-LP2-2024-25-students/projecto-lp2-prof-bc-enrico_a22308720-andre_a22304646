@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
 
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
 
 public class Old extends Creature {
@@ -61,6 +62,13 @@ public class Old extends Creature {
         return false;
     }
 
+    @Override
+    public void interact(Piece piece) {
 
+    }
+
+    public boolean canTransform(){return this.state != State.LIVE;}
+
+    public boolean canBeTransformed(){return this.state == State.LIVE;}
 
 }

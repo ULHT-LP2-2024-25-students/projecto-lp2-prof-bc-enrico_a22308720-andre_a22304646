@@ -62,6 +62,8 @@ public class Child extends Creature {
         return false;
     }
 
+    public boolean canTransform(){return this.state != State.LIVE;}
 
+    public boolean canBeTransformed(){return this.state == State.LIVE;}
 
 }

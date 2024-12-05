@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
 
+import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
+
 public class Dog extends Creature {
 
     public Dog(int[] positionInBoard, int id, int team, String name, State state) {
@@ -48,6 +50,15 @@ public class Dog extends Creature {
         }
         return false;
     }
+
+    @Override
+    public void interact(Piece piece) {
+
+    }
+
+    public boolean canTransform(){return false;}
+
+    public boolean canBeTransformed(){return false;}
 
 
 }

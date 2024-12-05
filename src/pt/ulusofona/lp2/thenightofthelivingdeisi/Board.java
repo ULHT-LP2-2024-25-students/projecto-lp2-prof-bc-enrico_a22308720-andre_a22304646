@@ -80,33 +80,29 @@ public class Board {
         }
         return null;
     }
-
+//todo pode casts????
+//todo canBeholded e todas essas sao boas praticas
+//todo ajuda na interacao entre pecas
     public boolean move(int x0, int y0, int xD, int yD){
-       /* LegacyCreature creature;
-        if (positionIsValid(x0, y0)){               // verificar se a posicao de origem e valida
-            if(positionId(x0, y0) > 0){             // verificar se na posicao de origem esta uma criatura
-                creature = getCreatureById(positionId(x0, y0));         //obter a criatura a mover
-
-                // verificar se posicao de destino e valida, se o movimento e valido e se a posicao de destino esta vazia
-                if ((positionIsValid(xD, yD) && moveIsValid(x0,y0,xD,yD)) && (positionId(xD, yD) <= 0)){
-                    if (positionId(xD, yD) < 0){
-                        if (creature.isHuman()){
-                            creature.increasePoint();
-                            creature.addEquipment(getEquipmentById(positionId(xD, yD)));  //se for equipamento fica com a criatura
-                        }else{
-                            creature.increasePoint();
-
+        if (positionIsValid(x0,y0) && positionIsValid(xD,yD)){
+            if(board[y0][x0] != null && board[y0][x0].canMove()){
+                Creature creature =  (Creature)board[y0][x0];
+                Piece pieceDestiny =  board[yD][xD];
+                if (creature.moveIsValid(x0, y0, xD, yD)){
+                    if (pieceDestiny == null){
+                        creature.changePositionInBoard(xD,yD);
+                        board[yD][xD] = creature;
+                        board[y0][x0] = null;
+                    }else if(pieceDestiny.canBeHolded()){
+                        if (creature.destroyEquipment(pieceDestiny)){
+                            board[yD][xD] = null;
                         }
-                        removeEquipment(getEquipmentById(positionId(xD, yD)));                  //elimina equipamento da lisat
+                        creature.changePositionInBoard(xD,yD);
+                        board[yD][xD] = creature;
                     }
-                    board[xD][yD]=positionId(x0,y0);                                    // posicao destino recebe id da origem
-                    board[x0][y0]=0;                                                    //posicao da origem recebe 0
-                    creature.move(xD, yD);
-
-                    return true;
                 }
             }
-        }*/
+        }
         return false;
     }
 

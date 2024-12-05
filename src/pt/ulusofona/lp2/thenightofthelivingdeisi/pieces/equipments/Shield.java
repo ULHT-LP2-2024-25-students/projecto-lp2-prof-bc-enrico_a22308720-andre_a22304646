@@ -13,5 +13,10 @@ public class Shield extends Equipment {
     @Override
     public boolean canDefend(){return true;}
 
+    @Override
+    public void atack() {
+
+    }
+
 
 }

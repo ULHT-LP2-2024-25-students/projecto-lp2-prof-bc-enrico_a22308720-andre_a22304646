@@ -13,5 +13,10 @@ public class Sword extends Equipment {
     @Override
     public boolean canDefend(){return false;}
 
+    @Override
+    public void atack() {
+
+    }
+
 
 }

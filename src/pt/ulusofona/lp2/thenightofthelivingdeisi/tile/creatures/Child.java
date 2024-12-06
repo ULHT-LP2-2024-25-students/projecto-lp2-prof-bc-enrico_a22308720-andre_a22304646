@@ -1,5 +1,5 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
 public class Child extends Creature {
     protected Equipment equipment;
@@ -62,6 +62,8 @@ public class Child extends Creature {
         return false;
     }
 
+    public boolean canTransform(){return this.state != State.LIVE;}
 
+    public boolean canBeTransformed(){return this.state == State.LIVE;}
 
 }

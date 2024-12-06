@@ -1,5 +1,7 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
 
+
+import pt.ulusofona.lp2.thenightofthelivingdeisi.Piece;
 
 public class Vampire extends Creature {
     public Vampire(int[] positionInBoard, int id, int team, String name, State state) {
@@ -44,4 +46,13 @@ public class Vampire extends Creature {
         }
         return false;
     }
+
+    @Override
+    public void interact(Piece piece) {
+
+    }
+
+    public boolean canTransform(){return true;}
+
+    public boolean canBeTransformed(){return false;}
 }

@@ -1,125 +1,121 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi;
+//package pt.ulusofona.lp2.thenightofthelivingdeisi;
+//
+//import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures.Creature;
+//import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
+//
+//import java.util.ArrayList;
+//
+//public class Board {
+//    Piece[][] board;
+//    ArrayList<Creature> creatures;
+//    ArrayList<Equipment> equipments;
+//    ArrayList<Creature> safeHeaven;
+//
+//
+//    public Board(int rows, int columns){
+//        this.board = new Piece[rows][columns];
+//        this.creatures=new ArrayList<>();
+//        this.equipments=new ArrayList<>();
+//    }
 
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Door;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.Creature;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
+//    public boolean addCreature(Creature creature){
+//        int [] position = creature.getPositionInBoard();
+//        if (!positionIsValid(position[1],position[0]) ){
+//            return false;
+//        }
+//        if (board[position[1]][position[0]] != null){
+//            return false;
+//        }
+//        board[position[1]][position[0]] = creature;
+//        creatures.add(creature);
+//        return true;
+//    }
 
-import java.util.ArrayList;
+//    public void addEquipment(Equipment equipment){
+//        int[] position = equipment.getPositionInBoard();
+//        board[position[1]][position[0]] = equipment;
+//        equipments.add(equipment);
+//    }
 
-public class Board {
-    Piece[][] board;                  // board contains creature or equipmnet id. If empty 0
-    ArrayList<Creature> creatures;
-    ArrayList<Equipment> equipments;
-    ArrayList<Creature> safeHeaven;
+//    public void addDoor(Door door){
+//        board[door.getPositionInBoard()[1]][door.getPositionInBoard()[0]]=door;
+//    }
 
+//    public void removeEquipment (Equipment equipment){
+//        equipments.remove(equipment);
+//    }
 
-    public Board(int rows, int columns){
-        this.board = new Piece[rows][columns];
-        this.creatures=new ArrayList<>();
-        this.equipments=new ArrayList<>();
-    }
+//    public int getSizeX() {
+//        return board[0].length;
+//    }
+//
+//    public int getSizeY() {
+//        return board.length;
+//    }
 
-    public boolean addCreature(Creature creature){
-        int [] position = creature.getPositionInBoard();
-        if (!positionIsValid(position[1],position[0]) ){
-            return false;
-        }
-        if (board[position[1]][position[0]] != null){
-            return false;
-        }
-        board[position[1]][position[0]] = creature;
-        creatures.add(creature);
-        return true;
-    }
+//    public String getSquareInfo(int x, int y) {
+//        if (board[y][x] == null){
+//            return "";
+//        }else{
+//            return board[y][x].getSquareInfo();
+//        }
+//    }
 
-    public void addEquipment(Equipment equipment){
-        int[] position = equipment.getPositionInBoard();
-        board[position[1]][position[0]] = equipment;
-        equipments.add(equipment);
-    }
+//    public Creature getCreatureById(int id){
+//        for(Creature atualCreature : creatures){
+//            if(atualCreature.getId() == id) {
+//                return atualCreature;
+//            }
+//        }
+//        return  null;
+//    }
 
-    public void addDoor(Door door){
-        board[door.getPositionInBoard()[1]][door.getPositionInBoard()[0]]=door;
-    }
+//    public Equipment getEquipmentById(int id){
+//        for(Equipment equipment : equipments){
+//            if(equipment.getId() == id){
+//                return equipment;
+//            }
+//        }
+//        return null;
+//    }
 
-    public void removeEquipment (Equipment equipment){
-        equipments.remove(equipment);
-    }
-
-    public int getSizeX() {
-        return board[0].length;
-    }
-
-    public int getSizeY() {
-        return board.length;
-    }
-
-    public String getSquareInfo(int x, int y) {
-        if (board[y][x] == null){
-            return "";
-        }else{
-            return board[y][x].getSquareInfo();
-        }
-    }
-
-    public Creature getCreatureById(int id){
-        for(Creature atualCreature : creatures){
-            if(atualCreature.getId() == id) {
-                return atualCreature;
-            }
-        }
-        return  null;
-    }
-
-    public Equipment getEquipmentById(int id){
-        for(Equipment equipment : equipments){
-            if(equipment.getId() == id){
-                return equipment;
-            }
-        }
-        return null;
-    }
-
-    public boolean move(int x0, int y0, int xD, int yD){
-       /* LegacyCreature creature;
-        if (positionIsValid(x0, y0)){               // verificar se a posicao de origem e valida
-            if(positionId(x0, y0) > 0){             // verificar se na posicao de origem esta uma criatura
-                creature = getCreatureById(positionId(x0, y0));         //obter a criatura a mover
-
-                // verificar se posicao de destino e valida, se o movimento e valido e se a posicao de destino esta vazia
-                if ((positionIsValid(xD, yD) && moveIsValid(x0,y0,xD,yD)) && (positionId(xD, yD) <= 0)){
-                    if (positionId(xD, yD) < 0){
-                        if (creature.isHuman()){
-                            creature.increasePoint();
-                            creature.addEquipment(getEquipmentById(positionId(xD, yD)));  //se for equipamento fica com a criatura
-                        }else{
-                            creature.increasePoint();
-
-                        }
-                        removeEquipment(getEquipmentById(positionId(xD, yD)));                  //elimina equipamento da lisat
-                    }
-                    board[xD][yD]=positionId(x0,y0);                                    // posicao destino recebe id da origem
-                    board[x0][y0]=0;                                                    //posicao da origem recebe 0
-                    creature.move(xD, yD);
-
-                    return true;
-                }
-            }
-        }*/
-        return false;
-    }
-
-    public boolean positionIsValid(int x, int y) {
-        return x >= 0 && x < getSizeX() && y >= 0 && y < getSizeY();
-    }
-
-    public int positionId(int x, int y){
-        return board[y][x].getId();
-    }
-
-    public ArrayList<Creature> getCreatures (){return creatures;}
+//todo ajuda na interacao entre pecas
 
 
+//todo e se eu fizer um .toCast abstract na piece e no creature e equipments e assim ela receberia um piece e retornaria do tipo que ela e para cada uma
+
+
+//    public boolean move(int x0, int y0, int xD, int yD){
+//        if (positionIsValid(x0,y0) && positionIsValid(xD,yD)){
+//            if(board[y0][x0] != null && board[y0][x0].canMove()){
+//                Creature creature =  (Creature)board[y0][x0];
+//                Piece pieceDestiny =  board[yD][xD];
+//                if (creature.moveIsValid(x0, y0, xD, yD)){
+//                    if (pieceDestiny == null){
+//                        creature.changePositionInBoard(xD,yD);
+//                        board[yD][xD] = creature;
+//                        board[y0][x0] = null;
+//                    }else if(pieceDestiny.canBeHolded()){
+//                        if (creature.destroyEquipment(pieceDestiny)){
+//                            board[yD][xD] = null;
+//                        }
+//                        creature.changePositionInBoard(xD,yD);
+//                        board[yD][xD] = creature;
+//                    }
+//                }
+//            }
+//        }
+//        return false;
+//    }
+
+//    public boolean positionIsValid(int x, int y) {
+//        return x >= 0 && x < getSizeX() && y >= 0 && y < getSizeY();
+//    }
+
+//    public int positionId(int x, int y){
+//        return board[y][x].getId();
+//    }
+
+//    public ArrayList<Creature> getCreatures (){return creatures;}
 
 }

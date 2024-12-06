@@ -1,18 +1,20 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
 
-public class Adult extends Creature {
+import pt.ulusofona.lp2.thenightofthelivingdeisi.Piece;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
+
+public class Old extends Creature {
     protected Equipment equipment;
 
-    public Adult(int[] positionInBoard, int id, int team, String name, State state) {
+    public Old(int[] positionInBoard, int id, int team, String name, State state) {
         super(positionInBoard, id, team, name, state);
-        this.equipment = null;
     }
+
     @Override
     public String[] getCreatureInfo(){
         String[] creatureInfo = new String[7];
         creatureInfo[0] = "" + id;
-        creatureInfo[1] = "Adulto";
+        creatureInfo[1] = "Idoso";
         creatureInfo[2] = this.state == State.LIVE ? "Humano" : this.state == State.DEAD ? "Zombie" : "Zombie (Transformado)";
         creatureInfo[3] = name;
         creatureInfo[4] = "" + positionInBoard[0];
@@ -24,9 +26,9 @@ public class Adult extends Creature {
 
     @Override
     public String getCreatureInfoAsString() {
-        String adultType= this.state == State.LIVE ? "Humano" : this.state == State.DEAD ? "Zombie" : "Zombie (Transformado)";
-        String adultPoints = this.state == State.LIVE ? "+" : "-";
-        String result = id + " | Adulto | " + adultType + " | " + name + " | " + adultPoints + points + " @(" + positionInBoard[0] + "," + positionInBoard[1]+")";
+        String oldType= this.state == State.LIVE ? "Humano" : this.state == State.DEAD ? "Zombie" : "Zombie (Transformado)";
+        String oldPoints = this.state == State.LIVE ? "+" : "-";
+        String result= id + " | Idoso | " + oldType + " | " + name + " | " + oldPoints + points + " @(" + positionInBoard[0] + "," + positionInBoard[1]+")";
         if(equipment == null){
             return result;
         }else{   // se tiver equipamento concatenar strings
@@ -53,11 +55,20 @@ public class Adult extends Creature {
 
     @Override
     public boolean moveIsValid(int x0, int y0, int xD, int yD) {
-        if(x0 != xD || y0!=yD) {                                        // evitar que nao se possoa mover para a casa onde está
-            if ((Math.abs(xD - x0) <= 2) && (Math.abs(yD - y0) <= 2)) {
-                return true;
-            }
+        if ((Math.abs(xD - x0) == 1) && (Math.abs(yD - y0) == 1)) {
+            return true;
         }
+
         return false;
     }
+
+    @Override
+    public void interact(Piece piece) {
+
+    }
+
+    public boolean canTransform(){return this.state != State.LIVE;}
+
+    public boolean canBeTransformed(){return this.state == State.LIVE;}
+
 }

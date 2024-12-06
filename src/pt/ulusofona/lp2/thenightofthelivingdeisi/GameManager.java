@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Door;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures.*;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.*;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.Door;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures.*;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.*;
 
 import javax.swing.*;
 import java.io.File;

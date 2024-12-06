@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments;
 
 public class Leach extends Equipment {
     private double liters;
@@ -15,7 +15,10 @@ public class Leach extends Equipment {
     public boolean canAttack(){return false;}
 
     @Override
-    public boolean canDefend(){return true;}
+    public boolean canDefend(){return this.liters >= 0.3;}
+
+    @Override
+    public void atack() {}
 
     @Override
     public String getEquipmentInfoAsString() {

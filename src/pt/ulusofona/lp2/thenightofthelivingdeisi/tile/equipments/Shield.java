@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments;
 
 public class Shield extends Equipment {
     public Shield(int[] positionInBoard, int id, int type) {
@@ -12,6 +12,11 @@ public class Shield extends Equipment {
 
     @Override
     public boolean canDefend(){return true;}
+
+    @Override
+    public void atack() {
+
+    }
 
 
 }

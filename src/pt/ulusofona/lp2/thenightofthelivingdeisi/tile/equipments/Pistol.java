@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments;
 
 public class Pistol extends Equipment {
     int bullets;
@@ -11,10 +11,16 @@ public class Pistol extends Equipment {
     }
 
     @Override
-    public boolean canAttack(){return true;}
+    public boolean canAttack(){return this.bullets > 0;}
 
     @Override
     public boolean canDefend(){return false;}
+
+    @Override
+    public void atack(){
+        this.bullets--;
+    }
+
 
     @Override
     public String getEquipmentInfoAsString() {

@@ -8,17 +8,16 @@ abstract public class Equipment {
     protected int[] positionInBoard;
     protected int id;
 
-    public Equipment(int type, String name, int[] positionInBoard, int id) {
+    public Equipment(int type, int[] positionInBoard, int id) {
         this.type = type;
-        this.name = name;
         this.positionInBoard = positionInBoard;
         this.id = id;
     }
 
 
-    public void setPositionInBoard(int y, int x){
-        this.positionInBoard[0] = y;
-        this.positionInBoard[1] = x;
+    public void setPositionInBoard(int x, int y){
+        this.positionInBoard[0] = x;
+        this.positionInBoard[1] = y;
     }
 
     public String getSquareInfo(){
@@ -29,42 +28,35 @@ abstract public class Equipment {
         return id;
     }
 
-//    public String[] getEquipmentInfo() {
-//        String[] equipmentInfo = new String[5];
-//        equipmentInfo[0] = "" + id;
-//        equipmentInfo[1] = "" + type;
-//        equipmentInfo[2] = "" + positionInBoard[0];
-//        equipmentInfo[3] = "" + positionInBoard[1];
-//        equipmentInfo[4] = null;
-//        return equipmentInfo;
-//    }
+    public String[] getEquipmentInfo() {
+        String[] equipmentInfo = new String[5];
+        equipmentInfo[0] = "" + id;
+        equipmentInfo[1] = "" + type;
+        equipmentInfo[2] = "" + positionInBoard[0];
+        equipmentInfo[3] = "" + positionInBoard[1];
+        equipmentInfo[4] = null;
+        return equipmentInfo;
+    }
 
-//    public String getEquipmentInfoAsString() {
-//        return id + " | " + name + " @(" + positionInBoard[0] + "," + positionInBoard[1] + ")";
-//    }
+    public String getEquipmentInfoAsString() {
+        return id + " | " + name + " @(" + positionInBoard[0] + "," + positionInBoard[1] + ")";
+    }
 
-//    abstract public boolean canAttack();
-//    abstract public boolean canDefend();
+    public int getType() {
+        return type;
+    }
+
+    abstract public boolean canAttack();
+    abstract public boolean canDefend();
 
 
 
 
-//    public boolean canMove(){
-//        return false;
-//    }
-//
-//    public boolean moveIsValid (int x0, int y0, int xD, int yD){
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean canBeHolded(){
-//        return true;
-//    }
-//
-//    public boolean canTransform(){return false;}
-//
-//    public boolean canBeTransformed(){return false;}
-//
-//    abstract public void atack();
+
+
+
+
+
+
+
 }

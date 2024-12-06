@@ -8,21 +8,19 @@ public class Tile {
     Equipment equipment;
     Door door;
 
-    public Tile(Creature creature, Equipment equipment) {
+    public Tile() {
         this.creature = null;
         this.equipment = null;
         this.door = null;
     }
 
-
-
-    public void addCreature(Creature creature, int y, int x) {
+    public void addCreature(Creature creature, int x, int y) {
         this.creature = creature;
-        this.creature.setPositionInBoard(y, x);
+        this.creature.setPositionInBoard(x,y);
     }
-    public void addEquipment(Equipment equipment, int y, int x) {
+    public void addEquipment(Equipment equipment, int x, int y) {
         this.equipment = equipment;
-        this.equipment.setPositionInBoard(y, x);
+        this.equipment.setPositionInBoard(x, y);
     }
     public void removeEquipment() {
         this.equipment = null;
@@ -57,5 +55,8 @@ public class Tile {
 
     public Equipment getEquipment() {
         return equipment;
+    }
+
+    public Door getDoor() {return door;
     }
 }

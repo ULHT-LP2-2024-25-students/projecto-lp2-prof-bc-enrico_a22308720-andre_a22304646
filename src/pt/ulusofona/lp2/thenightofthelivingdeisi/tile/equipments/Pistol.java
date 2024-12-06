@@ -3,11 +3,10 @@ package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments;
 public class Pistol extends Equipment {
     int bullets;
 
-    public Pistol(int[] positionInBoard, int id, int type) {
-        super(positionInBoard, id, type);
+    public Pistol(int type, int[] positionInBoard, int id) {
+        super(type, positionInBoard, id);
         this.bullets = 3;
         this.name = "Pistola Walter PPK";
-
     }
 
     @Override
@@ -15,12 +14,6 @@ public class Pistol extends Equipment {
 
     @Override
     public boolean canDefend(){return false;}
-
-    @Override
-    public void atack(){
-        this.bullets--;
-    }
-
 
     @Override
     public String getEquipmentInfoAsString() {

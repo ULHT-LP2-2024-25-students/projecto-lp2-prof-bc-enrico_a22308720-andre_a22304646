@@ -24,14 +24,15 @@ abstract public class Creature {
     public int getPoints() {
         return points;
     }
+    public void increasePoints(){points++;}
 
     public State getState() {
         return state;
     }
 
-    public void setPositionInBoard(int y, int x) {
-        this.positionInBoard[0] = y;
-        this.positionInBoard[1] = x;
+    public void setPositionInBoard(int x, int y) {
+        this.positionInBoard[0] = x;
+        this.positionInBoard[1] = y;
     }
 
     public String getSquareInfo() {
@@ -46,14 +47,17 @@ abstract public class Creature {
         return id;
     }
 
-    public abstract boolean moveIsValid(int x0, int y0, int xD, int yD);
-
     public TypeMove getTypeMove(Tile tile, Tile tileDestiny){
         if (tile.getCreature() != null){
             if(tileDestiny.getCreature() == null){
                 if(tileDestiny.getEquipment() == null) {
-                    //empty tile
-                    return TypeMove.MOVE;
+                    if(tile.getDoor() == null){
+                        //empty tile
+                        return TypeMove.MOVE;
+                    }else if(tileDestiny.getDoor() != null){
+                        //tile with door
+                        return TypeMove.SAFEHEAVEN;
+                    }
                 } else if(tileDestiny.getEquipment() != null){
                     //tile with equipment
                     return TypeMove.WEAPON;
@@ -80,37 +84,33 @@ abstract public class Creature {
         return TypeMove.INVALID;
     }
 
-
-     abstract public void addEquipment(Equipment equipment);
-
     public void setState(State state) {
         this.state = state;
     }
 
-    //
-//    abstract public String[] getCreatureInfo();
-//
-//    abstract public String getCreatureInfoAsString();
-//
-//
-//
-//    abstract public String getIdAndName();
-//
-//
-//    abstract public boolean moveIsValid (int x0, int y0, int xD, int yD);
-//
-
-//    abstract public Creature interactCreature(Creature piece);
-//    abstract public boolean destroyEquipment(Piece piece);
-//    abstract public boolean canBeTransformed();
-//    abstract public boolean canTransform();
-
-
+    public void setTeam(int team) {
+        this.team = team;
+    }
 
     public boolean canMove(){
         return true;
     }
 
-    public abstract boolean canHoldEquipment();
+
+    // Abstract Methods
+    abstract public void addEquipment(Equipment equipment);
+    abstract public String[] getCreatureInfo();
+    abstract public String getCreatureInfoAsString();
+    abstract public String getIdAndName();
+    abstract public boolean moveIsValid (int x0, int y0, int xD, int yD);
+    abstract public boolean canBeTransformed();
+    abstract public boolean canTransform();
+    abstract public  boolean canHoldEquipment();
+    abstract public  boolean canDestroyEquipment();
+    abstract public boolean hasEquipment(int equipmentTypeId);
+
+
+
+
 
 }

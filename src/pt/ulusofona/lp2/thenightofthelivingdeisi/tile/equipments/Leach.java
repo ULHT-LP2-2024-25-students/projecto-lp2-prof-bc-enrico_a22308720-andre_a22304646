@@ -4,11 +4,10 @@ public class Leach extends Equipment {
     private double liters;
 
 
-    public Leach(int[] positionInBoard, int id, int type) {
-        super(positionInBoard, id, type);
-        this.name = "Lixívia";
+    public Leach(int type, int[] positionInBoard, int id) {
+        super(type, positionInBoard, id);
         this.liters = 1.0;
-
+        this.name = "Lixívia";
     }
 
     @Override
@@ -17,8 +16,6 @@ public class Leach extends Equipment {
     @Override
     public boolean canDefend(){return this.liters >= 0.3;}
 
-    @Override
-    public void atack() {}
 
     @Override
     public String getEquipmentInfoAsString() {

@@ -1,10 +1,12 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments;
 
 public class Shield extends Equipment {
-    public Shield(int[] positionInBoard, int id, int type) {
-        super(positionInBoard, id, type);
-        this.name = "Escudo madeira";
 
+
+
+    public Shield(int type, int[] positionInBoard, int id) {
+        super(type, positionInBoard, id);
+        this.name = "Escudo madeira";
     }
 
     @Override
@@ -13,10 +15,7 @@ public class Shield extends Equipment {
     @Override
     public boolean canDefend(){return true;}
 
-    @Override
-    public void atack() {
 
-    }
 
 
 }

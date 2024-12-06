@@ -10,6 +10,14 @@ public class Child extends Creature {
     }
 
     @Override
+    public void addEquipment(Equipment equipment) {
+        if (this.state == State.LIVE && equipment.canDefend()){    // Crianças só podem apanhar equipamentos defensivos
+            this.equipment = equipment;
+        }
+        this.points ++;
+    }
+
+    @Override
     public String[] getCreatureInfo(){
         String[] creatureInfo = new String[7];
         creatureInfo[0] = "" + id;
@@ -63,6 +71,13 @@ public class Child extends Creature {
     }
 
     public boolean canTransform(){return this.state != State.LIVE;}
+
+    @Override
+    public boolean canHoldEquipment() {
+        return false;
+    }
+    @Override
+    public boolean canDestroyEquipment() {return this.state != State.LIVE;}
 
     public boolean canBeTransformed(){return this.state == State.LIVE;}
 

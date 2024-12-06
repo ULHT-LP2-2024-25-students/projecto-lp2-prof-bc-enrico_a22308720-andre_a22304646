@@ -1,6 +1,4 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
-
-import pt.ulusofona.lp2.thenightofthelivingdeisi.Piece;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
 public class Old extends Creature {
@@ -8,6 +6,11 @@ public class Old extends Creature {
 
     public Old(int[] positionInBoard, int id, int team, String name, State state) {
         super(positionInBoard, id, team, name, state);
+    }
+
+    @Override
+    public void addEquipment(Equipment equipment) {
+
     }
 
     @Override
@@ -62,12 +65,12 @@ public class Old extends Creature {
         return false;
     }
 
-    @Override
-    public void interact(Piece piece) {
-
-    }
-
     public boolean canTransform(){return this.state != State.LIVE;}
+
+    @Override
+    public boolean canHoldEquipment() {return false;}
+    @Override
+    public boolean canDestroyEquipment() {return this.state != State.LIVE;}
 
     public boolean canBeTransformed(){return this.state == State.LIVE;}
 

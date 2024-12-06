@@ -1,10 +1,11 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments;
 
 public class Sword extends Equipment {
-    public Sword(int[] positionInBoard, int id, int type) {
-        super(positionInBoard, id, type);
-        this.name = "Espada samurai";
 
+
+    public Sword(int type, int[] positionInBoard, int id) {
+        super(type, positionInBoard, id);
+        this.name = "Espada samurai";
     }
 
     @Override
@@ -13,10 +14,7 @@ public class Sword extends Equipment {
     @Override
     public boolean canDefend(){return false;}
 
-    @Override
-    public void atack() {
 
-    }
 
 
 }

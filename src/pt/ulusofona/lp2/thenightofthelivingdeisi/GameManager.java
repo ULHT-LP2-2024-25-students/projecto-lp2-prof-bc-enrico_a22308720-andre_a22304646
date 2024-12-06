@@ -66,7 +66,7 @@ public class GameManager {
                                  creatureName,
                                  teamId == 10 ? State.DEAD : State.LIVE
                              );
-                          board.addCreature(creature);
+                          board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                           break;
                     }
                     case 1:{
@@ -77,7 +77,7 @@ public class GameManager {
                                 creatureName,
                                 teamId == 10 ? State.DEAD : State.LIVE
                         );
-                         board.addCreature(creature);
+                         board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                          break;
                     }
                     case 2:{
@@ -88,7 +88,7 @@ public class GameManager {
                                 creatureName,
                                 teamId == 10 ? State.DEAD : State.LIVE
                         );
-                          board.addCreature(creature);
+                          board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                           break;
                     }
                     case 3:{
@@ -99,7 +99,7 @@ public class GameManager {
                                 creatureName,
                                 State.LIVE
                         );
-                         board.addCreature(creature);
+                         board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                          break;
                     }
                     case 4:{
@@ -108,9 +108,9 @@ public class GameManager {
                                 creatureId,
                                 teamId,
                                 creatureName,
-                                State.LIVE
+                                State.DEAD
                         );
-                         board.addCreature(creature);
+                         board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                          break;
                     }
                 }
@@ -128,23 +128,23 @@ public class GameManager {
                 Equipment equipment;
                 switch (equipmentType){
                     case 0:{
-                        equipment = new Shield(positionInBoard,equipmentId,equipmentType);
-                        board.addEquipment(equipment);
+                        equipment = new Shield(equipmentType,positionInBoard,equipmentId);
+                        board.addEquipment(equipment,positionInBoard[0],positionInBoard[1]);
                         break;
                     }
                     case 1:{
-                        equipment = new Sword(positionInBoard,equipmentId,equipmentType);
-                        board.addEquipment(equipment);
+                        equipment = new Sword(equipmentType,positionInBoard,equipmentId);
+                        board.addEquipment(equipment,positionInBoard[0],positionInBoard[1]);
                         break;
                     }
                     case 2:{
-                        equipment = new Pistol(positionInBoard,equipmentId,equipmentType);
-                        board.addEquipment(equipment);
+                        equipment = new Pistol(equipmentType,positionInBoard,equipmentId);
+                        board.addEquipment(equipment,positionInBoard[0],positionInBoard[1]);
                         break;
                     }
                     case 3:{
-                        equipment = new Leach(positionInBoard,equipmentId,equipmentType);
-                        board.addEquipment(equipment);
+                        equipment = new Leach(equipmentType,positionInBoard,equipmentId);
+                        board.addEquipment(equipment,positionInBoard[0],positionInBoard[1]);
                         break;
                     }
                 }
@@ -157,7 +157,7 @@ public class GameManager {
                 positionInBoard[0] = Integer.parseInt(infoDoor[0]);
                 positionInBoard[1] = Integer.parseInt(infoDoor[1]);
                 Door door = new Door(positionInBoard);
-                board.addDoor(door);
+                board.addDoor(door,positionInBoard[0],positionInBoard[1]);
             }
 
         }
@@ -187,7 +187,7 @@ public class GameManager {
 
     public boolean isDay() {
         if(turns==0){
-            gameStatus = getInitialTeamId() == 10 ? false : true;
+            gameStatus = true;
         }
 
         if (((turns % 2) == 0) && turns != 0){
@@ -260,7 +260,7 @@ public class GameManager {
             }
         }
         result.add("");
-        result.add("OS MORTOS");
+        result.add("OS OUTROS");
         for (Creature actualCreature : creatures) {
             if (actualCreature.getState() != State.LIVE) {
                 result.add(actualCreature.getIdAndName());

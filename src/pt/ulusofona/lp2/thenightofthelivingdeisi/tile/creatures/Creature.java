@@ -47,8 +47,4 @@ abstract public class Creature extends Piece {
         return true;
     }
 
-    @Override
-    public boolean canBeHolded(){
-        return false;
-    }
 }

@@ -1,5 +1,5 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
 public class Child extends Creature {
     protected Equipment equipment;

@@ -1,4 +1,6 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.tile;
+
+import pt.ulusofona.lp2.thenightofthelivingdeisi.Piece;
 
 public class Door extends Piece {
 

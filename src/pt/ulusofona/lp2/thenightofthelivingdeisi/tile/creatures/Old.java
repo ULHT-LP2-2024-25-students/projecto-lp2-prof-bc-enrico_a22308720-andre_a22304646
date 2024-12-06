@@ -1,7 +1,7 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
 
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.equipments.Equipment;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.Piece;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
 public class Old extends Creature {
     protected Equipment equipment;

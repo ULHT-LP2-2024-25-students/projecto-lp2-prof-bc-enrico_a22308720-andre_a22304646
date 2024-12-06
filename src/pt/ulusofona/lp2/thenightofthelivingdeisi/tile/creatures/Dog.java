@@ -1,6 +1,6 @@
-package pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.creatures;
+package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
 
-import pt.ulusofona.lp2.thenightofthelivingdeisi.pieces.Piece;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.Piece;
 
 public class Dog extends Creature {
 

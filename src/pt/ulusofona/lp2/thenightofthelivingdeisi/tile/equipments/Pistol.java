@@ -10,7 +10,14 @@ public class Pistol extends Equipment {
     }
 
     @Override
-    public boolean canAttack(){return this.bullets > 0;}
+    public boolean canAttack(){
+        if (this.bullets > 0){
+            bullets--;
+            return true;
+
+        }
+        return false;
+    }
 
     @Override
     public boolean canDefend(){return false;}

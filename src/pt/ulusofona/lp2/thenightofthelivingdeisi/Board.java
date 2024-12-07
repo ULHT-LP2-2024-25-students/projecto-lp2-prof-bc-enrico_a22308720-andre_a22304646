@@ -43,8 +43,6 @@ public class Board {
     public boolean positionIsValid(int x, int y) {
         return x >= 0 && x < boardTiles[0].length && y >= 0 && y < boardTiles.length;
     }
-
-
     public int getSizeX() {
         return boardTiles[0].length;
     }
@@ -79,50 +77,58 @@ public class Board {
         return null;
     }
 
-    public boolean move(int x0, int y0, int xD, int yD) {
-        if (positionIsValid(xD, yD) && boardTiles[y0][x0].getCreature() != null) {
+    public boolean move(int x0, int y0, int xD, int yD, boolean isDay,int currentTeam) {
+        if (positionIsValid(xD, yD) && boardTiles[y0][x0].getCreature() != null) {    //verificar se a posicao de destino e valida e se esta uma criatura na posicao de origem
             Tile tile = boardTiles[y0][x0];
             Tile tileD = boardTiles[yD][xD];
             TypeMove typeMove = tile.getCreature().getTypeMove(tile, tileD);
-            if (tile.getCreature().moveIsValid(x0, y0, xD, yD)) {
+            if (tile.getCreature().moveIsValid(x0, y0, xD, yD)) {                   //verificar se o movimento é valido pelo tipo de criatura
                 Creature creature = boardTiles[y0][x0].getCreature();
-                switch (typeMove) {
-                    case INVALID:
-                        return false;
-                    case MOVE:
-                        tile.removeCreature();
-                        tileD.addCreature(creature, yD, xD);
-                        return true;
-                    case WEAPON:
-                        if (creature.canHoldEquipment()){
-                            tile.removeCreature();
-                            creature.addEquipment(tileD.getEquipment());
-                            tileD.removeEquipment();
-                            tileD.addCreature(creature, yD, xD);
-                            return true;
-                        }else if(creature.canDestroyEquipment()){
-                            tileD.removeEquipment();
-                            creature.increasePoints();
-                            return true;
-                        }else{
+                int creatureTeam = creature.getTeam();
+                if(((isDay && creature.canMoveAtDay()) || (!isDay && creature.canMoveAtNight())) && creatureTeam == currentTeam){            //verificar se a criatura se pode mover consoante ser dia ou noite e consoante ser o seu turno
+                    switch (typeMove) {
+                        case INVALID:
                             return false;
-                        }
-                    case INFECT:
-                        Creature newZombie = tileD.getCreature();
-                        newZombie.setState(State.TRANSFORMED);
-                        newZombie.setTeam(10);
-                        boardTiles[yD][xD].setCreature(newZombie);
-                        return true;
-                    case KILL:
-                        tile.removeCreature();
-                        tileD.removeCreature();
-                        tileD.addCreature(creature, yD, xD);
-                        return true;
-                    case SAFEHEAVEN:
-                        tile.removeCreature();
-                        safeHeaven.add(creature);
-                        return true;
+                        case MOVE:
+                            tile.removeCreature();
+                            tileD.addCreature(creature, xD, yD);
+                            return true;
+                        case WEAPON:
+                            if (creature.canHoldEquipment()){
+                                tile.removeCreature();
+                                creature.addEquipment(tileD.getEquipment());
+                                tileD.removeEquipment();
+                                tileD.addCreature(creature, xD, yD);
+                                return true;
+                            }else if(creature.canDestroyEquipment()){
+                                tileD.removeEquipment();
+                                creature.increasePoints();
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        case INFECT:
+                            Creature newZombie = tileD.getCreature();
+                            newZombie.setState(State.TRANSFORMED);
+                            newZombie.setTeam(10);
+                            boardTiles[yD][xD].setCreature(newZombie);
+                            return true;
+                        case KILL:
+                            tile.removeCreature();
+                            tileD.removeCreature();
+                            tileD.addCreature(creature, xD, yD);
+                            return true;
+                        case SAFEHEAVEN:
+                            tile.removeCreature();
+                            safeHeaven.add(creature);
+                            return true;
+                        case DEFENDED:
+
+                    }
+                }else{
+                    return false;
                 }
+
             }
 
             /*
@@ -168,4 +174,6 @@ public class Board {
         creatures.sort(Comparator.comparingInt(Creature::getId));
         return creatures;
     }
+
+
 }

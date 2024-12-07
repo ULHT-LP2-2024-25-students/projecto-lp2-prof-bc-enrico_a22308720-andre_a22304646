@@ -39,7 +39,7 @@ public class Child extends Creature {
         if(equipment == null){
             return result;
         }else{   // se tiver equipamento concatenar strings
-            return result + equipment.getEquipmentInfoAsString();
+            return result + " " + equipment.getEquipmentInfoAsString();
         }
     }
     @Override
@@ -80,5 +80,14 @@ public class Child extends Creature {
     public boolean canDestroyEquipment() {return this.state != State.LIVE;}
 
     public boolean canBeTransformed(){return this.state == State.LIVE;}
+
+    @Override
+    public boolean canMoveAtNight() {
+        return true;
+    }
+    @Override
+    public boolean canMoveAtDay() {
+        return true;
+    }
 
 }

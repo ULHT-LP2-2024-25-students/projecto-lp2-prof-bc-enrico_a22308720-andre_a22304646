@@ -31,8 +31,6 @@ public class Tile {
     public void addDoor(Door door) {
         this.door = door;
     }
-
-
     public String getSquareInfo() {
         if (creature != null) {
             return creature.getSquareInfo();

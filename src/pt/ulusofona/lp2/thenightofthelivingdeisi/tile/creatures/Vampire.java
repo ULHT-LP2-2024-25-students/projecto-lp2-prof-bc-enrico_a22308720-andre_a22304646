@@ -37,6 +37,9 @@ public class Vampire extends Creature {
     }
 
     @Override
+    public boolean canMoveAtNight() {return true;}
+
+    @Override
     public String getIdAndName() {
             return id + " (antigamente conhecido como " + name +")";
     }
@@ -51,8 +54,6 @@ public class Vampire extends Creature {
         return false;
     }
 
-
-
     public boolean canTransform(){return true;}
 
     @Override
@@ -63,4 +64,8 @@ public class Vampire extends Creature {
     public boolean canDestroyEquipment() {return true;}
 
     public boolean canBeTransformed(){return false;}
+    @Override
+    public boolean canMoveAtDay() {
+        return false;
+    }
 }

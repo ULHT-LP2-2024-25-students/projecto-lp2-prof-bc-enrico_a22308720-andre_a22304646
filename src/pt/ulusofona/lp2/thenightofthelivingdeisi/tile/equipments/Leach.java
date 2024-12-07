@@ -14,7 +14,16 @@ public class Leach extends Equipment {
     public boolean canAttack(){return false;}
 
     @Override
-    public boolean canDefend(){return this.liters >= 0.3;}
+    public boolean canDefend(){
+        if (this.liters >= 0.3 ){
+            liters -= 0.3;
+            return true;
+        }
+        liters=0;
+        return false;
+    }
+
+
 
 
     @Override

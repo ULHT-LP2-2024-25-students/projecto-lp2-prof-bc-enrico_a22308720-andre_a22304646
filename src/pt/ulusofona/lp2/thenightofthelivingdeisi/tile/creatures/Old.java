@@ -35,7 +35,7 @@ public class Old extends Creature {
         if(equipment == null){
             return result;
         }else{   // se tiver equipamento concatenar strings
-            return result + equipment.getEquipmentInfoAsString();
+            return result + " " +equipment.getEquipmentInfoAsString();
         }
     }
 
@@ -74,4 +74,11 @@ public class Old extends Creature {
 
     public boolean canBeTransformed(){return this.state == State.LIVE;}
 
+    @Override
+    public boolean canMoveAtNight() {return this.state != State.LIVE;}
+
+    @Override
+    public boolean canMoveAtDay() {
+        return true;
+    }
 }

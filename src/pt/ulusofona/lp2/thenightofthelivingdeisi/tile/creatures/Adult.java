@@ -28,7 +28,6 @@ public class Adult extends Creature {
         this.points ++;
     }
 
-
     @Override
     public boolean canHoldEquipment() {
         return this.state == State.LIVE;
@@ -60,7 +59,7 @@ public class Adult extends Creature {
         if(equipment == null){
             return result;
         }else{   // se tiver equipamento concatenar strings
-            return result + equipment.getEquipmentInfoAsString();
+            return result + " " + equipment.getEquipmentInfoAsString();
         }
     }
 
@@ -70,6 +69,16 @@ public class Adult extends Creature {
             return false;
         }
         return equipment.getType() == equipmentTypeId;
+    }
+
+
+    @Override
+    public boolean canMoveAtNight() {
+        return true;
+    }
+    @Override
+    public boolean canMoveAtDay() {
+        return true;
     }
 
     @Override

@@ -62,21 +62,27 @@ abstract public class Creature {
                     //tile with equipment
                     return TypeMove.WEAPON;
                 }
-            } else if(tile.getCreature().state == State.LIVE ){
-                if (tileDestiny.getCreature().state == State.LIVE){
-                    //tile with creature LIVE and destination tile with creature LIVE
-                    return TypeMove.INVALID;
-                }else {
-                    //tile with creature LIVE and destination tile with creature DEAD or TRANSFORMED
+            } else if(tile.getCreature().canBeTransformed() ){
+                if(tileDestiny.getCreature().canTransform() && tile.getEquipment() != null && tile.getEquipment().canAttack()){
+                    //tile with creature LIVE with atack weapon and destination tile with creature DEAD or TRANSFORMED
                     return TypeMove.KILL;
+                }else {
+                    return TypeMove.INVALID;
                 }
-            } else if (tile.getCreature().state == State.DEAD){
-                if (tileDestiny.getCreature().state == State.DEAD || tileDestiny.getCreature().state == State.TRANSFORMED){
+            } else if (tile.getCreature().canTransform()){
+                if (tileDestiny.getCreature().canBeTransformed()){
+                    if (tileDestiny.getEquipment() != null && tileDestiny.getEquipment().canDefend()){
+                        //tile with creature DEAD and destination tile with creature LIVE with weapon to defend
+                        return TypeMove.DEFENDED;
+                    }
+                    else{
+                        //tile with creature DEAD and destination tile with creature LIVE with no defend weapon
+                        return TypeMove.INFECT;
+                    }
+
+                }else {
                     //tile with creature DEAD and destination tile with creature DEAD or TRANSFORMED
                     return TypeMove.INVALID;
-                }else {
-                    //tile with creature DEAD and destination tile with creature LIVE
-                    return TypeMove.INFECT;
                 }
 
             }
@@ -96,6 +102,9 @@ abstract public class Creature {
         return true;
     }
 
+    public int getTeam() {
+        return team;
+    }
 
     // Abstract Methods
     abstract public void addEquipment(Equipment equipment);
@@ -108,6 +117,8 @@ abstract public class Creature {
     abstract public  boolean canHoldEquipment();
     abstract public  boolean canDestroyEquipment();
     abstract public boolean hasEquipment(int equipmentTypeId);
+    abstract public boolean canMoveAtNight();
+    abstract public boolean canMoveAtDay();
 
 
 

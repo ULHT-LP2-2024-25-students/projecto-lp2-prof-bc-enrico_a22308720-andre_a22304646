@@ -231,16 +231,12 @@ public class GameManager {
     }
 
     public boolean move(int x0, int y0, int xD, int yD) {
-        /*
-        int originId = board.positionId(x0, y0);
-        if (originId > 0 && board.getCreatureById(originId).getTeam() == getCurrentTeamId()) {
-            if (board.move(x0, y0, xD, yD)) {
-                increaseTurn();
-                return true;
-            }
-        }*/
+        int currentTeam = getCurrentTeamId();
+        if (board.move(x0,y0,xD,yD,isDay(),currentTeam)){
+            turns++;
+            return true;
+        }
         return false;
-
     }
 
     public boolean gameIsOver() {

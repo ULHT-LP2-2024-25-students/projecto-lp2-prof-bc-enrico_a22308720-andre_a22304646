@@ -67,5 +67,13 @@ public class Dog extends Creature {
 
     public boolean canBeTransformed(){return false;}
 
+    @Override
+    public boolean canMoveAtNight() {
+        return true;
+    }
+    @Override
+    public boolean canMoveAtDay() {
+        return true;
+    }
 
 }

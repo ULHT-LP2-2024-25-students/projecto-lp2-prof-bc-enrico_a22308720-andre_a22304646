@@ -57,7 +57,7 @@ public class Vampire extends Creature {
     public boolean canTransform(){return true;}
 
     @Override
-    public boolean canHoldEquipment() {
+    public boolean canHoldEquipment(Equipment equipment) {
         return false;
     }
     @Override

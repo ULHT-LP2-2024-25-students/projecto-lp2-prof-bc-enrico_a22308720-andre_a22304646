@@ -15,12 +15,19 @@ public class Leach extends Equipment {
 
     @Override
     public boolean canDefend(){
-        if (this.liters >= 0.3 ){
-            liters -= 0.3;
+        if (this.liters >= 0.1 ){
             return true;
         }
-        liters=0;
         return false;
+    }
+
+    public void defend(){
+        if(liters < 0.3){
+            liters=0.0;
+        }
+        liters -= 0.3;
+        liters = Math.round(liters * 10.0) / 10.0;
+
     }
 
 

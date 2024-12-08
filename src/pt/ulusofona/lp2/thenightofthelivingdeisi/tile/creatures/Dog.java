@@ -59,7 +59,7 @@ public class Dog extends Creature {
     public boolean canTransform(){return false;}
 
     @Override
-    public boolean canHoldEquipment() {
+    public boolean canHoldEquipment(Equipment equipment) {
         return false;
     }
     @Override

@@ -46,8 +46,12 @@ abstract public class Equipment {
         return type;
     }
 
+    public void defend(){}
+
     abstract public boolean canAttack();
     abstract public boolean canDefend();
+
+
 
 
 

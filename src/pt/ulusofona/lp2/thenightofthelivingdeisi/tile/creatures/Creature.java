@@ -11,6 +11,7 @@ abstract public class Creature {
     protected String name;
     protected int points;
     protected State state;
+    protected Equipment equipment;
 
     public Creature(int[] positionInBoard, int id, int team, String name, State state) {
         this.positionInBoard = positionInBoard;
@@ -19,6 +20,7 @@ abstract public class Creature {
         this.name = name;
         this.points = 0;
         this.state = state;
+        this.equipment=null;
     }
 
     public int getPoints() {
@@ -71,7 +73,8 @@ abstract public class Creature {
                 }
             } else if (tile.getCreature().canTransform()){
                 if (tileDestiny.getCreature().canBeTransformed()){
-                    if (tileDestiny.getEquipment() != null && tileDestiny.getEquipment().canDefend()){
+                    if ((tileDestiny.getCreature().getEquipment() != null || tileDestiny.getEquipment() != null) &&
+                            (tileDestiny.getCreature().getEquipment().canDefend() || tileDestiny.getCreature().getEquipment().canAttack())){
                         //tile with creature DEAD and destination tile with creature LIVE with weapon to defend
                         return TypeMove.DEFENDED;
                     }
@@ -106,6 +109,15 @@ abstract public class Creature {
         return team;
     }
 
+    public Equipment getEquipment() {
+        return null;
+    }
+
+    public void removeEquipment (){
+        this.equipment =  null;
+    }
+
+
     // Abstract Methods
     abstract public void addEquipment(Equipment equipment);
     abstract public String[] getCreatureInfo();
@@ -114,14 +126,10 @@ abstract public class Creature {
     abstract public boolean moveIsValid (int x0, int y0, int xD, int yD);
     abstract public boolean canBeTransformed();
     abstract public boolean canTransform();
-    abstract public  boolean canHoldEquipment();
+    abstract public  boolean canHoldEquipment(Equipment equipment);
     abstract public  boolean canDestroyEquipment();
     abstract public boolean hasEquipment(int equipmentTypeId);
     abstract public boolean canMoveAtNight();
     abstract public boolean canMoveAtDay();
-
-
-
-
 
 }

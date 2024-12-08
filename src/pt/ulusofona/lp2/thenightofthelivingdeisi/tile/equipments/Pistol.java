@@ -6,7 +6,7 @@ public class Pistol extends Equipment {
     public Pistol(int type, int[] positionInBoard, int id) {
         super(type, positionInBoard, id);
         this.bullets = 3;
-        this.name = "Pistola Walter PPK";
+        this.name = "Pistola Walther PPK";
     }
 
     @Override

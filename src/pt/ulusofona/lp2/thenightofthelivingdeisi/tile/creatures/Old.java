@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
 public class Old extends Creature {
-    protected Equipment equipment;
+
 
     public Old(int[] positionInBoard, int id, int team, String name, State state) {
         super(positionInBoard, id, team, name, state);
@@ -68,7 +68,7 @@ public class Old extends Creature {
     public boolean canTransform(){return this.state != State.LIVE;}
 
     @Override
-    public boolean canHoldEquipment() {return false;}
+    public boolean canHoldEquipment(Equipment equipment) {return this.state == State.LIVE;}
     @Override
     public boolean canDestroyEquipment() {return this.state != State.LIVE;}
 
@@ -80,5 +80,10 @@ public class Old extends Creature {
     @Override
     public boolean canMoveAtDay() {
         return true;
+    }
+
+    @Override
+    public Equipment getEquipment() {
+        return equipment;
     }
 }

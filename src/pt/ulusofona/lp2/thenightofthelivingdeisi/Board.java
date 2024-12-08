@@ -94,11 +94,17 @@ public class Board {
                             tileD.addCreature(creature, xD, yD);
                             return true;
                         case WEAPON:
-                            if (creature.canHoldEquipment()){
+                            if (creature.canHoldEquipment(tileD.getEquipment())){
+                                if (creature.getEquipment() != null){
+                                    tile.addEquipment(creature.getEquipment(),x0,y0);
+                                    creature.removeEquipment();
+                                }
                                 tile.removeCreature();
                                 creature.addEquipment(tileD.getEquipment());
+                                creature.increasePoints();
                                 tileD.removeEquipment();
                                 tileD.addCreature(creature, xD, yD);
+
                                 return true;
                             }else if(creature.canDestroyEquipment()){
                                 tileD.removeEquipment();
@@ -111,6 +117,7 @@ public class Board {
                             Creature newZombie = tileD.getCreature();
                             newZombie.setState(State.TRANSFORMED);
                             newZombie.setTeam(10);
+                            newZombie.removeEquipment();
                             boardTiles[yD][xD].setCreature(newZombie);
                             return true;
                         case KILL:
@@ -123,41 +130,21 @@ public class Board {
                             safeHeaven.add(creature);
                             return true;
                         case DEFENDED:
+                            if (tileD.getEquipment()!= null){
+                                tileD.getEquipment().defend();
+                            }
+                            if (tileD.getCreature().getEquipment()!= null){
+                                creature.getEquipment().defend();
+                            }
 
+
+                            return true;
                     }
                 }else{
                     return false;
                 }
 
             }
-
-            /*
-            //move to empty space
-            if (boardTiles[yD][xD].getCreature() == null && boardTiles[yD][xD].getCreature().moveIsValid(x0, y0, xD, yD)) {
-                Creature creature = boardTiles[y0][x0].getCreature();
-                Tile tile = boardTiles[y0][x0];
-                Tile tileD = boardTiles[yD][xD];
-                tile.removeCreature();
-                tileD.addCreature(creature, yD, xD);
-            }
-            //move to equipment
-            else if (boardTiles[yD][xD].getEquipment() != null && boardTiles[yD][xD].getCreature() == null) {
-                Creature creature = boardTiles[y0][x0].getCreature();
-                Equipment equipment = boardTiles[yD][xD].getEquipment();
-                Tile tile = boardTiles[y0][x0];
-                Tile tileD = boardTiles[yD][xD];
-                tile.removeCreature();
-                if(!creature.canHoldEquipment()) {
-                    tileD.removeEquipment();
-                    tileD.addCreature(creature, yD, xD);
-                    tile.addEquipment(equipment, yD, xD);
-                } else {
-                    tileD.removeEquipment();
-                    tileD.addCreature(creature, yD, xD);
-                    tile.addEquipment(equipment, yD, xD);
-                }
-
-            }*/
         }
         return false;
     }

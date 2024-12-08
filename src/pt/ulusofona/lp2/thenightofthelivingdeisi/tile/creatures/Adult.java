@@ -3,11 +3,11 @@ import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.Tile;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
 public class Adult extends Creature {
-    protected Equipment equipment;
+
 
     public Adult(int[] positionInBoard, int id, int team, String name, State state) {
         super(positionInBoard, id, team, name, state);
-        this.equipment = null;
+
     }
 
     @Override
@@ -29,7 +29,7 @@ public class Adult extends Creature {
     }
 
     @Override
-    public boolean canHoldEquipment() {
+    public boolean canHoldEquipment(Equipment equipment) {
         return this.state == State.LIVE;
     }
 
@@ -93,4 +93,8 @@ public class Adult extends Creature {
     public boolean canTransform(){return this.state != State.LIVE;}
 
     public boolean canBeTransformed(){return this.state == State.LIVE;}
+    @Override
+    public Equipment getEquipment() {
+        return equipment;
+    }
 }

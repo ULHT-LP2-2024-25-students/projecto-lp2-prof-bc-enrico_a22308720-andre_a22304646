@@ -15,13 +15,14 @@ public class Board {
 
     public Board(int rows, int columns) {
         this.boardTiles = new Tile[rows][columns];
-        //Precisamos inicializar cada elemento
+        this.safeHeaven = new ArrayList<>();
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < columns; x++) {
                 boardTiles[y][x] = new Tile();
             }
         }
     }
+
     public void addCreature(Creature creature, int x, int y) {
         boardTiles[y][x].addCreature(creature, x, y);
     }

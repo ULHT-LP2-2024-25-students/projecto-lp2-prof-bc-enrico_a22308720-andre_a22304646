@@ -271,7 +271,7 @@ public boolean isDay() {
         return hash;
     }
 
-    public List<Integer> getIdsInSafeHeaven() {
+    public List<Integer> getIdsInSafeHaven() {
         List<Integer> ids = new ArrayList<>();
         for (Creature creature : board.safeHeaven) {
             ids.add(creature.getId());

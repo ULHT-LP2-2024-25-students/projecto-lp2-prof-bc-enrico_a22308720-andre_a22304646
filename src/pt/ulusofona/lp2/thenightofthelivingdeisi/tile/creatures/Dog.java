@@ -30,7 +30,7 @@ public class Dog extends Creature {
 
     @Override
     public String getCreatureInfoAsString() {
-        return id + " | Cão | " + name + " @(" + positionInBoard[0] + "," + positionInBoard[1]+")";
+        return id + " | Cão | " + name + " @ (" + positionInBoard[0] + ", " + positionInBoard[1]+")";
     }
 
     @Override

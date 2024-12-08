@@ -165,8 +165,8 @@ public class GameManager {
 
     public int[] getWorldSize() {
         int[] size = new int[2];
-        size[0] = board.getSizeX();
-        size[1] = board.getSizeY();
+        size[0] = board.getSizeY();
+        size[1] = board.getSizeX();
         return size;
     }
 

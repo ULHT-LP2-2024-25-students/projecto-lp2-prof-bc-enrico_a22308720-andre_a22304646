@@ -39,7 +39,7 @@ abstract public class Equipment {
     }
 
     public String getEquipmentInfoAsString() {
-        return id + " | " + name + " @(" + positionInBoard[0] + "," + positionInBoard[1] + ")";
+        return id + " | " + name + " @ (" + positionInBoard[0] + ", " + positionInBoard[1] + ")";
     }
 
     public int getType() {

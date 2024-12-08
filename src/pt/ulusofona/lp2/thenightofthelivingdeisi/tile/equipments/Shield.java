@@ -6,7 +6,7 @@ public class Shield extends Equipment {
 
     public Shield(int type, int[] positionInBoard, int id) {
         super(type, positionInBoard, id);
-        this.name = "Escudo madeira";
+        this.name = "Escudo de madeira";
     }
 
     @Override

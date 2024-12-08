@@ -33,7 +33,7 @@ public class Pistol extends Equipment {
 
     @Override
     public String getEquipmentInfoAsString() {
-        return id + " | " + name + " @(" + positionInBoard[0] + "," + positionInBoard[1] + ") | " + bullets + " balas";
+        return id + " | " + name + " @ (" + positionInBoard[0] + ", " + positionInBoard[1] + ") | " + bullets + " balas";
     }
 
 

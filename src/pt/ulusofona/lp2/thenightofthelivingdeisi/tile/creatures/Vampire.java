@@ -28,7 +28,7 @@ public class Vampire extends Creature {
 
     @Override
     public String getCreatureInfoAsString() {
-        return id + " | Vampiro | Zombie | " +  name + " | -" + points + " @(" + positionInBoard[0] + "," + positionInBoard[1]+")";
+        return id + " | Vampiro | " +  name + " | -" + points + " @ (" + positionInBoard[0] + ", " + positionInBoard[1]+")";
     }
 
     @Override

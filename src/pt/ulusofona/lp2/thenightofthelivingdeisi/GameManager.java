@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GameManager {
-    int[] worldSize;
-    int initialTeam;
-    int currentTeam;
-    boolean gameStatus;
-    Board board;
-    int turns;
+    private int[] worldSize;
+    private int initialTeam;
+    private int currentTeam;
+    private boolean gameStatus;
+    private Board board;
+    private int turns;
 
     public GameManager() {
         this.turns=0;

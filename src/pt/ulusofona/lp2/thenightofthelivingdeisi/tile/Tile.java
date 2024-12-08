@@ -4,9 +4,9 @@ import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures.Creature;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
 public class Tile {
-    public Creature creature;
-    Equipment equipment;
-    Door door;
+    private Creature creature;
+    private Equipment equipment;
+    private Door door;
 
     public Tile() {
         this.creature = null;

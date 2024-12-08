@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments;
 
 public class Pistol extends Equipment {
-    int bullets;
+    protected int bullets;
 
     public Pistol(int type, int[] positionInBoard, int id) {
         super(type, positionInBoard, id);

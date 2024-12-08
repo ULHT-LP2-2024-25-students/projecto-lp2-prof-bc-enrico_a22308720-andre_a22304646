@@ -14,7 +14,6 @@ public class Child extends Creature {
         if (this.state == State.LIVE && equipment.canDefend()){    // Crianças só podem apanhar equipamentos defensivos
             this.equipment = equipment;
         }
-        this.points ++;
     }
 
     @Override

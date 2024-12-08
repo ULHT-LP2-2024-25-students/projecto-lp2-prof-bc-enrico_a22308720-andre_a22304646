@@ -104,11 +104,12 @@ public class Board {
                                 creature.increasePoints();
                                 tileD.removeEquipment();
                                 tileD.addCreature(creature, xD, yD);
-
                                 return true;
                             }else if(creature.canDestroyEquipment()){
                                 tileD.removeEquipment();
                                 creature.increasePoints();
+                                tile.removeCreature();
+                                tileD.addCreature(creature, xD, yD);
                                 return true;
                             }else{
                                 return false;
@@ -134,7 +135,7 @@ public class Board {
                                 tileD.getEquipment().defend();
                             }
                             if (tileD.getCreature().getEquipment()!= null){
-                                creature.getEquipment().defend();
+                                tileD.getCreature().getEquipment().defend();
                             }
 
 
@@ -143,7 +144,6 @@ public class Board {
                 }else{
                     return false;
                 }
-
             }
         }
         return false;

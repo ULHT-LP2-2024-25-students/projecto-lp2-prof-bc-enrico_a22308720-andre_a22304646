@@ -185,20 +185,15 @@ public class GameManager {
         //if turn is odd, return initial team, if not return the other team
     }
 
-    public boolean isDay() {
-        if(turns==0){
-            gameStatus = true;
-        }
-
-        if (((turns % 2) == 0) && turns != 0){
-            if (gameStatus) {
-                gameStatus = false;
-            }else {
-                gameStatus = true;
-            }
-        }
-        return gameStatus;
+public boolean isDay() {
+    if (turns % 4 < 2) {
+        gameStatus = true;
+    } else {
+        gameStatus = false;
     }
+    return gameStatus;
+}
+
     public void increaseTurn(){
         turns++;
     }

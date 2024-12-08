@@ -24,6 +24,7 @@ public class Leach extends Equipment {
     public void defend(){
         if(liters < 0.3){
             liters=0.0;
+            return;
         }
         liters -= 0.3;
         liters = Math.round(liters * 10.0) / 10.0;

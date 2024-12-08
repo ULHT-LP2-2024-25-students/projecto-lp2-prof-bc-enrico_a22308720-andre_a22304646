@@ -20,7 +20,16 @@ public class Pistol extends Equipment {
     }
 
     @Override
-    public boolean canDefend(){return false;}
+    public boolean canDefend(){
+        if (this.bullets > 0 ){
+            return true;
+        }
+        return false;
+    }
+
+    public void defend(){
+        bullets--;
+    }
 
     @Override
     public String getEquipmentInfoAsString() {

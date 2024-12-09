@@ -19,23 +19,28 @@ public class GameManager {
     private boolean gameStatus;
     private Board board;
     private int turns;
+    private int lastTransformationOrDead;
+    private int livesInBoard;
+    private int deadsInBoard;
+
 
     public GameManager() {
         this.turns=0;
+        this.lastTransformationOrDead=0;
+        this.livesInBoard=0;
+        this.deadsInBoard=0;
+
     }
 
     public void loadGame(File file) throws InvalidFileException, FileNotFoundException{
         ArrayList<String> info = new ArrayList<>();
         Scanner scanner = new Scanner(file);
-
         while (scanner.hasNextLine()) {
             info.add(scanner.nextLine());
         }
-
         int creatures = 0;
         int equipments = 0;
         int doors =0;
-
         for (int index = 0; index < info.size(); index++) {
             if (index == 0) {
                 String[] size = info.get(index).split(" ");
@@ -51,70 +56,37 @@ public class GameManager {
                 int teamId = Integer.parseInt(infoCreature[1]);
                 int creatureType = Integer.parseInt(infoCreature[2]);
                 String creatureName = infoCreature[3];
-
                 int[] positionInBoard = new int[2];
                 positionInBoard[0] = Integer.parseInt(infoCreature[4]);
                 positionInBoard[1] = Integer.parseInt(infoCreature[5]);
-
                 Creature creature;
                 switch (creatureType) {
                     case 0:{
-                          creature = new Child(
-                                 positionInBoard,
-                                 creatureId,
-                                 teamId,
-                                 creatureName,
-                                 teamId == 10 ? State.DEAD : State.LIVE
-                             );
+                          creature = new Child(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE);
                           board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                           break;
                     }
                     case 1:{
-                         creature = new Adult(
-                                positionInBoard,
-                                creatureId,
-                                teamId,
-                                creatureName,
-                                teamId == 10 ? State.DEAD : State.LIVE
-                        );
+                         creature = new Adult(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE);
                          board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                          break;
                     }
                     case 2:{
-                          creature = new Old(
-                                positionInBoard,
-                                creatureId,
-                                teamId,
-                                creatureName,
-                                teamId == 10 ? State.DEAD : State.LIVE
-                        );
+                          creature = new Old(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE);
                           board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                           break;
                     }
                     case 3:{
-                         creature = new Dog(
-                                positionInBoard,
-                                creatureId,
-                                teamId,
-                                creatureName,
-                                State.LIVE
-                        );
+                         creature = new Dog(positionInBoard,creatureId,teamId,creatureName, State.LIVE);
                          board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                          break;
                     }
                     case 4:{
-                         creature = new Vampire(
-                                positionInBoard,
-                                creatureId,
-                                teamId,
-                                creatureName,
-                                State.DEAD
-                        );
+                         creature = new Vampire(positionInBoard,creatureId,teamId,creatureName,State.DEAD);
                          board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                          break;
                     }
                 }
-
             } else if (index == 3 + creatures) {
                 equipments = Integer.parseInt(info.get(index));
             } else if (index > 3 + creatures && index < 4 + creatures + equipments) {
@@ -159,7 +131,6 @@ public class GameManager {
                 Door door = new Door(positionInBoard);
                 board.addDoor(door,positionInBoard[0],positionInBoard[1]);
             }
-
         }
     }
 
@@ -185,7 +156,7 @@ public class GameManager {
         //if turn is odd, return initial team, if not return the other team
     }
 
-public boolean isDay() {
+    public boolean isDay() {
     if (turns % 4 < 2) {
         gameStatus = true;
     } else {
@@ -229,13 +200,28 @@ public boolean isDay() {
         int currentTeam = getCurrentTeamId();
         if (board.move(x0,y0,xD,yD,isDay(),currentTeam)){
             turns++;
+            lastTransformationOrDead++;
             return true;
         }
         return false;
     }
 
     public boolean gameIsOver() {
-        return turns == 12;
+        ArrayList<Creature> creaturesInGame = board.getCreatures();
+        int livesInBoard=this.livesInBoard;
+        int deadsInBoard=this.deadsInBoard;
+        for(Creature atualCreature : creaturesInGame){
+            if (atualCreature.getState() == State.LIVE){
+                this.livesInBoard++;
+            }else{
+                this.deadsInBoard++;
+            }
+        }
+        if (livesInBoard != this.livesInBoard || deadsInBoard != this.deadsInBoard){
+            this.lastTransformationOrDead=0;
+        }
+
+        return this.livesInBoard==0 || this.deadsInBoard ==0 || lastTransformationOrDead>7;
     }
 
     public ArrayList<String> getSurvivors() {
@@ -272,14 +258,14 @@ public boolean isDay() {
     }
 
     public List<Integer> getIdsInSafeHaven() {
-        List<Integer> ids = new ArrayList<>();
-        for (Creature creature : board.safeHeaven) {
-            ids.add(creature.getId());
-        }
-        return ids;
+        return null;
     }
 
     public void saveGame(File file) throws IOException {
 
     }
+
+
+
+
 }

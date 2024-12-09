@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class Board {
-    Tile[][] boardTiles;
-    ArrayList<Creature> safeHeaven;
+    private Tile[][] boardTiles;
+    private ArrayList<Creature> safeHeaven;
 
     public Board(int rows, int columns) {
         this.boardTiles = new Tile[rows][columns];

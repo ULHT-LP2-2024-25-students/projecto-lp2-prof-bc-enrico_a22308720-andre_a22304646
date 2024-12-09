@@ -65,7 +65,7 @@ abstract public class Creature {
                     return TypeMove.WEAPON;
                 }
             } else if(tile.getCreature().canBeTransformed() ){
-                if(tileDestiny.getCreature().canTransform() && tile.getEquipment() != null && tile.getEquipment().canAttack()){
+                if(tileDestiny.getCreature().canTransform() && tile.getCreature().getEquipment() != null && tile.getCreature().getEquipment().canAttack()){
                     //tile with creature LIVE with atack weapon and destination tile with creature DEAD or TRANSFORMED
                     return TypeMove.KILL;
                 }else {

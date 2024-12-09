@@ -14,7 +14,6 @@ public class Pistol extends Equipment {
         if (this.bullets > 0){
             bullets--;
             return true;
-
         }
         return false;
     }

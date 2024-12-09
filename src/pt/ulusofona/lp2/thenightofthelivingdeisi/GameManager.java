@@ -36,8 +36,7 @@ public class GameManager {
         ArrayList<String> info = new ArrayList<>();
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {
-            info.add(scanner.nextLine());
-        }
+            info.add(scanner.nextLine());}
         int creatures = 0;
         int equipments = 0;
         int doors =0;

@@ -183,10 +183,18 @@ public class GameManager {
     }
 
     public String[] getEquipmentInfo(int id) {
+        Equipment equipment = board.getEquipmentById(id);
+        if (equipment.isHolded()){
+            return null;
+        }
         return board.getEquipmentById(id).getEquipmentInfo();
     }
 
     public String getEquipmentInfoAsString(int id) {
+        Equipment equipment = board.getEquipmentById(id);
+        if (equipment.isHolded()){
+            return null;
+        }
         return board.getEquipmentById(id).getEquipmentInfoAsString();
     }
 

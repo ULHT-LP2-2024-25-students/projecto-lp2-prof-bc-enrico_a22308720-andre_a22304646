@@ -13,6 +13,7 @@ public class Child extends Creature {
     public void addEquipment(Equipment equipment) {
         if (this.state == State.LIVE && equipment.canDefend()){    // Crianças só podem apanhar equipamentos defensivos
             this.equipment = equipment;
+            equipment.hold();
         }
     }
 

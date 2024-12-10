@@ -116,7 +116,9 @@ abstract public class Creature {
     }
 
     public void removeEquipment (){
+        this.equipment.drop();
         this.equipment =  null;
+
     }
 
 

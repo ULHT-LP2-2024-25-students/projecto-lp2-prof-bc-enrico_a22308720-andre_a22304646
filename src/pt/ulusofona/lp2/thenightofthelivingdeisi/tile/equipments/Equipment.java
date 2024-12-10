@@ -7,17 +7,34 @@ abstract public class Equipment {
     protected String name;
     protected int[] positionInBoard;
     protected int id;
-
+    protected boolean isHolded;
     public Equipment(int type, int[] positionInBoard, int id) {
         this.type = type;
         this.positionInBoard = positionInBoard;
         this.id = id;
+        this.isHolded=false;
     }
 
 
     public void setPositionInBoard(int x, int y){
         this.positionInBoard[0] = x;
         this.positionInBoard[1] = y;
+    }
+
+    public void hold(){
+        this.isHolded=true;
+    }
+
+    public void drop(){
+        this.isHolded=false;
+    }
+
+    public boolean isHolded() {
+        return isHolded;
+    }
+
+    public int[] getPositionInBoard() {
+        return positionInBoard;
     }
 
     public String getSquareInfo(){

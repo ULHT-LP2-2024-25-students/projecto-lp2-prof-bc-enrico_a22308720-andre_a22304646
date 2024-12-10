@@ -12,6 +12,7 @@ public class Old extends Creature {
     public void addEquipment(Equipment equipment) {
         if (this.state == State.LIVE){
             this.equipment = equipment;
+            equipment.hold();
         }
 
     }

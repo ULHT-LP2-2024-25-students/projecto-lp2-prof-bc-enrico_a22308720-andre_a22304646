@@ -31,7 +31,7 @@ In Part 1, the goal is to:
 
 ## Unit Testing
 
-The project includes at least 4 test cases for the methods within the `GameManager` class, as part of the API specification. The tests are written using **JUnit 5** and are located in the `pt.ulusofona.lp2.thenightofthelivingdeisi.TestGameManager.java` file.
+The project includes at least 4 test cases for the methods within the `GameManager` class, as part of the API specification. The tests are written using **JUnit 5** and are located in the `pt.ulusofona.lp2.thenightofthelivingdeisi.TestGameManager2.java` file.
 
 ---
 

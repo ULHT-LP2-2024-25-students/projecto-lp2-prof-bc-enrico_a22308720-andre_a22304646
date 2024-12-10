@@ -1,17 +1,8 @@
 //package pt.ulusofona.lp2.thenightofthelivingdeisi;
 //
-//import org.junit.Assert;
 //import org.junit.Test;
 //
-//import java.io.File;
-//import java.io.FileNotFoundException;
-//import java.util.ArrayList;
-//
-//import static org.junit.Assert.*;
-//
 //public class TestGameManager {
-//
-//
 //    @Test
 //    public void testLoadGame(){
 //        GameManager gameManager = new GameManager();
@@ -132,5 +123,4 @@
 //
 //
 //    }
-//
 //}

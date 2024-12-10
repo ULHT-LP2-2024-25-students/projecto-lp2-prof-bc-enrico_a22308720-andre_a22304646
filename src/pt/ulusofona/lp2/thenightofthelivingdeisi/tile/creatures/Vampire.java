@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
 
 
+import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.Tile;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
 public class Vampire extends Creature {
@@ -68,4 +69,32 @@ public class Vampire extends Creature {
         return false;
     }
 
+
+    @Override
+    public TypeMove getTypeMove(Tile tile, Tile tileDestiny){
+        if(tileDestiny.getCreature() == null){
+            if(tileDestiny.getEquipment() == null) {
+                if(tileDestiny.getDoor() == null){
+                    //empty tile
+                    return TypeMove.MOVE;
+                }
+            } else if(tileDestiny.getEquipment() != null){
+                //tile with equipment
+                return TypeMove.WEAPON;
+            }
+        }
+        if (tileDestiny.getCreature().canBeTransformed()){
+            if (tileDestiny.getCreature().getEquipment() != null &&
+                    (tileDestiny.getCreature().getEquipment().canDefend() || tileDestiny.getCreature().getEquipment().canAttack())){
+                //tile with creature DEAD and destination tile with creature LIVE with weapon to defend
+                return TypeMove.DEFENDED;
+            }
+            else{
+                //tile with creature DEAD and destination tile with creature LIVE with no defend weapon
+                return TypeMove.INFECT;
+            }
+
+        }
+        return TypeMove.INVALID;
+    }
 }

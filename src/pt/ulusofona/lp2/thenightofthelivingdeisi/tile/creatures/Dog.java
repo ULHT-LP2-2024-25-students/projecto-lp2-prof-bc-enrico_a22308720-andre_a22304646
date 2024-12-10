@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
 
 
+import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.Tile;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
 public class Dog extends Creature {
@@ -76,4 +77,18 @@ public class Dog extends Creature {
         return true;
     }
 
+    @Override
+    public TypeMove getTypeMove(Tile tile, Tile tileDestiny) {
+        if (tileDestiny.getCreature() == null) {
+            if (tileDestiny.getEquipment() == null) {
+                if (tileDestiny.getDoor() == null) {
+                    //empty tile
+                    return TypeMove.MOVE;
+                } else if (tileDestiny.getDoor() != null) {
+                    return TypeMove.SAFEHEAVEN;
+                }
+            }
+        }
+        return TypeMove.INVALID;
+    }
 }

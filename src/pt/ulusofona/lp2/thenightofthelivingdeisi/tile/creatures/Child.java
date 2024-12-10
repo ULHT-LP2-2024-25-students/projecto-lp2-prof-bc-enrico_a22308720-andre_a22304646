@@ -1,4 +1,5 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
+import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.Tile;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
 public class Child extends Creature {
@@ -98,4 +99,41 @@ public class Child extends Creature {
         return equipment;
     }
 
+
+    @Override
+    public TypeMove getTypeMove(Tile tile, Tile tileDestiny){
+        if(tileDestiny.getCreature() == null){
+            if(tileDestiny.getEquipment() == null) {
+                if(tileDestiny.getDoor() == null){
+                    //empty tile
+                    return TypeMove.MOVE;
+                }else if(tileDestiny.getDoor() != null){
+                    if (this.state == State.LIVE){
+                        //tile with door
+                        return TypeMove.SAFEHEAVEN;
+                    }
+                }
+            } else if(tileDestiny.getEquipment() != null && tileDestiny.getEquipment().canDefend()){
+                //tile with equipment
+                return TypeMove.WEAPON;
+            }
+        } else if (this.state != State.LIVE){
+            if (tileDestiny.getCreature().canBeTransformed()){
+                if (tileDestiny.getCreature().getEquipment() != null &&
+                        (tileDestiny.getCreature().getEquipment().canDefend() || tileDestiny.getCreature().getEquipment().canAttack())){
+                    //tile with creature DEAD and destination tile with creature LIVE with weapon to defend
+                    return TypeMove.DEFENDED;
+                }
+                else{
+                    //tile with creature DEAD and destination tile with creature LIVE with no defend weapon
+                    return TypeMove.INFECT;
+                }
+
+            }else {
+                //tile with creature DEAD and destination tile with creature DEAD or TRANSFORMED
+                return TypeMove.INVALID;
+            }
+        }
+        return TypeMove.INVALID;
+    }
 }

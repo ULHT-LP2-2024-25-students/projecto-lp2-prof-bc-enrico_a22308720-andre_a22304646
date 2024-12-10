@@ -51,54 +51,54 @@ abstract public class Creature {
         return id;
     }
 
-    public TypeMove getTypeMove(Tile tile, Tile tileDestiny){
-
-
-        if (tile.getCreature() != null){
-            if(tileDestiny.getCreature() == null){
-                if(tileDestiny.getEquipment() == null) {
-                    if(tileDestiny.getDoor() == null){
-                        //empty tile
-                        return TypeMove.MOVE;
-                    }else if(tileDestiny.getDoor() != null){
-                        if (!tile.getCreature().canTransform()){
-                            //tile with door
-                            return TypeMove.SAFEHEAVEN;
-                        }
-                    }
-                } else if(tileDestiny.getEquipment() != null){
-                    //tile with equipment
-                    return TypeMove.WEAPON;
-                }
-            } else if(tile.getCreature().canBeTransformed() ){
-                if(tileDestiny.getCreature().canTransform() && tile.getCreature().getEquipment() != null && tile.getCreature().getEquipment().canAttack()){
-                    //tile with creature LIVE with atack weapon and destination tile with creature DEAD or TRANSFORMED
-
-                    return TypeMove.KILL;
-                }else {
-                    return TypeMove.INVALID;
-                }
-            } else if (tile.getCreature().canTransform()){
-                if (tileDestiny.getCreature().canBeTransformed()){
-                    if ((tileDestiny.getCreature().getEquipment() != null || tileDestiny.getEquipment() != null) &&
-                            (tileDestiny.getCreature().getEquipment().canDefend() || tileDestiny.getCreature().getEquipment().canAttack())){
-                        //tile with creature DEAD and destination tile with creature LIVE with weapon to defend
-                        return TypeMove.DEFENDED;
-                    }
-                    else{
-                        //tile with creature DEAD and destination tile with creature LIVE with no defend weapon
-                        return TypeMove.INFECT;
-                    }
-
-                }else {
-                    //tile with creature DEAD and destination tile with creature DEAD or TRANSFORMED
-                    return TypeMove.INVALID;
-                }
-
-            }
-        }
-        return TypeMove.INVALID;
-    }
+    abstract public TypeMove getTypeMove(Tile tile, Tile tileDestiny);
+//
+//
+//        if (tile.getCreature() != null){
+//            if(tileDestiny.getCreature() == null){
+//                if(tileDestiny.getEquipment() == null) {
+//                    if(tileDestiny.getDoor() == null){
+//                        //empty tile
+//                        return TypeMove.MOVE;
+//                    }else if(tileDestiny.getDoor() != null){
+//                        if (!tile.getCreature().canTransform()){
+//                            //tile with door
+//                            return TypeMove.SAFEHEAVEN;
+//                        }
+//                    }
+//                } else if(tileDestiny.getEquipment() != null){
+//                    //tile with equipment
+//                    return TypeMove.WEAPON;
+//                }
+//            } else if(tile.getCreature().canBeTransformed() ){
+//                if(tileDestiny.getCreature().canTransform() && tile.getCreature().getEquipment() != null && tile.getCreature().getEquipment().canAttack()){
+//                    //tile with creature LIVE with atack weapon and destination tile with creature DEAD or TRANSFORMED
+//
+//                    return TypeMove.KILL;
+//                }else {
+//                    return TypeMove.INVALID;
+//                }
+//            } else if (tile.getCreature().canTransform()){
+//                if (tileDestiny.getCreature().canBeTransformed()){
+//                    if ((tileDestiny.getCreature().getEquipment() != null || tileDestiny.getEquipment() != null) &&
+//                            (tileDestiny.getCreature().getEquipment().canDefend() || tileDestiny.getCreature().getEquipment().canAttack())){
+//                        //tile with creature DEAD and destination tile with creature LIVE with weapon to defend
+//                        return TypeMove.DEFENDED;
+//                    }
+//                    else{
+//                        //tile with creature DEAD and destination tile with creature LIVE with no defend weapon
+//                        return TypeMove.INFECT;
+//                    }
+//
+//                }else {
+//                    //tile with creature DEAD and destination tile with creature DEAD or TRANSFORMED
+//                    return TypeMove.INVALID;
+//                }
+//
+//            }
+//        }
+//        return TypeMove.INVALID;
+//    }
 
     public void setState(State state) {
         this.state = state;

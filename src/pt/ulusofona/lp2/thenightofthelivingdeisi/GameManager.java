@@ -185,7 +185,7 @@ public class GameManager {
 
     public String[] getEquipmentInfo(int id) {
         Equipment equipment = board.getEquipmentById(id);
-        if (equipment != null &&  equipment.isHolded()){
+        if (equipment == null ||  equipment.isHolded()){
             return null;
         }
         return board.getEquipmentById(id).getEquipmentInfo();

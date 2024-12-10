@@ -141,14 +141,6 @@ public class Board {
                             boardTiles[yD][xD].setCreature(newZombie);
                             return true;
                         case KILL:
-                            if (!creature.canMoveAtNight() && creature.getEquipment() != null){
-                                tile.addEquipment(creature.getEquipment(),x0,y0);
-                                tile.removeCreature();
-                                tileD.removeCreature();
-                                tileD.addCreature(creature, xD, yD);
-                                tileD.getCreature().removeEquipment();
-                                return true;
-                            }
                             tile.removeCreature();
                             tileD.removeCreature();
                             tileD.addCreature(creature, xD, yD);

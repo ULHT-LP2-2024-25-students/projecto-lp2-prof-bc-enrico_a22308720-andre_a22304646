@@ -53,12 +53,14 @@ abstract public class Creature {
         if (tile.getCreature() != null){
             if(tileDestiny.getCreature() == null){
                 if(tileDestiny.getEquipment() == null) {
-                    if(tile.getDoor() == null){
+                    if(tileDestiny.getDoor() == null){
                         //empty tile
                         return TypeMove.MOVE;
                     }else if(tileDestiny.getDoor() != null){
-                        //tile with door
-                        return TypeMove.SAFEHEAVEN;
+                        if (!tile.getCreature().canTransform()){
+                            //tile with door
+                            return TypeMove.SAFEHEAVEN;
+                        }
                     }
                 } else if(tileDestiny.getEquipment() != null){
                     //tile with equipment

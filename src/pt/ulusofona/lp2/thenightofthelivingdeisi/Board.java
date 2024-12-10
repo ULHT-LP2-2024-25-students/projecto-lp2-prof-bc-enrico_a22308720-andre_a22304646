@@ -73,6 +73,11 @@ public class Board {
                 if (boardTiles[i][j].getEquipment() != null && boardTiles[i][j].getEquipment().getId() == id) {
                     return boardTiles[i][j].getEquipment();
                 }
+                if(boardTiles[i][j].getCreature() != null && boardTiles[i][j].getCreature().getEquipment() != null){
+                    if (boardTiles[i][j].getCreature().getEquipment().getId() == id){
+                        return boardTiles[i][j].getCreature().getEquipment();
+                    }
+                }
             }
         }
         return null;
@@ -91,8 +96,20 @@ public class Board {
                         case INVALID:
                             return false;
                         case MOVE:
+                            //Se for velho deixa a arma para trás
+                            if (!creature.canMoveAtNight() && creature.getEquipment() != null){
+                                tile.addEquipment(creature.getEquipment(),x0,y0);
+                                tile.removeCreature();
+                                tileD.addCreature(creature, xD, yD);
+                                tileD.getCreature().removeEquipment();
+                                return true;
+                            }
                             tile.removeCreature();
                             tileD.addCreature(creature, xD, yD);
+                            if (tileD.getCreature().getEquipment() != null){
+                                tileD.getCreature().getEquipment().setPositionInBoard(xD,yD);
+                            }
+
                             return true;
                         case WEAPON:
                             if (creature.canHoldEquipment(tileD.getEquipment())){
@@ -123,9 +140,21 @@ public class Board {
                             boardTiles[yD][xD].setCreature(newZombie);
                             return true;
                         case KILL:
+                            if (!creature.canMoveAtNight() && creature.getEquipment() != null){
+                                tile.addEquipment(creature.getEquipment(),x0,y0);
+                                tile.removeCreature();
+                                tileD.removeCreature();
+                                tileD.addCreature(creature, xD, yD);
+                                tileD.getCreature().removeEquipment();
+                                return true;
+                            }
                             tile.removeCreature();
                             tileD.removeCreature();
                             tileD.addCreature(creature, xD, yD);
+                            //  Alterar posicao da arma quando criatura se move com ela
+                            if (tileD.getCreature().getEquipment() != null){
+                                tileD.getCreature().getEquipment().setPositionInBoard(xD,yD);
+                            }
                             return true;
                         case SAFEHEAVEN:
                             tile.removeCreature();
@@ -152,7 +181,7 @@ public class Board {
 
     public ArrayList<Creature> getCreatures (){
         ArrayList<Creature> creatures = new ArrayList<>();
-        for (int y=0; y<getSizeY(); y++) {
+        for (int y=0; y < getSizeY(); y++) {
             for (int x = 0; x < getSizeX(); x++) {
                 if (boardTiles[y][x].getCreature() != null) {
                     creatures.add(boardTiles[y][x].getCreature());

@@ -10,6 +10,9 @@ public class Old extends Creature {
 
     @Override
     public void addEquipment(Equipment equipment) {
+        if (this.state == State.LIVE){
+            this.equipment = equipment;
+        }
 
     }
 

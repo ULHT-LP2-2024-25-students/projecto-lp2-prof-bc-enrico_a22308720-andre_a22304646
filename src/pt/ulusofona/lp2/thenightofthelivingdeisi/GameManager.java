@@ -141,8 +141,7 @@ public class GameManager {
     }
 
     public int getInitialTeamId() {
-        return initialTeam;
-    }
+        return initialTeam;    }
 
     public int getCurrentTeamId() {
         if (turns%2 ==0){
@@ -199,7 +198,6 @@ public class GameManager {
         int currentTeam = getCurrentTeamId();
         if (board.move(x0,y0,xD,yD,isDay(),currentTeam)){
             turns++;
-            lastTransformationOrDead++;
             return true;
         }
         return false;
@@ -209,6 +207,8 @@ public class GameManager {
         ArrayList<Creature> creaturesInGame = board.getCreatures();
         int livesInBoard=this.livesInBoard;
         int deadsInBoard=this.deadsInBoard;
+        this.livesInBoard=0;
+        this.deadsInBoard=0;
         for(Creature atualCreature : creaturesInGame){
             if (atualCreature.getState() == State.LIVE){
                 this.livesInBoard++;
@@ -216,11 +216,15 @@ public class GameManager {
                 this.deadsInBoard++;
             }
         }
+        if(this.turns==1){
+            return false;
+        }
         if (livesInBoard != this.livesInBoard || deadsInBoard != this.deadsInBoard){
-            this.lastTransformationOrDead=0;
+            this.lastTransformationOrDead=this.turns;
         }
 
-        return this.livesInBoard==0 || this.deadsInBoard ==0 || lastTransformationOrDead>7;
+
+        return this.livesInBoard==0 || this.deadsInBoard ==0 || this.turns - this.lastTransformationOrDead==8;
     }
 
     public ArrayList<String> getSurvivors() {

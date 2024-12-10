@@ -7,8 +7,7 @@
 //import java.io.FileNotFoundException;
 //import java.util.ArrayList;
 //
-//import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.*;
 //
 //public class TestGameManager {
 //
@@ -108,4 +107,30 @@
 //        assertTrue(gameManager.gameIsOver());
 //
 //    }
+//
+//    @Test
+//    public void testEndGame2(){
+//        GameManager gameManager = new GameManager();
+//        try{
+//            gameManager.loadGame(new File("test-files/test.txt"));
+//        }catch (FileNotFoundException e){
+//            System.out.println("Ficheiro não existe");
+//        } catch (InvalidFileException e) {
+//            System.out.println("Ficheiro inválido");
+//        }
+//        gameManager.move(3,3,3,2);
+//        gameManager.move(4,3,4,2);
+//        gameManager.move(3,2,3,3);
+//        gameManager.move(4,2,4,3);
+//        gameManager.move(3,3,3,2);
+//        gameManager.move(4,3,4,2);
+//        gameManager.move(3,2,3,3);
+//        gameManager.move(4,2,4,3);
+//        assertTrue(gameManager.gameIsOver());
+//
+//
+//
+//
+//    }
+//
 //}

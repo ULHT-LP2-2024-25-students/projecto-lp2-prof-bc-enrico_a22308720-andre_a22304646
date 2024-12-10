@@ -184,7 +184,7 @@ public class GameManager {
 
     public String[] getEquipmentInfo(int id) {
         Equipment equipment = board.getEquipmentById(id);
-        if (equipment.isHolded()){
+        if (equipment != null &&  equipment.isHolded()){
             return null;
         }
         return board.getEquipmentById(id).getEquipmentInfo();
@@ -192,7 +192,7 @@ public class GameManager {
 
     public String getEquipmentInfoAsString(int id) {
         Equipment equipment = board.getEquipmentById(id);
-        if (equipment.isHolded()){
+        if (equipment != null && equipment.isHolded()){
             return null;
         }
         return board.getEquipmentById(id).getEquipmentInfoAsString();

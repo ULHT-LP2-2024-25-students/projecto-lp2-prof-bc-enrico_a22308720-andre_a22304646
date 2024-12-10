@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,27 +62,27 @@ public class GameManager {
                 Creature creature;
                 switch (creatureType) {
                     case 0:{
-                          creature = new Child(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE);
+                          creature = new Child(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE, creatureType);
                           board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                           break;
                     }
                     case 1:{
-                         creature = new Adult(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE);
+                         creature = new Adult(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE, creatureType);
                          board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                          break;
                     }
                     case 2:{
-                          creature = new Old(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE);
+                          creature = new Old(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE, creatureType);
                           board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                           break;
                     }
                     case 3:{
-                         creature = new Dog(positionInBoard,creatureId,teamId,creatureName, State.LIVE);
+                         creature = new Dog(positionInBoard,creatureId,teamId,creatureName, State.LIVE, creatureType);
                          board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                          break;
                     }
                     case 4:{
-                         creature = new Vampire(positionInBoard,creatureId,teamId,creatureName,State.DEAD);
+                         creature = new Vampire(positionInBoard,creatureId,teamId,creatureName,State.DEAD, creatureType);
                          board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
                          break;
                     }
@@ -269,11 +270,39 @@ public class GameManager {
     }
 
     public List<Integer> getIdsInSafeHaven() {
-        return null;
+        return board.getIdsInSafeHaven();
     }
 
     public void saveGame(File file) throws IOException {
+        ArrayList<Equipment> equipments = board.getEquipments();
+        ArrayList<Creature> creatures = board.getCreatures();
+        ArrayList<Door> doors = board.getDoors();
 
+        try (PrintWriter writer = new PrintWriter(file)) {
+            // Save board size
+            writer.println(board.getSizeY() + " " + board.getSizeX());
+
+            // Save initial team
+            writer.println(initialTeam);
+
+            // Save creatures
+            writer.println(creatures.size());
+            for (Creature creature : creatures) {
+                writer.println(creature.getSave());
+            }
+
+            // Save equipments
+            writer.println(equipments.size());
+            for (Equipment equipment : equipments) {
+                writer.println(equipment.getSave());
+            }
+
+            // Save doors
+            writer.println(doors.size());
+            for (Door door : doors) {
+                writer.println(door.getPositionInBoard()[0] + " : " + door.getPositionInBoard()[1]);
+            }
+        }
     }
 
 

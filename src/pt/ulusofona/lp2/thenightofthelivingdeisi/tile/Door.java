@@ -15,6 +15,7 @@ public class Door {
         return "SH";
     }
 
-
-
+    public int[] getPositionInBoard() {
+        return positionInBoard;
+    }
 }

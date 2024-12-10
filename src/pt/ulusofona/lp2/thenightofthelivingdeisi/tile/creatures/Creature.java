@@ -12,8 +12,9 @@ abstract public class Creature {
     protected int points;
     protected State state;
     protected Equipment equipment;
+    protected int type;
 
-    public Creature(int[] positionInBoard, int id, int team, String name, State state) {
+    public Creature(int[] positionInBoard, int id, int team, String name, State state, int type) {
         this.positionInBoard = positionInBoard;
         this.id = id;
         this.team = team;
@@ -21,6 +22,7 @@ abstract public class Creature {
         this.points = 0;
         this.state = state;
         this.equipment=null;
+        this.type = type;
     }
 
     public int getPoints() {
@@ -116,11 +118,15 @@ abstract public class Creature {
     }
 
     public void removeEquipment (){
-        this.equipment.drop();
-        this.equipment =  null;
-
+        if (this.equipment != null){
+            this.equipment.drop();
+            this.equipment = null;
+        }
     }
 
+    public String getSave(){
+        return id + " : " + team + " : " + type + " : " + name + " : " + positionInBoard[0] + " : " + positionInBoard[1];
+    }
 
     // Abstract Methods
     abstract public void addEquipment(Equipment equipment);
@@ -135,5 +141,4 @@ abstract public class Creature {
     abstract public boolean hasEquipment(int equipmentTypeId);
     abstract public boolean canMoveAtNight();
     abstract public boolean canMoveAtDay();
-
 }

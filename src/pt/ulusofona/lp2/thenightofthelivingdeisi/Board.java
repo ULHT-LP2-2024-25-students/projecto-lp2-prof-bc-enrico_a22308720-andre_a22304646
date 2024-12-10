@@ -8,6 +8,7 @@ import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.Tile;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class Board {
     private Tile[][] boardTiles;
@@ -192,5 +193,38 @@ public class Board {
         return creatures;
     }
 
+    public List<Integer> getIdsInSafeHaven(){
+        List<Integer> ids = new ArrayList<>();
+        for (Creature creature : safeHeaven){
+            ids.add(creature.getId());
+        }
+        return ids;
+    }
 
+
+    public ArrayList<Equipment> getEquipments(){
+        ArrayList<Equipment> equipments = new ArrayList<>();
+        for (int y=0; y < getSizeY(); y++) {
+            for (int x = 0; x < getSizeX(); x++) {
+                if (boardTiles[y][x].getEquipment() != null) {
+                    equipments.add(boardTiles[y][x].getEquipment());
+                }
+            }
+        }
+        equipments.sort(Comparator.comparingInt(Equipment::getId));
+        return equipments;
+    }
+
+
+    public ArrayList<Door> getDoors(){
+        ArrayList<Door> doors = new ArrayList<>();
+        for (int y=0; y < getSizeY(); y++) {
+            for (int x = 0; x < getSizeX(); x++) {
+                if (boardTiles[y][x].getDoor() != null) {
+                    doors.add(boardTiles[y][x].getDoor());
+                }
+            }
+        }
+        return doors;
+    }
 }

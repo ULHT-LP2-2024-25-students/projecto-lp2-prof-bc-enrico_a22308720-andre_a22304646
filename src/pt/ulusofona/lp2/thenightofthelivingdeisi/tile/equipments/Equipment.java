@@ -65,20 +65,11 @@ abstract public class Equipment {
 
     public void defend(){}
 
+    public String getSave(){
+        return id + " : " + type + " : " + positionInBoard[0] + " : " + positionInBoard[1];
+    }
+
     abstract public boolean canAttack();
     abstract public boolean canDefend();
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

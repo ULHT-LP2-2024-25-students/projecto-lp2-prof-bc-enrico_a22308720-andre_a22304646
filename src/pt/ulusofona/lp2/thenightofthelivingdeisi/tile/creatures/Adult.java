@@ -1,13 +1,11 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
-import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.Tile;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
 public class Adult extends Creature {
 
 
-    public Adult(int[] positionInBoard, int id, int team, String name, State state) {
-        super(positionInBoard, id, team, name, state);
-
+    public Adult(int[] positionInBoard, int id, int team, String name, State state, int type) {
+        super(positionInBoard, id, team, name, state, type);
     }
 
     @Override

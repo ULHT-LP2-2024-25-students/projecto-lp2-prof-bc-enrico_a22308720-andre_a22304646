@@ -6,8 +6,8 @@ import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 public class Dog extends Creature {
 
 
-    public Dog(int[] positionInBoard, int id, int team, String name, State state) {
-        super(positionInBoard, id, team, name, state);
+    public Dog(int[] positionInBoard, int id, int team, String name, State state, int type) {
+        super(positionInBoard, id, team, name, state, type);
     }
 
     @Override

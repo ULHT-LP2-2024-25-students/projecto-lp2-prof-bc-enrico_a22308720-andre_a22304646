@@ -193,7 +193,10 @@ public class GameManager {
 
     public String getEquipmentInfoAsString(int id) {
         Equipment equipment = board.getEquipmentById(id);
-        if (equipment != null && equipment.isHolded()){
+        if (equipment==null){
+            return null;
+        }
+        if (equipment.isHolded()){
             return null;
         }
         return board.getEquipmentById(id).getEquipmentInfoAsString();

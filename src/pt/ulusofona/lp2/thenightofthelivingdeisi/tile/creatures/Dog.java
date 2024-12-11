@@ -31,6 +31,9 @@ public class Dog extends Creature {
 
     @Override
     public String getCreatureInfoAsString() {
+        if (positionInBoard[0] == -1) {
+            return id + " | Cão | " + name + " @ Safe Haven";
+        }
         return id + " | Cão | " + name + " @ (" + positionInBoard[0] + ", " + positionInBoard[1]+")";
     }
 

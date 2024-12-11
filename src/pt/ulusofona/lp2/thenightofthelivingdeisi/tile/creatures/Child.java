@@ -35,7 +35,12 @@ public class Child extends Creature {
     public String getCreatureInfoAsString() {
         String childType= this.state == State.LIVE ? "Humano" : this.state == State.DEAD ? "Zombie" : "Zombie (Transformado)";
         String childPoints = this.state == State.LIVE ? "+" : "-";
-        String result= id + " | Criança | " + childType + " | " + name + " | " + childPoints + points + " @ (" + positionInBoard[0] + ", " + positionInBoard[1]+")";
+        String result;
+        if(positionInBoard[0] == -1){
+            result = id + " | Criança | " + childType + " | " + name + " | " + childPoints + points + " @ Safe Haven";
+        }else {
+            result = id + " | Criança | " + childType + " | " + name + " | " + childPoints + points + " @ (" + positionInBoard[0] + ", " + positionInBoard[1]+")";
+        }
         if(equipment == null){
             return result;
         }else{   // se tiver equipamento concatenar strings

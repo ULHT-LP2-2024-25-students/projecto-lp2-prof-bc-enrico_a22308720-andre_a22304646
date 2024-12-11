@@ -35,7 +35,12 @@ public class Old extends Creature {
     public String getCreatureInfoAsString() {
         String oldType= this.state == State.LIVE ? "Humano" : this.state == State.DEAD ? "Zombie" : "Zombie (Transformado)";
         String oldPoints = this.state == State.LIVE ? "+" : "-";
-        String result= id + " | Idoso | " + oldType + " | " + name + " | " + oldPoints + points + " @ (" + positionInBoard[0] + ", " + positionInBoard[1]+")";
+        String result;
+        if (positionInBoard[0] == -1) {
+            result = id + " | Idoso | " + oldType + " | " + name + " | " + oldPoints + points + " @ Safe Haven";
+        } else {
+            result= id + " | Idoso | " + oldType + " | " + name + " | " + oldPoints + points + " @ (" + positionInBoard[0] + ", " + positionInBoard[1]+")";
+        }
         if(equipment == null){
             return result;
         }else{   // se tiver equipamento concatenar strings

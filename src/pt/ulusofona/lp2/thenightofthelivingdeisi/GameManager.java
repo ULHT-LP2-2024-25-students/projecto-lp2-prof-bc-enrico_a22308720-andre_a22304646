@@ -30,106 +30,103 @@ public class GameManager {
 
     }
 
-    public void loadGame(File file) throws InvalidFileException, FileNotFoundException{
-        ArrayList<String> info = new ArrayList<>();
-        Scanner scanner = new Scanner(file);
-        while (scanner.hasNextLine()) {
-            info.add(scanner.nextLine());}
-        int creatures = 0;
-        int equipments = 0;
-        int doors =0;
-        for (int index = 0; index < info.size(); index++) {
-            if (index == 0) {
-                String[] size = info.get(index).split(" ");
-                this.board = new Board(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
-            } else if (index == 1) {
-                this.initialTeam = Integer.parseInt(info.get(index));
-            } else if (index == 2) {
-                creatures = Integer.parseInt(info.get(index));
-            } else if (index > 2 && index < 3 + creatures) {
-                String[] infoCreature = info.get(index).split(" : ");
-                if(infoCreature.length != 6){return;}                         //se nao passarem todas as informacoes de alguma criatura
-                int creatureId = Integer.parseInt(infoCreature[0]);
-                int teamId = Integer.parseInt(infoCreature[1]);
-                int creatureType = Integer.parseInt(infoCreature[2]);
-                String creatureName = infoCreature[3];
-                int[] positionInBoard = new int[2];
-                positionInBoard[0] = Integer.parseInt(infoCreature[4]);
-                positionInBoard[1] = Integer.parseInt(infoCreature[5]);
-                Creature creature;
-                switch (creatureType) {
-                    case 0:{
-                          creature = new Child(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE, creatureType);
-                          board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
-                          break;
-                    }
-                    case 1:{
-                         creature = new Adult(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE, creatureType);
-                         board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
-                         break;
-                    }
-                    case 2:{
-                          creature = new Old(positionInBoard,creatureId,teamId,creatureName,teamId == 10 ? State.DEAD : State.LIVE, creatureType);
-                          board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
-                          break;
-                    }
-                    case 3:{
-                         creature = new Dog(positionInBoard,creatureId,teamId,creatureName, State.LIVE, creatureType);
-                         board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
-                         break;
-                    }
-                    case 4:{
-                         creature = new Vampire(positionInBoard,creatureId,teamId,creatureName,State.DEAD, creatureType);
-                         board.addCreature(creature,positionInBoard[0],positionInBoard[1]);
-                         break;
-                    }
-                }
-            } else if (index == 3 + creatures) {
-                equipments = Integer.parseInt(info.get(index));
-            } else if (index > 3 + creatures && index < 4 + creatures + equipments) {
-                String[] infoEquipment = info.get(index).split(" : ");
-                if(infoEquipment.length != 4){return;}                        // se nao passarem todas as informacaoes de algum equipamento
-                int equipmentId = Integer.parseInt(infoEquipment[0]);
-                int equipmentType = Integer.parseInt(infoEquipment[1]);
-                int[] positionInBoard = new int[2];
-                positionInBoard[0] = Integer.parseInt(infoEquipment[2]);
-                positionInBoard[1] = Integer.parseInt(infoEquipment[3]);
-                Equipment equipment;
-                switch (equipmentType){
-                    case 0:{
-                        equipment = new Shield(equipmentType,positionInBoard,equipmentId);
-                        board.addEquipment(equipment,positionInBoard[0],positionInBoard[1]);
-                        break;
-                    }
-                    case 1:{
-                        equipment = new Sword(equipmentType,positionInBoard,equipmentId);
-                        board.addEquipment(equipment,positionInBoard[0],positionInBoard[1]);
-                        break;
-                    }
-                    case 2:{
-                        equipment = new Pistol(equipmentType,positionInBoard,equipmentId);
-                        board.addEquipment(equipment,positionInBoard[0],positionInBoard[1]);
-                        break;
-                    }
-                    case 3:{
-                        equipment = new Leach(equipmentType,positionInBoard,equipmentId);
-                        board.addEquipment(equipment,positionInBoard[0],positionInBoard[1]);
-                        break;
-                    }
-                }
-            }else if(index == 4 + creatures + equipments){
-                doors = Integer.parseInt(info.get(index));
-            } else if (index > 4 + creatures + equipments && index < 5 + creatures + equipments + doors) {
-                String[] infoDoor = info.get(index).split(" : ");
-                if(infoDoor.length != 2){return;}                        // se nao passarem todas as informacaoes de algum equipamento
-                int[] positionInBoard = new int[2];
-                positionInBoard[0] = Integer.parseInt(infoDoor[0]);
-                positionInBoard[1] = Integer.parseInt(infoDoor[1]);
-                Door door = new Door(positionInBoard);
-                board.addDoor(door,positionInBoard[0],positionInBoard[1]);
+public void loadGame(File file) throws InvalidFileException, FileNotFoundException {
+    ArrayList<String> info = new ArrayList<>();
+    Scanner scanner = new Scanner(file);
+    while (scanner.hasNextLine()) {info.add(scanner.nextLine());}
+    int creatures = 0, equipments = 0, doors = 0;
+    for (int index = 0; index < info.size(); index++) {
+        if (index == 0) {
+            String[] size = info.get(index).split(" ");
+            if (size.length != 2) {
+                throw new InvalidFileException(index + 1);
             }
+            this.board = new Board(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
+        } else if (index == 1) {
+            this.initialTeam = Integer.parseInt(info.get(index));
+        } else if (index == 2) {
+            creatures = Integer.parseInt(info.get(index));
+        } else if (index > 2 && index < 3 + creatures) {
+            String[] infoCreature = info.get(index).split(" : ");
+            if (infoCreature.length != 6) {throw new InvalidFileException(index + 1);}
+            int creatureId = Integer.parseInt(infoCreature[0]);
+            int teamId = Integer.parseInt(infoCreature[1]);
+            int creatureType = Integer.parseInt(infoCreature[2]);
+            String creatureName = infoCreature[3];
+            int[] positionInBoard = new int[2];
+            positionInBoard[0] = Integer.parseInt(infoCreature[4]);
+            positionInBoard[1] = Integer.parseInt(infoCreature[5]);
+            Creature creature;
+            switch (creatureType) {
+                case 0: {
+                    creature = new Child(positionInBoard, creatureId, teamId, creatureName, teamId == 10 ? State.DEAD : State.LIVE, creatureType);
+                    board.addCreature(creature, positionInBoard[0], positionInBoard[1]);
+                    break;
+                } case 1: {
+                    creature = new Adult(positionInBoard, creatureId, teamId, creatureName, teamId == 10 ? State.DEAD : State.LIVE, creatureType);
+                    board.addCreature(creature, positionInBoard[0], positionInBoard[1]);
+                    break;
+                } case 2: {
+                    creature = new Old(positionInBoard, creatureId, teamId, creatureName, teamId == 10 ? State.DEAD : State.LIVE, creatureType);
+                    board.addCreature(creature, positionInBoard[0], positionInBoard[1]);
+                    break;
+                } case 3: {
+                    creature = new Dog(positionInBoard, creatureId, teamId, creatureName, State.LIVE, creatureType);
+                    board.addCreature(creature, positionInBoard[0], positionInBoard[1]);
+                    break;
+                } case 4: {
+                    creature = new Vampire(positionInBoard, creatureId, teamId, creatureName, State.DEAD, creatureType);
+                    board.addCreature(creature, positionInBoard[0], positionInBoard[1]);
+                    break;
+                }
+            }
+        } else if (index == 3 + creatures) {
+            equipments = Integer.parseInt(info.get(index));
+        } else if (index > 3 + creatures && index < 4 + creatures + equipments) {
+            String[] infoEquipment = info.get(index).split(" : ");
+            if (infoEquipment.length != 4) {
+                throw new InvalidFileException(index + 1);
+            }
+            int equipmentId = Integer.parseInt(infoEquipment[0]);
+            int equipmentType = Integer.parseInt(infoEquipment[1]);
+            int[] positionInBoard = new int[2];
+            positionInBoard[0] = Integer.parseInt(infoEquipment[2]);
+            positionInBoard[1] = Integer.parseInt(infoEquipment[3]);
+            Equipment equipment;
+            switch (equipmentType) {
+                case 0: {
+                    equipment = new Shield(equipmentType, positionInBoard, equipmentId);
+                    board.addEquipment(equipment, positionInBoard[0], positionInBoard[1]);
+                    break;
+                } case 1: {
+                    equipment = new Sword(equipmentType, positionInBoard, equipmentId);
+                    board.addEquipment(equipment, positionInBoard[0], positionInBoard[1]);
+                    break;
+                } case 2: {
+                    equipment = new Pistol(equipmentType, positionInBoard, equipmentId);
+                    board.addEquipment(equipment, positionInBoard[0], positionInBoard[1]);
+                    break;
+                } case 3: {
+                    equipment = new Leach(equipmentType, positionInBoard, equipmentId);
+                    board.addEquipment(equipment, positionInBoard[0], positionInBoard[1]);
+                    break;
+                }
+            }
+        } else if (index == 4 + creatures + equipments) {
+            doors = Integer.parseInt(info.get(index));
+        } else if (index > 4 + creatures + equipments && index < 5 + creatures + equipments + doors) {
+            String[] infoDoor = info.get(index).split(" : ");
+            if (infoDoor.length != 2) {
+                throw new InvalidFileException(index + 1);
+            }
+            int[] positionInBoard = new int[2];
+            positionInBoard[0] = Integer.parseInt(infoDoor[0]);
+            positionInBoard[1] = Integer.parseInt(infoDoor[1]);
+            Door door = new Door(positionInBoard);
+            board.addDoor(door, positionInBoard[0], positionInBoard[1]);
         }
     }
+}
 
     public int[] getWorldSize() {
         int[] size = new int[2];
@@ -173,10 +170,16 @@ public class GameManager {
     }
 
     public String[] getCreatureInfo(int id) {
+        if (board.getCreatureById(id) == null){
+            return null;
+        }
         return board.getCreatureById(id).getCreatureInfo();
     }
 
     public String getCreatureInfoAsString(int id) {
+        if (board.getCreatureById(id) == null){
+            return null;
+        }
         return board.getCreatureById(id).getCreatureInfoAsString();
     }
 

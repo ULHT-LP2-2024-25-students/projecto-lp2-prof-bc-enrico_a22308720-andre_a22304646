@@ -156,6 +156,7 @@ public class Board {
                             return true;
                         case SAFEHEAVEN:
                             tile.removeCreature();
+                            creature.setPositionNull();
                             safeHeaven.add(creature);
                             return true;
                         case DEFENDED:
@@ -165,8 +166,6 @@ public class Board {
                             if (tileD.getCreature().getEquipment()!= null){
                                 tileD.getCreature().getEquipment().defend();
                             }
-
-
                             return true;
                     }
                 }else{

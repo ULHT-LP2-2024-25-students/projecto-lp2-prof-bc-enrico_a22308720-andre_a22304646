@@ -19,8 +19,8 @@ public class Vampire extends Creature {
         creatureInfo[1] = "Vampiro";
         creatureInfo[2] = "Zombie";
         creatureInfo[3] = name;
-        creatureInfo[4] = "" + positionInBoard[0];
-        creatureInfo[5] = "" + positionInBoard[1];
+        creatureInfo[4] = positionInBoard[0] == -1 ? null : "" + positionInBoard[0];
+        creatureInfo[5] = positionInBoard[1] == -1 ? null : "" + positionInBoard[1];
         creatureInfo[6] = null;
 
         return creatureInfo;

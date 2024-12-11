@@ -24,8 +24,8 @@ public class Old extends Creature {
         creatureInfo[1] = "Idoso";
         creatureInfo[2] = this.state == State.LIVE ? "Humano" : this.state == State.DEAD ? "Zombie" : "Zombie (Transformado)";
         creatureInfo[3] = name;
-        creatureInfo[4] = "" + positionInBoard[0];
-        creatureInfo[5] = "" + positionInBoard[1];
+        creatureInfo[4] = positionInBoard[0] == -1 ? null : "" + positionInBoard[0];
+        creatureInfo[5] = positionInBoard[1] == -1 ? null : "" + positionInBoard[1];
         creatureInfo[6] = null;
 
         return creatureInfo;

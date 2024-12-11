@@ -85,9 +85,10 @@ abstract public class Creature {
         return id + " : " + team + " : " + type + " : " + name + " : " + positionInBoard[0] + " : " + positionInBoard[1];
     }
 
-    public void setPositionNull(){
-        this.positionInBoard = null;
-    }
+public void setPositionNull(){
+    this.positionInBoard[0] = -1;
+    this.positionInBoard[1] = -1;
+}
 
     // Abstract Methods
     abstract public void addEquipment(Equipment equipment);

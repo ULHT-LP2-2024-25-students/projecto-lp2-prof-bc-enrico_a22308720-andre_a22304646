@@ -65,6 +65,11 @@ public class Board {
                 }
             }
         }
+        for (Creature creature : safeHeaven){
+            if (creature.getId() == id){
+                return creature;
+            }
+        }
         return null;
     }
 
@@ -193,6 +198,9 @@ public class Board {
         return ids;
     }
 
+    public ArrayList<Creature> getSafeHeaven() {
+        return safeHeaven;
+    }
 
     public ArrayList<Equipment> getEquipments(){
         ArrayList<Equipment> equipments = new ArrayList<>();

@@ -105,7 +105,7 @@ public class Old extends Creature {
                         return TypeMove.SAFEHEAVEN;
                     }
                 }
-            } else if(tileDestiny.getEquipment() != null && tileDestiny.getEquipment().canDefend()){
+            } else if(tileDestiny.getEquipment() != null){
                 //tile with equipment
                 return TypeMove.WEAPON;
             }

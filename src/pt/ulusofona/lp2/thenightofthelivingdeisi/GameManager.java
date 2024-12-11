@@ -8,10 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameManager {
     private int[] worldSize;
@@ -242,6 +239,10 @@ public class GameManager {
     public ArrayList<String> getSurvivors() {
         ArrayList<String> result = new ArrayList<String>();
         ArrayList<Creature> creatures = board.getCreatures();
+        ArrayList<Creature> creaturesSafeHaven = board.getSafeHeaven();
+        creatures.addAll(creaturesSafeHaven);
+        creatures.sort(Comparator.comparingInt(Creature::getId));
+
         result.add("Nr. de turnos terminados:");
         result.add(this.turns + "");
         result.add("");
@@ -307,8 +308,6 @@ public class GameManager {
             }
         }
     }
-
-
 
 
 }

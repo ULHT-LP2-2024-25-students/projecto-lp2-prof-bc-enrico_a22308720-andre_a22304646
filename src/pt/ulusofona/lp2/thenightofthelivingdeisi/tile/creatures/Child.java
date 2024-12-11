@@ -114,8 +114,10 @@ public class Child extends Creature {
                     }
                 }
             } else if(tileDestiny.getEquipment() != null && tileDestiny.getEquipment().canDefend()){
-                //tile with equipment
                 return TypeMove.WEAPON;
+
+            }else if(tileDestiny.getEquipment() != null && tileDestiny.getEquipment().canAttack()){
+                return state == State.LIVE ? TypeMove.INVALID : TypeMove.WEAPON;
             }
         } else if (this.state != State.LIVE){
             if (tileDestiny.getCreature().canBeTransformed()){

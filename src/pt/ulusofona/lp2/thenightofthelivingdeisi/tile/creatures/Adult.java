@@ -129,11 +129,17 @@ public class Adult extends Creature {
                 return TypeMove.WEAPON;
             }
         } else if(this.state == State.LIVE ){
-            if(tileDestiny.getCreature().canTransform() && this.equipment != null && this.equipment.canAttack()){
-                //tile with creature LIVE with atack weapon and destination tile with creature DEAD or TRANSFORMED
-                return TypeMove.KILL;
-            }else {
-                return TypeMove.INVALID;
+            if(tileDestiny.getCreature().canTransform() && this.equipment != null){
+                if(this.equipment.canAttack()){
+                    //tile with creature LIVE with atack weapon and destination tile with creature DEAD or TRANSFORMED
+                    return TypeMove.KILL;
+                }else if(this.equipment.canDefend()){
+                    //tile with creature LIVE with DEFEND weapon and destination tile with creature DEAD or TRANSFORMED
+                    return TypeMove.PASS;
+                }else{
+                    return TypeMove.INVALID;
+                }
+
             }
         } else if (this.state != State.LIVE){
             if (tileDestiny.getCreature().canBeTransformed()){

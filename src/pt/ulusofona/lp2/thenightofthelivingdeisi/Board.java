@@ -167,6 +167,9 @@ public class Board {
                                 tileD.getCreature().getEquipment().defend();
                             }
                             return true;
+                        case PASS:
+                            tile.getCreature().getEquipment().defend();
+                            return true;
                     }
                 }else{
                     return false;

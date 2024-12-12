@@ -18,8 +18,8 @@ public class GameManager {
     private Board board;
     private int turns;
     private int lastTransformationOrDead;
-    private int livesInBoard;
-    private int deadsInBoard;
+    private ArrayList<Creature> livesInBoard;
+    private ArrayList<Creature> deadsInBoard;
 
     private static final int CREATURE_COMPONENTS_NR = 6;
     private static final int EQUIPMENT_COMPONENTS_NR = 4;
@@ -27,8 +27,8 @@ public class GameManager {
     public GameManager() {
         this.turns=0;
         this.lastTransformationOrDead=0;
-        this.livesInBoard=0;
-        this.deadsInBoard=0;
+        this.livesInBoard= new ArrayList<>();
+        this.deadsInBoard= new ArrayList<>();
 
     }
 
@@ -189,26 +189,47 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
 
     public boolean gameIsOver() {
         ArrayList<Creature> creaturesInGame = board.getCreatures();
-        int livesInBoard=this.livesInBoard;
-        int deadsInBoard=this.deadsInBoard;
-        this.livesInBoard=0;
-        this.deadsInBoard=0;
+        int livesInBoard=this.livesInBoard.size();
+        int deadsInBoard=this.deadsInBoard.size();
+        this.livesInBoard= new ArrayList<>();
+        this.deadsInBoard= new ArrayList<>();
         for(Creature atualCreature : creaturesInGame){
             if (atualCreature.getState() == State.LIVE){
-                this.livesInBoard++;
+                this.livesInBoard.add(atualCreature);
             }else{
-                this.deadsInBoard++;
+                this.deadsInBoard.add(atualCreature);
             }
         }
         if(this.turns==1){
             return false;
         }
-        if (livesInBoard != this.livesInBoard || deadsInBoard != this.deadsInBoard){
+        if (livesInBoard != this.livesInBoard.size() || deadsInBoard != this.deadsInBoard.size()){
             this.lastTransformationOrDead=this.turns;
         }
 
+        ArrayList<Creature> creaturesInvalid = new ArrayList<>();
 
-        return this.livesInBoard==0 || this.deadsInBoard ==0 || this.turns - this.lastTransformationOrDead==8;
+        if (!isDay()){
+            for (Creature creature : this.livesInBoard){
+                if (!creature.canMoveAtNight()){
+                    creaturesInvalid.add(creature);
+                }
+            }
+            if (creaturesInvalid.size() == this.livesInBoard.size()){
+                return true;
+            }
+        } else {
+            for (Creature creature : this.deadsInBoard){
+                if (!creature.canMoveAtDay()){
+                    creaturesInvalid.add(creature);
+                }
+            }
+            if (creaturesInvalid.size() == this.deadsInBoard.size()){
+                return true;
+            }
+        }
+
+        return this.livesInBoard.isEmpty() || this.deadsInBoard.isEmpty() || this.turns - this.lastTransformationOrDead==8;
     }
 
     public ArrayList<String> getSurvivors() {

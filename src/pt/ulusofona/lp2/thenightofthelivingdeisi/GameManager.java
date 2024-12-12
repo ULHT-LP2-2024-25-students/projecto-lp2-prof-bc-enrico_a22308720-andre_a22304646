@@ -21,6 +21,8 @@ public class GameManager {
     private int livesInBoard;
     private int deadsInBoard;
 
+    private static final int CREATURE_COMPONENTS_NR = 6;
+    private static final int EQUIPMENT_COMPONENTS_NR = 4;
 
     public GameManager() {
         this.turns=0;
@@ -48,7 +50,8 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
             creatures = Integer.parseInt(info.get(index));
         } else if (index > 2 && index < 3 + creatures) {
             String[] infoCreature = info.get(index).split(" : ");
-            if (infoCreature.length != 6) {throw new InvalidFileException(index + 1);}
+            if (infoCreature.length != CREATURE_COMPONENTS_NR) {throw new InvalidFileException(index + 1);}
+
             int creatureId = Integer.parseInt(infoCreature[0]);
             int teamId = Integer.parseInt(infoCreature[1]);
             int creatureType = Integer.parseInt(infoCreature[2]);
@@ -56,35 +59,18 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
             int[] positionInBoard = new int[2];
             positionInBoard[0] = Integer.parseInt(infoCreature[4]);
             positionInBoard[1] = Integer.parseInt(infoCreature[5]);
-            Creature creature;
-            switch (creatureType) {
-                case 0: {
-                    creature = new Child(positionInBoard, creatureId, teamId, creatureName, teamId == 10 ? State.DEAD : State.LIVE, creatureType);
-                    board.addCreature(creature, positionInBoard[0], positionInBoard[1]);
-                    break;
-                } case 1: {
-                    creature = new Adult(positionInBoard, creatureId, teamId, creatureName, teamId == 10 ? State.DEAD : State.LIVE, creatureType);
-                    board.addCreature(creature, positionInBoard[0], positionInBoard[1]);
-                    break;
-                } case 2: {
-                    creature = new Old(positionInBoard, creatureId, teamId, creatureName, teamId == 10 ? State.DEAD : State.LIVE, creatureType);
-                    board.addCreature(creature, positionInBoard[0], positionInBoard[1]);
-                    break;
-                } case 3: {
-                    creature = new Dog(positionInBoard, creatureId, teamId, creatureName, State.LIVE, creatureType);
-                    board.addCreature(creature, positionInBoard[0], positionInBoard[1]);
-                    break;
-                } case 4: {
-                    creature = new Vampire(positionInBoard, creatureId, teamId, creatureName, State.DEAD, creatureType);
-                    board.addCreature(creature, positionInBoard[0], positionInBoard[1]);
-                    break;
-                }
+
+            Creature creature = Creature.createCreature(creatureType, positionInBoard, creatureId, teamId, creatureName);
+            if(creature == null){
+                throw new InvalidFileException(index + 1);
             }
+
+            board.addCreature(creature, positionInBoard[0], positionInBoard[1]);
         } else if (index == 3 + creatures) {
             equipments = Integer.parseInt(info.get(index));
         } else if (index > 3 + creatures && index < 4 + creatures + equipments) {
             String[] infoEquipment = info.get(index).split(" : ");
-            if (infoEquipment.length != 4) {
+            if (infoEquipment.length != EQUIPMENT_COMPONENTS_NR) {
                 throw new InvalidFileException(index + 1);
             }
             int equipmentId = Integer.parseInt(infoEquipment[0]);
@@ -92,26 +78,12 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
             int[] positionInBoard = new int[2];
             positionInBoard[0] = Integer.parseInt(infoEquipment[2]);
             positionInBoard[1] = Integer.parseInt(infoEquipment[3]);
-            Equipment equipment;
-            switch (equipmentType) {
-                case 0: {
-                    equipment = new Shield(equipmentType, positionInBoard, equipmentId);
-                    board.addEquipment(equipment, positionInBoard[0], positionInBoard[1]);
-                    break;
-                } case 1: {
-                    equipment = new Sword(equipmentType, positionInBoard, equipmentId);
-                    board.addEquipment(equipment, positionInBoard[0], positionInBoard[1]);
-                    break;
-                } case 2: {
-                    equipment = new Pistol(equipmentType, positionInBoard, equipmentId);
-                    board.addEquipment(equipment, positionInBoard[0], positionInBoard[1]);
-                    break;
-                } case 3: {
-                    equipment = new Leach(equipmentType, positionInBoard, equipmentId);
-                    board.addEquipment(equipment, positionInBoard[0], positionInBoard[1]);
-                    break;
-                }
+
+            Equipment equipment = Equipment.createEquipment(equipmentType, positionInBoard, equipmentId);
+            if (equipment == null) {
+                throw new InvalidFileException(index + 1);
             }
+            board.addEquipment(equipment, positionInBoard[0], positionInBoard[1]);
         } else if (index == 4 + creatures + equipments) {
             doors = Integer.parseInt(info.get(index));
         } else if (index > 4 + creatures + equipments && index < 5 + creatures + equipments + doors) {
@@ -267,7 +239,8 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
     }
 
     public JPanel getCreditsPanel() {
-        return null;
+        JPanel res = new JPanel();
+        return res;
     }
 
     public HashMap<String, String> customizeBoard() {

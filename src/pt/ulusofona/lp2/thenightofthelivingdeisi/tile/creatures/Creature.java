@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.thenightofthelivingdeisi.tile.creatures;
 
 
+import pt.ulusofona.lp2.thenightofthelivingdeisi.InvalidFileException;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.Tile;
 import pt.ulusofona.lp2.thenightofthelivingdeisi.tile.equipments.Equipment;
 
@@ -103,4 +104,35 @@ public void setPositionNull(){
     abstract public boolean hasEquipment(int equipmentTypeId);
     abstract public boolean canMoveAtNight();
     abstract public boolean canMoveAtDay();
+
+    public static Creature createCreature(int creatureType, int[] positionInBoard, int creatureId, int teamId, String creatureName) {
+        Creature creature = null;
+        if (creatureType < 0 || creatureType > 4){return null;}
+        if (creatureId < 1){return null;}
+        if (teamId != 10 && teamId != 20 ){return null;}
+        switch (creatureType) {
+            case 0: {
+                creature = new Child(positionInBoard, creatureId, teamId, creatureName, teamId == 10 ? State.DEAD : State.LIVE, creatureType);
+                break;
+            } case 1: {
+                creature = new Adult(positionInBoard, creatureId, teamId, creatureName, teamId == 10 ? State.DEAD : State.LIVE, creatureType);
+                break;
+            } case 2: {
+                creature = new Old(positionInBoard, creatureId, teamId, creatureName, teamId == 10 ? State.DEAD : State.LIVE, creatureType);
+                break;
+            } case 3: {
+                if (teamId != 20){
+                    return null;
+                }
+                creature = new Dog(positionInBoard, creatureId, teamId, creatureName, State.LIVE, creatureType);
+                break;
+            } case 4: {
+                creature = new Vampire(positionInBoard, creatureId, teamId, creatureName, State.DEAD, creatureType);
+                break;
+            } default: {
+                return null;
+            }
+        }
+        return creature;
+    }
 }

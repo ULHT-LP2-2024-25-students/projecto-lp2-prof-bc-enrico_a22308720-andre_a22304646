@@ -74,7 +74,6 @@ abstract public class Equipment {
 
     public static Equipment createEquipment(int equipmentType, int[] positionInBoard, int equipmentId) {
         Equipment equipment = null;
-        if (equipmentId>=0){return null;}
         switch (equipmentType) {
             case 0: {
                 equipment = new Shield(equipmentType, positionInBoard, equipmentId);

@@ -108,7 +108,6 @@ public void setPositionNull(){
     public static Creature createCreature(int creatureType, int[] positionInBoard, int creatureId, int teamId, String creatureName) {
         Creature creature = null;
         if (creatureType < 0 || creatureType > 4){return null;}
-        if (creatureId < 1){return null;}
         if (teamId != 10 && teamId != 20 ){return null;}
         switch (creatureType) {
             case 0: {

@@ -209,7 +209,7 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
 
         ArrayList<Creature> creaturesInvalid = new ArrayList<>();
 
-        if (!isDay()){
+        if (!isDay() && this.currentTeam == 20){
             for (Creature creature : this.livesInBoard){
                 if (!creature.canMoveAtNight()){
                     creaturesInvalid.add(creature);
@@ -218,7 +218,7 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
             if (creaturesInvalid.size() == this.livesInBoard.size()){
                 return true;
             }
-        } else {
+        } else if (isDay() && this.currentTeam ==10){
             for (Creature creature : this.deadsInBoard){
                 if (!creature.canMoveAtDay()){
                     creaturesInvalid.add(creature);

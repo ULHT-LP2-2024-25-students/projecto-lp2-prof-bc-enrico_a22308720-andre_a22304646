@@ -17,22 +17,20 @@ public class GameManager {
     private boolean gameStatus;
     private Board board;
     private int turns;
-    private int lastTransformationOrDead;
-    private ArrayList<Creature> livesInBoard;
-    private ArrayList<Creature> deadsInBoard;
+    private int turnsWithoutTransformationOrDead;
+
 
     private static final int CREATURE_COMPONENTS_NR = 6;
     private static final int EQUIPMENT_COMPONENTS_NR = 4;
 
     public GameManager() {
         this.turns=0;
-        this.lastTransformationOrDead=0;
-        this.livesInBoard= new ArrayList<>();
-        this.deadsInBoard= new ArrayList<>();
+        this.turnsWithoutTransformationOrDead=0;
+
 
     }
 
-public void loadGame(File file) throws InvalidFileException, FileNotFoundException {
+    public void loadGame(File file) throws InvalidFileException, FileNotFoundException {
     ArrayList<String> info = new ArrayList<>();
     Scanner scanner = new Scanner(file);
     while (scanner.hasNextLine()) {info.add(scanner.nextLine());}
@@ -98,7 +96,7 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
             board.addDoor(door, positionInBoard[0], positionInBoard[1]);
         }
     }
-    gameIsOver();
+
 }
 
     public int[] getWorldSize() {
@@ -177,7 +175,7 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
 
     public boolean move(int x0, int y0, int xD, int yD) {
         int currentTeam = getCurrentTeamId();
-        if (board.move(x0,y0,xD,yD,isDay(),currentTeam)){
+        if (board.move(x0,y0,xD,yD,isDay(),currentTeam)){        // se o type move for kill ou dead reseta variavel turnsWithoutTransformationOrDead
             turns++;
             return true;
         }
@@ -186,47 +184,48 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
 
     public boolean gameIsOver() {
         ArrayList<Creature> creaturesInGame = board.getCreatures();
-        int livesInBoard=this.livesInBoard.size();
-        int deadsInBoard=this.deadsInBoard.size();
-        this.livesInBoard.clear();
-        this.deadsInBoard.clear();
+        ArrayList<Creature> livesInBoard = new ArrayList<>();
+        ArrayList<Creature> deadsInBoard = new ArrayList<>();
         for(Creature atualCreature : creaturesInGame){
             if (atualCreature.getState() == State.LIVE){
-                this.livesInBoard.add(atualCreature);
+                livesInBoard.add(atualCreature);
             }else{
-                this.deadsInBoard.add(atualCreature);
+                deadsInBoard.add(atualCreature);
             }
         }
-        if ((livesInBoard != this.livesInBoard.size() || deadsInBoard != this.deadsInBoard.size()) && this.turns !=1){
-            this.lastTransformationOrDead=this.turns;
-        }
+
 
         ArrayList<Creature> creaturesInvalid = new ArrayList<>();
 
         if (!isDay() && this.currentTeam == 20){
-            for (Creature creature : this.livesInBoard){
+            for (Creature creature : livesInBoard){
                 if (!creature.canMoveAtNight()){
                     creaturesInvalid.add(creature);
                 }
             }
-            if (creaturesInvalid.size() == this.livesInBoard.size()){
+            if (creaturesInvalid.size() == livesInBoard.size()){
                 return true;
             }
         } else if (isDay() && this.currentTeam ==10){
-            for (Creature creature : this.deadsInBoard){
+            for (Creature creature : deadsInBoard){
                 if (!creature.canMoveAtDay()){
                     creaturesInvalid.add(creature);
                 }
             }
-            if (creaturesInvalid.size() == this.deadsInBoard.size()){
+            if (creaturesInvalid.size() == deadsInBoard.size()){
                 return true;
             }
         }
+        if (board.getLastTypeMove() == TypeMove.KILL ||board.getLastTypeMove() == TypeMove.INFECT ){
+            turnsWithoutTransformationOrDead=0;
+        }else{
+            this.turnsWithoutTransformationOrDead++;  //aumenta 1 turno sem transformação ou kill
+        }
 
         return (
-                this.livesInBoard.isEmpty() ||
-                this.deadsInBoard.isEmpty() ||
-                this.turns - this.lastTransformationOrDead==8
+                livesInBoard.isEmpty() ||
+                deadsInBoard.isEmpty() ||
+                this.turnsWithoutTransformationOrDead==8
                 );
     }
 

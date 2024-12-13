@@ -13,6 +13,8 @@ import java.util.List;
 public class Board {
     private Tile[][] boardTiles;
     private ArrayList<Creature> safeHeaven;
+    private TypeMove lastTypeMove;
+
 
     public Board(int rows, int columns) {
         this.boardTiles = new Tile[rows][columns];
@@ -22,6 +24,7 @@ public class Board {
                 boardTiles[y][x] = new Tile();
             }
         }
+        this.lastTypeMove=null;
     }
 
     public void addCreature(Creature creature, int x, int y) {
@@ -100,6 +103,7 @@ public class Board {
                 if(((isDay && creature.canMoveAtDay()) || (!isDay && creature.canMoveAtNight())) && creatureTeam == currentTeam){            //verificar se a criatura se pode mover consoante ser dia ou noite e consoante ser o seu turno
                     switch (typeMove) {
                         case INVALID:
+                            this.lastTypeMove = TypeMove.INVALID;
                             return false;
                         case MOVE:
                             //Se for velho deixa a arma para trás
@@ -108,6 +112,7 @@ public class Board {
                                 tile.removeCreature();
                                 tileD.addCreature(creature, xD, yD);
                                 tileD.getCreature().removeEquipment();
+                                this.lastTypeMove = TypeMove.MOVE;
                                 return true;
                             }
                             tile.removeCreature();
@@ -115,7 +120,7 @@ public class Board {
                             if (tileD.getCreature().getEquipment() != null){
                                 tileD.getCreature().getEquipment().setPositionInBoard(xD,yD);
                             }
-
+                            this.lastTypeMove = TypeMove.MOVE;
                             return true;
                         case WEAPON:
                             if (creature.canHoldEquipment(tileD.getEquipment())){
@@ -128,12 +133,14 @@ public class Board {
                                 creature.increasePoints();
                                 tileD.removeEquipment();
                                 tileD.addCreature(creature, xD, yD);
+                                this.lastTypeMove=TypeMove.WEAPON;
                                 return true;
                             }else if(creature.canDestroyEquipment()){
                                 tileD.removeEquipment();
                                 creature.increasePoints();
                                 tile.removeCreature();
                                 tileD.addCreature(creature, xD, yD);
+                                this.lastTypeMove=TypeMove.WEAPON;
                                 return true;
                             }else{
                                 return false;
@@ -144,6 +151,7 @@ public class Board {
                             newZombie.setTeam(10);
                             newZombie.removeEquipment();
                             boardTiles[yD][xD].setCreature(newZombie);
+                            this.lastTypeMove=TypeMove.INFECT;
                             return true;
                         case KILL:
                             tile.removeCreature();
@@ -153,11 +161,13 @@ public class Board {
                             if (tileD.getCreature().getEquipment() != null){
                                 tileD.getCreature().getEquipment().setPositionInBoard(xD,yD);
                             }
+                            this.lastTypeMove=TypeMove.KILL;
                             return true;
                         case SAFEHEAVEN:
                             tile.removeCreature();
                             creature.setPositionNull();
                             safeHeaven.add(creature);
+                            this.lastTypeMove=TypeMove.SAFEHEAVEN;
                             return true;
                         case DEFENDED:
                             if (tileD.getEquipment()!= null){
@@ -166,9 +176,11 @@ public class Board {
                             if (tileD.getCreature().getEquipment()!= null){
                                 tileD.getCreature().getEquipment().defend();
                             }
+                            this.lastTypeMove=TypeMove.DEFENDED;
                             return true;
                         case PASS:
                             tile.getCreature().getEquipment().defend();
+                            this.lastTypeMove=TypeMove.PASS;
                             return true;
                     }
                 }else{
@@ -228,5 +240,9 @@ public class Board {
             }
         }
         return doors;
+    }
+
+    public TypeMove getLastTypeMove() {
+        return lastTypeMove;
     }
 }

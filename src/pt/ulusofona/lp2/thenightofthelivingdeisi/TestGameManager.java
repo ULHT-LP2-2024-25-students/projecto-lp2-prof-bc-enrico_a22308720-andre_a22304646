@@ -129,6 +129,30 @@ public class TestGameManager {
 
     }
     @Test
+    public void testEndGame3(){
+        GameManager testEndGame3 = gameManager;
+        testEndGame3.move(3,3,3,4);
+        testEndGame3.gameIsOver();
+        testEndGame3.move(4,3,4,2);
+        testEndGame3.gameIsOver();
+        testEndGame3.move(3,3,3,2);
+        testEndGame3.gameIsOver();
+        testEndGame3.move(4,2,4,3);
+        testEndGame3.gameIsOver();
+        testEndGame3.move(3,2,3,3);
+        testEndGame3.gameIsOver();
+        testEndGame3.move(4,3,4,2);
+        testEndGame3.gameIsOver();
+        testEndGame3.move(3,3,3,2);
+        testEndGame3.gameIsOver();
+        testEndGame3.move(4,2,4,3);
+        testEndGame3.gameIsOver();
+        testEndGame3.move(3,2,3,3);
+        assertTrue(testEndGame3.gameIsOver());
+
+
+    }
+    @Test
     public void childWithEquipment(){
         GameManager childWithEquipment = gameManager;
 

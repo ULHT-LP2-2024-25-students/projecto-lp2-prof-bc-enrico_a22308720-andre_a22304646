@@ -98,6 +98,7 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
             board.addDoor(door, positionInBoard[0], positionInBoard[1]);
         }
     }
+    gameIsOver();
 }
 
     public int[] getWorldSize() {
@@ -129,10 +130,6 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
     }
     return gameStatus;
 }
-
-    public void increaseTurn(){
-        turns++;
-    }
 
     public String getSquareInfo(int x, int y) {
         if (board.positionIsValid(x, y)){
@@ -191,8 +188,8 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
         ArrayList<Creature> creaturesInGame = board.getCreatures();
         int livesInBoard=this.livesInBoard.size();
         int deadsInBoard=this.deadsInBoard.size();
-        this.livesInBoard= new ArrayList<>();
-        this.deadsInBoard= new ArrayList<>();
+        this.livesInBoard.clear();
+        this.deadsInBoard.clear();
         for(Creature atualCreature : creaturesInGame){
             if (atualCreature.getState() == State.LIVE){
                 this.livesInBoard.add(atualCreature);
@@ -200,10 +197,7 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
                 this.deadsInBoard.add(atualCreature);
             }
         }
-        if(this.turns==1){
-            return false;
-        }
-        if (livesInBoard != this.livesInBoard.size() || deadsInBoard != this.deadsInBoard.size()){
+        if ((livesInBoard != this.livesInBoard.size() || deadsInBoard != this.deadsInBoard.size()) && this.turns !=1){
             this.lastTransformationOrDead=this.turns;
         }
 
@@ -229,7 +223,11 @@ public void loadGame(File file) throws InvalidFileException, FileNotFoundExcepti
             }
         }
 
-        return this.livesInBoard.isEmpty() || this.deadsInBoard.isEmpty() || this.turns - this.lastTransformationOrDead==8;
+        return (
+                this.livesInBoard.isEmpty() ||
+                this.deadsInBoard.isEmpty() ||
+                this.turns - this.lastTransformationOrDead==8
+                );
     }
 
     public ArrayList<String> getSurvivors() {

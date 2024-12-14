@@ -215,8 +215,8 @@ public class GameManager {
         }
         if (board.getLastTypeMove() == TypeMove.KILL ||board.getLastTypeMove() == TypeMove.INFECT ){
             turnsWithoutTransformationOrDead=0;
-        }else{
-            this.turnsWithoutTransformationOrDead++;  //aumenta 1 turno sem transformação ou kill
+        }else if(board.getLastTypeMove() != TypeMove.INVALID){
+            this.turnsWithoutTransformationOrDead++;  //aumenta 1 turno sem transformação ou kill e com jogada valida
         }
 
         return (

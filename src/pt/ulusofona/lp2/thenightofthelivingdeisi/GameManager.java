@@ -194,6 +194,7 @@ public class GameManager {
             }
         }
         ArrayList<Creature> creaturesInvalid = new ArrayList<>();
+        //Verificar se os unicos vivos restantes são idosos e é de noite(jogo fica bloqueado)
         if (!isDay() && this.currentTeam == 20){
             for (Creature creature : livesInBoard){
                 if (!creature.canMoveAtNight()){
@@ -203,6 +204,7 @@ public class GameManager {
             if (creaturesInvalid.size() == livesInBoard.size()){
                 return true;
             }
+            //Verificar se os unicos mortos restantes são vampiros e é de dia(jogo fica bloqueado)
         } else if (isDay() && this.currentTeam ==10){
             for (Creature creature : deadsInBoard){
                 if (!creature.canMoveAtDay()){

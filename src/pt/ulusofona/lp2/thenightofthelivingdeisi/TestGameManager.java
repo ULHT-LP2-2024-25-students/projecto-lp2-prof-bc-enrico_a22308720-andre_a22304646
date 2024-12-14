@@ -153,6 +153,42 @@ public class TestGameManager {
 
     }
     @Test
+    public void testEndGame4(){
+       GameManager testEndGame4 = gameManager;
+       testEndGame4.move(3,3,3,2);
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(4,3,2,1);
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(2,2,2,3);   //jogada invalida
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(3,2,3,1);
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(2,1,0,1);  //Kill
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(3,1,3,0);  //1
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(3,0,3,1);  //jogada invalida
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(3,4,3,3);  //2
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(3,0,3,1);  //3
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(3,3,3,2);  //4
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(3,1,4,1);  //5
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(3,2,3,1);  //6
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(3,1,3,2);  //jogada invalida
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(4,1,4,0);  //7
+       assertFalse(testEndGame4.gameIsOver());
+       testEndGame4.move(3,1,3,2);  //8
+       assertTrue(testEndGame4.gameIsOver());
+
+
+    }
+    @Test
     public void childWithEquipment(){
         GameManager childWithEquipment = gameManager;
 

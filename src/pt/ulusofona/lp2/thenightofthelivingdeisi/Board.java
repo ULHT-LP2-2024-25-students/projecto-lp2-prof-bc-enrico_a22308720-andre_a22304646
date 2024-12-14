@@ -184,10 +184,12 @@ public class Board {
                             return true;
                     }
                 }else{
+                    this.lastTypeMove = TypeMove.INVALID;
                     return false;
                 }
             }
         }
+        this.lastTypeMove = TypeMove.INVALID;
         return false;
     }
 

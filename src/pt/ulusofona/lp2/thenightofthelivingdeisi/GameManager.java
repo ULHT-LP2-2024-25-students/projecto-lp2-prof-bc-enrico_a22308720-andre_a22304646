@@ -193,29 +193,26 @@ public class GameManager {
                 deadsInBoard.add(atualCreature);
             }
         }
-
-
-        ArrayList<Creature> creaturesInvalid = new ArrayList<>();
-
-        if (!isDay() && this.currentTeam == 20){
-            for (Creature creature : livesInBoard){
-                if (!creature.canMoveAtNight()){
-                    creaturesInvalid.add(creature);
-                }
-            }
-            if (creaturesInvalid.size() == livesInBoard.size()){
-                return true;
-            }
-        } else if (isDay() && this.currentTeam ==10){
-            for (Creature creature : deadsInBoard){
-                if (!creature.canMoveAtDay()){
-                    creaturesInvalid.add(creature);
-                }
-            }
-            if (creaturesInvalid.size() == deadsInBoard.size()){
-                return true;
-            }
-        }
+//        ArrayList<Creature> creaturesInvalid = new ArrayList<>();
+//        if (!isDay() && this.currentTeam == 20){
+//            for (Creature creature : livesInBoard){
+//                if (!creature.canMoveAtNight()){
+//                    creaturesInvalid.add(creature);
+//                }
+//            }
+//            if (creaturesInvalid.size() == livesInBoard.size()){
+//                return true;
+//            }
+//        } else if (isDay() && this.currentTeam ==10){
+//            for (Creature creature : deadsInBoard){
+//                if (!creature.canMoveAtDay()){
+//                    creaturesInvalid.add(creature);
+//                }
+//            }
+//            if (creaturesInvalid.size() == deadsInBoard.size()){
+//                return true;
+//            }
+//        }
         if (board.getLastTypeMove() == TypeMove.KILL ||board.getLastTypeMove() == TypeMove.INFECT ){
             turnsWithoutTransformationOrDead=0;
         }else{

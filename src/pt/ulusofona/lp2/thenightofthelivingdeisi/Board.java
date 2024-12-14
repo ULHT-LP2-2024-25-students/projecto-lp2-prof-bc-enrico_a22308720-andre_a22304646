@@ -143,6 +143,7 @@ public class Board {
                                 this.lastTypeMove=TypeMove.WEAPON;
                                 return true;
                             }else{
+                                this.lastTypeMove = TypeMove.INVALID;
                                 return false;
                             }
                         case INFECT:

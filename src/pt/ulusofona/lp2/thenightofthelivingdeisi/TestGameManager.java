@@ -91,18 +91,31 @@ public class TestGameManager {
         GameManager testEndGame = gameManager;
 
         testEndGame.move(1,1,1,0);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(4,3,2,1);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(4,5,5,4);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(2,1,0,1);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(1,0,1,1);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(0,1,1,1);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(3,3,3,2);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(1,1,2,0);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(3,2,3,1);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(2,0,3,1);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(5,3,4,2);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(3,1,4,2);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(5,4,4,3);
+        assertFalse(testEndGame.gameIsOver());
         testEndGame.move(4,2,4,3);
         assertTrue(testEndGame.gameIsOver());
 
@@ -132,21 +145,21 @@ public class TestGameManager {
     public void testEndGame3(){
         GameManager testEndGame3 = gameManager;
         testEndGame3.move(3,3,3,4);
-        testEndGame3.gameIsOver();
+        assertFalse(testEndGame3.gameIsOver());
         testEndGame3.move(4,3,4,2);
-        testEndGame3.gameIsOver();
+        assertFalse(testEndGame3.gameIsOver());
         testEndGame3.move(3,3,3,2);
-        testEndGame3.gameIsOver();
+        assertFalse(testEndGame3.gameIsOver());
         testEndGame3.move(4,2,4,3);
-        testEndGame3.gameIsOver();
+        assertFalse(testEndGame3.gameIsOver());
         testEndGame3.move(3,2,3,3);
-        testEndGame3.gameIsOver();
+        assertFalse(testEndGame3.gameIsOver());
         testEndGame3.move(4,3,4,2);
-        testEndGame3.gameIsOver();
+        assertFalse(testEndGame3.gameIsOver());
         testEndGame3.move(3,3,3,2);
-        testEndGame3.gameIsOver();
+        assertFalse(testEndGame3.gameIsOver());
         testEndGame3.move(4,2,4,3);
-        testEndGame3.gameIsOver();
+        assertFalse(testEndGame3.gameIsOver());
         testEndGame3.move(3,2,3,3);
         assertTrue(testEndGame3.gameIsOver());
 
@@ -185,6 +198,65 @@ public class TestGameManager {
        assertFalse(testEndGame4.gameIsOver());
        testEndGame4.move(3,1,3,2);  //8
        assertTrue(testEndGame4.gameIsOver());
+
+
+    }
+    @Test
+    public void testEndGame5(){
+       GameManager testEndGame5 = gameManager;
+       testEndGame5.move(3,3,3,4);  //INFECT
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(2,2,4,2);  //MOVE
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(3,4,4,4);  //WEAPON
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(4,2,4,0); //MOVE
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(4,5,5,6); //INFECT
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(4,0,6,0); //SAFEHEAVEN
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(5,3,4,3); //INFECT
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(6,5,6,3); //WEAPON
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(1,1,2,1); //WEAPON
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(2,1,3,1); //INVALID
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(6,3,6,1); //MOVE
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(4,1,4,0); //INVALID
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(6,1,6,0); //INVALID
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(2,1,2,0); //WEAPON
+       assertFalse(testEndGame5.gameIsOver());
+       testEndGame5.move(6,1,6,0); //SAFEHEAVEN
+       assertTrue(testEndGame5.gameIsOver());
+
+        ArrayList<String> resultadoEsperado = new ArrayList<>();
+        resultadoEsperado.add("Nr. de turnos terminados:");
+        resultadoEsperado.add("12");
+        resultadoEsperado.add("");
+        resultadoEsperado.add("OS VIVOS");
+        resultadoEsperado.add("9 John Wayne");
+        resultadoEsperado.add("10 Max");
+        resultadoEsperado.add("");
+        resultadoEsperado.add("OS OUTROS");
+        resultadoEsperado.add("1 (antigamente conhecido como Melanie)");
+        resultadoEsperado.add("2 (antigamente conhecido como Walker)");
+        resultadoEsperado.add("3 (antigamente conhecido como Frankenstein)");
+        resultadoEsperado.add("4 (antigamente conhecido como Crawler)");
+        resultadoEsperado.add("5 (antigamente conhecido como Babe)");
+        resultadoEsperado.add("6 (antigamente conhecido como Karate Kid)");
+        resultadoEsperado.add("7 (antigamente conhecido como Freddie M.)");
+        resultadoEsperado.add("8 (antigamente conhecido como James Bond)");
+        resultadoEsperado.add("-----");
+        assertEquals(resultadoEsperado,testEndGame5.getSurvivors());
+
+
+
 
 
     }

@@ -261,6 +261,43 @@ public class TestGameManager {
 
     }
     @Test
+    public void testEndGame6(){
+        GameManager testEndGame6 = gameManager;
+        testEndGame6.move(3,3,3,2); //MOVE
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(3,4,4,4); //WEAPON
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(0,1,0,2); //MOVE
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(4,3,4,2); //MOVE
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(1,1,1,0); //MOVE
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(6,5,6,3); //WEAPON
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(5,3,4,2); //INFECT
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(4,4,4,3); //MOVE
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(4,2,4,3); //DEFEND
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(2,2,2,4); //MOVE
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(4,5,3,6); //MOVE
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(4,3,4,4); //MOVE
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(5,3,6,3); //DEFEND
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(2,4,0,4); //MOVE
+        assertFalse(testEndGame6.gameIsOver());
+        testEndGame6.move(3,2,3,1);
+        assertTrue(testEndGame6.gameIsOver());
+
+
+
+    }
+    @Test
     public void childWithEquipment(){
         GameManager childWithEquipment = gameManager;
 

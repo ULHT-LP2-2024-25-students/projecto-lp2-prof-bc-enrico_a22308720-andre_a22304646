@@ -176,6 +176,11 @@ public class GameManager {
     public boolean move(int x0, int y0, int xD, int yD) {
         int currentTeam = getCurrentTeamId();
         if (board.move(x0,y0,xD,yD,isDay(),currentTeam)){        // se o type move for kill ou dead reseta variavel turnsWithoutTransformationOrDead
+            if (board.getLastTypeMove() == TypeMove.KILL ||board.getLastTypeMove() == TypeMove.INFECT ){
+                turnsWithoutTransformationOrDead=0;
+            }else if(board.getLastTypeMove() != TypeMove.INVALID){
+                this.turnsWithoutTransformationOrDead++;  //aumenta 1 turno sem transformação ou kill e com jogada valida
+            }
             turns++;
             return true;
         }
@@ -214,11 +219,6 @@ public class GameManager {
             if (creaturesInvalid.size() == deadsInBoard.size()){
                 return true;
             }
-        }
-        if (board.getLastTypeMove() == TypeMove.KILL ||board.getLastTypeMove() == TypeMove.INFECT ){
-            turnsWithoutTransformationOrDead=0;
-        }else if(board.getLastTypeMove() != TypeMove.INVALID){
-            this.turnsWithoutTransformationOrDead++;  //aumenta 1 turno sem transformação ou kill e com jogada valida
         }
 
         return (

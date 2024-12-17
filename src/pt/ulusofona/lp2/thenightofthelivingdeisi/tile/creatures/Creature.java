@@ -26,9 +26,6 @@ abstract public class Creature {
         this.type = type;
     }
 
-    public int getPoints() {
-        return points;
-    }
     public void increasePoints(){points++;}
 
     public State getState() {

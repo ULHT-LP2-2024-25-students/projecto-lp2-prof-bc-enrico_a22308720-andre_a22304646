@@ -35,12 +35,6 @@ public class Board {
         boardTiles[y][x].addEquipment(equipment, x, y);
     }
 
-    public void removeEquipment(int x, int y) {
-        boardTiles[y][x].removeEquipment();
-    }
-    public void removeCreature(int x, int y) {
-        boardTiles[y][x].removeCreature();
-    }
     public void addDoor(Door door, int x, int y) {
         boardTiles[y][x].addDoor(door);
     }

@@ -54,6 +54,12 @@ Below is the UML class diagram representing the model designed for this project:
 
 ---
 
+## Video
+
+https://youtu.be/8nyrQor3w7I
+
+---
+
 ## How to Run the Project
 
 To run this project, follow the steps below:

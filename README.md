@@ -50,7 +50,7 @@ Screenshots of any customization can be included in this README file.
 
 Below is the UML class diagram representing the model designed for this project:
 
-![](diagrama.png?raw=true "UML Class Diagram")
+![](diagrama2.png?raw=true "UML Class Diagram")
 
 ---
 

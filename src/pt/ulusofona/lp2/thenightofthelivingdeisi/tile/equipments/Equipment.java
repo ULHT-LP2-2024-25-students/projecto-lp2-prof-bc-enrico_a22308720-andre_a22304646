@@ -23,7 +23,7 @@ abstract public class Equipment {
 
     public void hold(){
         this.isHolded=true;
-    }
+   }
 
     public void drop(){
         this.isHolded=false;

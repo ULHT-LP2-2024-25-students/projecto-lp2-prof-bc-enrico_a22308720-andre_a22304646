@@ -60,9 +60,6 @@ abstract public class Creature {
         this.team = team;
     }
 
-    public boolean canMove(){
-        return true;
-    }
 
     public int getTeam() {
         return team;
